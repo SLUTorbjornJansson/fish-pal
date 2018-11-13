@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-15" ?>
+<tables  xmlns:xi="http://www.w3.org/2001/XInclude">
+    <themes>Fishing effort,Catch</themes>
+
+    <xi:include href="views/dimdefs.xml"/>
+    <xi:include href="views/simtables.xml"/>
+
+</tables>

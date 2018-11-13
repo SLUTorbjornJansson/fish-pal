@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding='ISO-8859-15' ?>
+<generated>
+
+
+<!-- The first dimension of the result parameter, (fisheryDomain). -->
+
+    <region><sel>[segment,all]</sel><key>'DFN_VL0012_N/A'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DFN_VL0012_TORSK'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DFN_VL0012_ÅL'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DFN_VL00XX_KRÄFTA'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DFN_VL00XX_LAX'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DFN_VL00XX_SIKL'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DFN_VL12XX_N/A'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DFN_VL12XX_TORSK'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL0012_KRÄFTA'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL0012_N/A_ÅL'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL0018_RÄKA'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL0018_SIKL_LAX'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL0018_TORSK'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL1218_KRÄFTA'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL1218_SIKL'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL1224_N/A'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL1824_RÄKA'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL1824_TORSK'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL18XX_KRÄFTA'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL24XX_N/A_TORSK'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'DTS_VL24XX_RÄKA'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'PEL_0018'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'PEL_1824'</key><itemName></itemName></region>
+    <region><sel>[segment,all]</sel><key>'PEL_24XX'</key><itemName></itemName></region>
+
+    <region><sel>[gear,all]</sel><key>'Annat Redskap'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Blekegarn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Bottengarn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Bottentrål Fisk/Kräfta'></key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Bottentrål Sill'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Bottentrål, Kräfta, Rist'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Bottentrål, Räka'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Bottentrål, Räka, Rist'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Bottentrål, Tobis'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Btral, Räka, Rist, Tunnel'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Btraltorsk, Bacomapanel'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Btraltorsk, T-90 Panel'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Burar, Kräfta'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Byxtral, Fisk/Kräfta'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Dörj/Häckla'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Flyttral Sill/Skarpsill'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Flyttral Torsk,Bacomapanel'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Grimnät/Garn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Krabbegarn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Krabbryssjor'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Landvad (not)'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Laxdrivlinor'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Laxgarn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Laxredskap'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Lysfiske Med Snörpvad'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Makrillgarn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Mjärdar'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Parbottentral, Fisk'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Parbottentral, Siklöja'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Parflyttral Sill/Skarpsill'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Piggvar/ Vargarn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Pilk'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Ringnot'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Siklöjenät/Skötar'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Sill/Strömming/Löj Ryssja'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Sillgarn/Strömmingsskötar'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Skäddegarn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Smabackor/Langrev'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Snurrevad, Dansk'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Snörpvad'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Sötvatten'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Tinor, Hummer'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Tinor, Krabba'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Torskgarn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Tungegarn'</key><itemName></itemName></region>
+    <region><sel>[gear,all]</sel><key>'Ålredskap'</key><itemName></itemName></region>
+
+    <region><sel>[area,all]</sel><key>'2224'</key><itemName>ICES areas 22-24</itemName></region>
+    <region><sel>[area,all]</sel><key>'2529+32'</key><itemName>ICES areas 25-29+32</itemName></region>
+    <region><sel>[area,all]</sel><key>'3031'</key><itemName>ICES areas 30-31</itemName></region>
+    <region><sel>[area,all]</sel><key>'K'</key><itemName>Kattegatt</itemName></region>
+    <region><sel>[area,all]</sel><key>'S'</key><itemName>Skagerack</itemName></region>
+    <region><sel>[area,all]</sel><key>'N'</key><itemName>North Sea</itemName></region>
+
+    <region><key>1</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Grimnät/Garn in 2224</itemName></region>
+    <region><key>2</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Piggvar/ Vargarn in 2224</itemName></region>
+    <region><key>3</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Sillgarn/Strömmingsskötar in 2224</itemName></region>
+    <region><key>4</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Skäddegarn in 2224</itemName></region>
+    <region><key>5</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Torskgarn in 2224</itemName></region>
+    <region><key>6</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Ålredskap in 2224</itemName></region>
+    <region><key>7</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Bottengarn in 2529+32</itemName></region>
+    <region><key>8</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Grimnät/Garn in 2529+32</itemName></region>
+    <region><key>9</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Laxdrivlinor in 2529+32</itemName></region>
+    <region><key>10</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Mjärdar in 2529+32</itemName></region>
+    <region><key>11</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Parbottentral, Fisk in 2529+32</itemName></region>
+    <region><key>12</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Piggvar/ Vargarn in 2529+32</itemName></region>
+    <region><key>13</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Sillgarn/Strömmingsskötar in 2529+32</itemName></region>
+    <region><key>14</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Skäddegarn in 2529+32</itemName></region>
+    <region><key>15</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Smabackor/Langrev in 2529+32</itemName></region>
+    <region><key>16</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Sötvatten in 2529+32</itemName></region>
+    <region><key>17</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Torskgarn in 2529+32</itemName></region>
+    <region><key>18</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Ålredskap in 2529+32</itemName></region>
+    <region><key>19</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Annat Redskap in 3031</itemName></region>
+    <region><key>20</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Laxredskap in 3031</itemName></region>
+    <region><key>21</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Mjärdar in 3031</itemName></region>
+    <region><key>22</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Siklöjenät/Skötar in 3031</itemName></region>
+    <region><key>23</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Sill/Strömming/Löj Ryssja in 3031</itemName></region>
+    <region><key>24</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Sillgarn/Strömmingsskötar in 3031</itemName></region>
+    <region><key>25</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Sötvatten in 3031</itemName></region>
+    <region><key>26</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Ålredskap in 3031</itemName></region>
+    <region><key>27</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Burar, Kräfta in K</itemName></region>
+    <region><key>28</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Dörj/Häckla in K</itemName></region>
+    <region><key>29</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Grimnät/Garn in K</itemName></region>
+    <region><key>30</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Krabbegarn in K</itemName></region>
+    <region><key>31</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Krabbryssjor in K</itemName></region>
+    <region><key>32</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Laxgarn in K</itemName></region>
+    <region><key>33</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Makrillgarn in K</itemName></region>
+    <region><key>34</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Piggvar/ Vargarn in K</itemName></region>
+    <region><key>35</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Sillgarn/Strömmingsskötar in K</itemName></region>
+    <region><key>36</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Skäddegarn in K</itemName></region>
+    <region><key>37</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Tinor, Hummer in K</itemName></region>
+    <region><key>38</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Tinor, Krabba in K</itemName></region>
+    <region><key>39</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Tungegarn in K</itemName></region>
+    <region><key>40</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Blekegarn in S</itemName></region>
+    <region><key>41</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Burar, Kräfta in S</itemName></region>
+    <region><key>42</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Dörj/Häckla in S</itemName></region>
+    <region><key>43</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Grimnät/Garn in S</itemName></region>
+    <region><key>44</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Krabbryssjor in S</itemName></region>
+    <region><key>45</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Landvad (not) in S</itemName></region>
+    <region><key>46</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Lysfiske Med Snörpvad in S</itemName></region>
+    <region><key>47</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Makrillgarn in S</itemName></region>
+    <region><key>48</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Mjärdar in S</itemName></region>
+    <region><key>49</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Pilk in S</itemName></region>
+    <region><key>50</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Sillgarn/Strömmingsskötar in S</itemName></region>
+    <region><key>51</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Tinor, Hummer in S</itemName></region>
+    <region><key>52</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Tinor, Krabba in S</itemName></region>
+    <region><key>53</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Torskgarn in S</itemName></region>
+    <region><key>54</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Ålredskap in S</itemName></region>
+    <region><key>55</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Grimnät/Garn in 2224</itemName></region>
+    <region><key>56</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Mjärdar in 2224</itemName></region>
+    <region><key>57</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Piggvar/ Vargarn in 2224</itemName></region>
+    <region><key>58</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Pilk in 2224</itemName></region>
+    <region><key>59</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Sillgarn/Strömmingsskötar in 2224</itemName></region>
+    <region><key>60</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Skäddegarn in 2224</itemName></region>
+    <region><key>61</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Smabackor/Langrev in 2224</itemName></region>
+    <region><key>62</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Torskgarn in 2224</itemName></region>
+    <region><key>63</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Grimnät/Garn in 2529+32</itemName></region>
+    <region><key>64</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Laxdrivlinor in 2529+32</itemName></region>
+    <region><key>65</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Mjärdar in 2529+32</itemName></region>
+    <region><key>66</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Skäddegarn in 2529+32</itemName></region>
+    <region><key>67</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Smabackor/Langrev in 2529+32</itemName></region>
+    <region><key>68</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Torskgarn in 2529+32</itemName></region>
+    <region><key>69</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Burar, Kräfta in S</itemName></region>
+    <region><key>70</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Dörj/Häckla in S</itemName></region>
+    <region><key>71</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Grimnät/Garn in S</itemName></region>
+    <region><key>72</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Pilk in S</itemName></region>
+    <region><key>73</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_TORSK using Torskgarn in S</itemName></region>
+    <region><key>74</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_ÅL using Ålredskap in 2224</itemName></region>
+    <region><key>75</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_ÅL using Bottengarn in 2529+32</itemName></region>
+    <region><key>76</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_ÅL using Sillgarn/Strömmingsskötar in 2529+32</itemName></region>
+    <region><key>77</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_ÅL using Skäddegarn in 2529+32</itemName></region>
+    <region><key>78</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_ÅL using Sötvatten in 2529+32</itemName></region>
+    <region><key>79</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_ÅL using Torskgarn in 2529+32</itemName></region>
+    <region><key>80</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_ÅL using Ålredskap in 2529+32</itemName></region>
+    <region><key>81</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Burar, Kräfta in K</itemName></region>
+    <region><key>82</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Tinor, Hummer in K</itemName></region>
+    <region><key>83</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Tinor, Krabba in K</itemName></region>
+    <region><key>84</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Blekegarn in S</itemName></region>
+    <region><key>85</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Bottentrål, Kräfta, Rist in S</itemName></region>
+    <region><key>86</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Bottentrål, Räka, Rist in S</itemName></region>
+    <region><key>87</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Burar, Kräfta in S</itemName></region>
+    <region><key>88</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Dörj/Häckla in S</itemName></region>
+    <region><key>89</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Grimnät/Garn in S</itemName></region>
+    <region><key>90</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Krabbryssjor in S</itemName></region>
+    <region><key>91</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Landvad (not) in S</itemName></region>
+    <region><key>92</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Lysfiske Med Snörpvad in S</itemName></region>
+    <region><key>93</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Makrillgarn in S</itemName></region>
+    <region><key>94</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Piggvar/ Vargarn in S</itemName></region>
+    <region><key>95</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Sillgarn/Strömmingsskötar in S</itemName></region>
+    <region><key>96</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Tinor, Hummer in S</itemName></region>
+    <region><key>97</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Tinor, Krabba in S</itemName></region>
+    <region><key>98</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_KRÄFTA using Ålredskap in S</itemName></region>
+    <region><key>99</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_LAX using Laxdrivlinor in 2224</itemName></region>
+    <region><key>100</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_LAX using Torskgarn in 2224</itemName></region>
+    <region><key>101</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_LAX using Laxdrivlinor in 2529+32</itemName></region>
+    <region><key>102</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_LAX using Smabackor/Langrev in 2529+32</itemName></region>
+    <region><key>103</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_LAX using Torskgarn in 2529+32</itemName></region>
+    <region><key>104</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_LAX using Laxredskap in 3031</itemName></region>
+    <region><key>105</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_LAX using Sill/Strömming/Löj Ryssja in 3031</itemName></region>
+    <region><key>106</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_LAX using Sötvatten in 3031</itemName></region>
+    <region><key>107</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_SIKL using Laxredskap in 3031</itemName></region>
+    <region><key>108</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_SIKL using Parbottentral, Siklöja in 3031</itemName></region>
+    <region><key>109</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_SIKL using Siklöjenät/Skötar in 3031</itemName></region>
+    <region><key>110</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_SIKL using Sill/Strömming/Löj Ryssja in 3031</itemName></region>
+    <region><key>111</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_SIKL using Sillgarn/Strömmingsskötar in 3031</itemName></region>
+    <region><key>112</key><sel>[fishery,all]</sel><itemName>DFN_VL00XX_SIKL using Sötvatten in 3031</itemName></region>
+    <region><key>113</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_N/A using Grimnät/Garn in 2224</itemName></region>
+    <region><key>114</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_N/A using Sillgarn/Strömmingsskötar in 2224</itemName></region>
+    <region><key>115</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_N/A using Torskgarn in 2224</itemName></region>
+    <region><key>116</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_N/A using Grimnät/Garn in K</itemName></region>
+    <region><key>117</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_N/A using Tungegarn in K</itemName></region>
+    <region><key>118</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_TORSK using Smabackor/Langrev in 2224</itemName></region>
+    <region><key>119</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_TORSK using Torskgarn in 2224</itemName></region>
+    <region><key>120</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_TORSK using Smabackor/Langrev in 2529+32</itemName></region>
+    <region><key>121</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_TORSK using Torskgarn in 2529+32</itemName></region>
+    <region><key>122</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_TORSK using Pilk in N</itemName></region>
+    <region><key>123</key><sel>[fishery,all]</sel><itemName>DFN_VL12XX_TORSK using Smabackor/Langrev in N</itemName></region>
+    <region><key>124</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_KRÄFTA using Bottentrål Fisk/Kräfta in K</itemName></region>
+    <region><key>125</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_KRÄFTA using Bottentrål, Kräfta, Rist in K</itemName></region>
+    <region><key>126</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_KRÄFTA using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>127</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_KRÄFTA using Bottentrål, Kräfta, Rist in S</itemName></region>
+    <region><key>128</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_KRÄFTA using Bottentrål, Räka in S</itemName></region>
+    <region><key>129</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_KRÄFTA using Bottentrål, Räka, Rist in S</itemName></region>
+    <region><key>130</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_KRÄFTA using Burar, Kräfta in S</itemName></region>
+    <region><key>131</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_KRÄFTA using Pilk in S</itemName></region>
+    <region><key>132</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Bottentrål Sill in 2224</itemName></region>
+    <region><key>133</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Bottentrål Sill in 2529+32</itemName></region>
+    <region><key>134</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Parbottentral, Fisk in 2529+32</itemName></region>
+    <region><key>135</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Sillgarn/Strömmingsskötar in 2529+32</itemName></region>
+    <region><key>136</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Snörpvad in 2529+32</itemName></region>
+    <region><key>137</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Bottentrål Sill in 3031</itemName></region>
+    <region><key>138</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Sillgarn/Strömmingsskötar in 3031</itemName></region>
+    <region><key>139</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Dörj/Häckla in S</itemName></region>
+    <region><key>140</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Landvad (not) in S</itemName></region>
+    <region><key>141</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Makrillgarn in S</itemName></region>
+    <region><key>142</key><sel>[fishery,all]</sel><itemName>DTS_VL0012_N/A_ÅL using Pilk in S</itemName></region>
+    <region><key>143</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_RÄKA using Btraltorsk, T-90 Panel in 2529+32</itemName></region>
+    <region><key>144</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_RÄKA using Bottentrål Fisk/Kräfta in K</itemName></region>
+    <region><key>145</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_RÄKA using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>146</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_RÄKA using Bottentrål, Kräfta, Rist in S</itemName></region>
+    <region><key>147</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_RÄKA using Bottentrål, Räka in S</itemName></region>
+    <region><key>148</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_RÄKA using Bottentrål, Räka, Rist in S</itemName></region>
+    <region><key>149</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_SIKL_LAX using Btraltorsk, Bacomapanel in 2529+32</itemName></region>
+    <region><key>150</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_SIKL_LAX using Btraltorsk, T-90 Panel in 2529+32</itemName></region>
+    <region><key>151</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_SIKL_LAX using Laxdrivlinor in 2529+32</itemName></region>
+    <region><key>152</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_SIKL_LAX using Bottentrål Sill in 3031</itemName></region>
+    <region><key>153</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_SIKL_LAX using Parbottentral, Siklöja in 3031</itemName></region>
+    <region><key>154</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_TORSK using Btraltorsk, Bacomapanel in 2224</itemName></region>
+    <region><key>155</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_TORSK using Btraltorsk, Bacomapanel in 2529+32</itemName></region>
+    <region><key>156</key><sel>[fishery,all]</sel><itemName>DTS_VL0018_TORSK using Btraltorsk, T-90 Panel in 2529+32</itemName></region>
+    <region><key>157</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_KRÄFTA using Btraltorsk, Bacomapanel in 2529+32</itemName></region>
+    <region><key>158</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_KRÄFTA using Bottentrål Fisk/Kräfta in K</itemName></region>
+    <region><key>159</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_KRÄFTA using Bottentrål, Kräfta, Rist in K</itemName></region>
+    <region><key>160</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_KRÄFTA using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>161</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_KRÄFTA using Bottentrål, Kräfta, Rist in S</itemName></region>
+    <region><key>162</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_KRÄFTA using Bottentrål, Räka, Rist in S</itemName></region>
+    <region><key>163</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_KRÄFTA using Lysfiske Med Snörpvad in S</itemName></region>
+    <region><key>164</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_SIKL using Torskgarn in 2529+32</itemName></region>
+    <region><key>165</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_SIKL using Parbottentral, Siklöja in 3031</itemName></region>
+    <region><key>166</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_SIKL using Parflyttral Sill/Skarpsill in 3031</itemName></region>
+    <region><key>167</key><sel>[fishery,all]</sel><itemName>DTS_VL1218_SIKL using Sillgarn/Strömmingsskötar in 3031</itemName></region>
+    <region><key>168</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Btraltorsk, Bacomapanel in 2529+32</itemName></region>
+    <region><key>169</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Snörpvad in 2529+32</itemName></region>
+    <region><key>170</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Bottentrål Sill in 3031</itemName></region>
+    <region><key>171</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Bottentrål Fisk/Kräfta in K</itemName></region>
+    <region><key>172</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Bottentrål, Kräfta, Rist in K</itemName></region>
+    <region><key>173</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Bottentrål, Räka in N</itemName></region>
+    <region><key>174</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Snurrevad, Dansk in N</itemName></region>
+    <region><key>175</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>176</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Bottentrål, Kräfta, Rist in S</itemName></region>
+    <region><key>177</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Bottentrål, Räka in S</itemName></region>
+    <region><key>178</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Btral, Räka, Rist, Tunnel in S</itemName></region>
+    <region><key>179</key><sel>[fishery,all]</sel><itemName>DTS_VL1224_N/A using Snurrevad, Dansk in S</itemName></region>
+    <region><key>180</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_RÄKA using Bottentrål, Räka in N</itemName></region>
+    <region><key>181</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_RÄKA using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>182</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_RÄKA using Bottentrål, Kräfta, Rist in S</itemName></region>
+    <region><key>183</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_RÄKA using Bottentrål, Räka in S</itemName></region>
+    <region><key>184</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_RÄKA using Bottentrål, Räka, Rist in S</itemName></region>
+    <region><key>185</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_RÄKA using Btral, Räka, Rist, Tunnel in S</itemName></region>
+    <region><key>186</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_RÄKA using Byxtral, Fisk/Kräfta in S</itemName></region>
+    <region><key>187</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_TORSK using Btraltorsk, Bacomapanel in 2224</itemName></region>
+    <region><key>188</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_TORSK using Btraltorsk, T-90 Panel in 2224</itemName></region>
+    <region><key>189</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_TORSK using Btraltorsk, Bacomapanel in 2529+32</itemName></region>
+    <region><key>190</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_TORSK using Btraltorsk, T-90 Panel in 2529+32</itemName></region>
+    <region><key>191</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_TORSK using Flyttral Torsk,Bacomapanel in 2529+32</itemName></region>
+    <region><key>192</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_TORSK using Bottentrål Fisk/Kräfta in K</itemName></region>
+    <region><key>193</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_TORSK using Bottentrål, Kräfta, Rist in K</itemName></region>
+    <region><key>194</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_TORSK using Bottentrål Fisk/Kräfta in N</itemName></region>
+    <region><key>195</key><sel>[fishery,all]</sel><itemName>DTS_VL1824_TORSK using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>196</key><sel>[fishery,all]</sel><itemName>DTS_VL18XX_KRÄFTA using Btraltorsk, Bacomapanel in 2224</itemName></region>
+    <region><key>197</key><sel>[fishery,all]</sel><itemName>DTS_VL18XX_KRÄFTA using Btraltorsk, Bacomapanel in 2529+32</itemName></region>
+    <region><key>198</key><sel>[fishery,all]</sel><itemName>DTS_VL18XX_KRÄFTA using Bottentrål Fisk/Kräfta in K</itemName></region>
+    <region><key>199</key><sel>[fishery,all]</sel><itemName>DTS_VL18XX_KRÄFTA using Bottentrål, Kräfta, Rist in K</itemName></region>
+    <region><key>200</key><sel>[fishery,all]</sel><itemName>DTS_VL18XX_KRÄFTA using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>201</key><sel>[fishery,all]</sel><itemName>DTS_VL18XX_KRÄFTA using Bottentrål, Kräfta, Rist in S</itemName></region>
+    <region><key>202</key><sel>[fishery,all]</sel><itemName>DTS_VL18XX_KRÄFTA using Bottentrål, Räka in S</itemName></region>
+    <region><key>203</key><sel>[fishery,all]</sel><itemName>DTS_VL18XX_KRÄFTA using Bottentrål, Räka, Rist in S</itemName></region>
+    <region><key>204</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_N/A_TORSK using Btraltorsk, Bacomapanel in 2224</itemName></region>
+    <region><key>205</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_N/A_TORSK using Btraltorsk, T-90 Panel in 2224</itemName></region>
+    <region><key>206</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_N/A_TORSK using Btraltorsk, Bacomapanel in 2529+32</itemName></region>
+    <region><key>207</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_N/A_TORSK using Btraltorsk, T-90 Panel in 2529+32</itemName></region>
+    <region><key>208</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_N/A_TORSK using Bottentrål Sill in 3031</itemName></region>
+    <region><key>209</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_N/A_TORSK using Bottentrål Fisk/Kräfta in N</itemName></region>
+    <region><key>210</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_N/A_TORSK using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>211</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_RÄKA using Bottentrål, Räka in N</itemName></region>
+    <region><key>212</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_RÄKA using Bottentrål, Räka, Rist in N</itemName></region>
+    <region><key>213</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_RÄKA using Btral, Räka, Rist, Tunnel in N</itemName></region>
+    <region><key>214</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_RÄKA using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>215</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_RÄKA using Bottentrål, Räka in S</itemName></region>
+    <region><key>216</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_RÄKA using Bottentrål, Räka, Rist in S</itemName></region>
+    <region><key>217</key><sel>[fishery,all]</sel><itemName>DTS_VL24XX_RÄKA using Btral, Räka, Rist, Tunnel in S</itemName></region>
+    <region><key>218</key><sel>[fishery,all]</sel><itemName>PEL_0018 using Bottentrål Sill in 2529+32</itemName></region>
+    <region><key>219</key><sel>[fishery,all]</sel><itemName>PEL_0018 using Bottentrål, Kräfta, Rist in S</itemName></region>
+    <region><key>220</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Btraltorsk, Bacomapanel in 2224</itemName></region>
+    <region><key>221</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Bottentrål Sill in 2529+32</itemName></region>
+    <region><key>222</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Btraltorsk, Bacomapanel in 2529+32</itemName></region>
+    <region><key>223</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Flyttral Sill/Skarpsill in 2529+32</itemName></region>
+    <region><key>224</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Parflyttral Sill/Skarpsill in 2529+32</itemName></region>
+    <region><key>225</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Bottentrål, Kräfta, Rist in K</itemName></region>
+    <region><key>226</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Bottentrål Fisk/Kräfta in N</itemName></region>
+    <region><key>227</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Bottentrål Fisk/Kräfta in S</itemName></region>
+    <region><key>228</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Bottentrål, Kräfta, Rist in S</itemName></region>
+    <region><key>229</key><sel>[fishery,all]</sel><itemName>PEL_1824 using Parflyttral Sill/Skarpsill in S</itemName></region>
+    <region><key>230</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Parflyttral Sill/Skarpsill in 2224</itemName></region>
+    <region><key>231</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Bottentrål Sill in 2529+32</itemName></region>
+    <region><key>232</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Btraltorsk, Bacomapanel in 2529+32</itemName></region>
+    <region><key>233</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Flyttral Sill/Skarpsill in 2529+32</itemName></region>
+    <region><key>234</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Parflyttral Sill/Skarpsill in 2529+32</itemName></region>
+    <region><key>235</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Flyttral Sill/Skarpsill in 3031</itemName></region>
+    <region><key>236</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Parflyttral Sill/Skarpsill in 3031</itemName></region>
+    <region><key>237</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Bottentrål Fisk/Kräfta in K</itemName></region>
+    <region><key>238</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Bottentrål, Kräfta, Rist in K</itemName></region>
+    <region><key>239</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Flyttral Sill/Skarpsill in K</itemName></region>
+    <region><key>240</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Bottentrål Fisk/Kräfta in N</itemName></region>
+    <region><key>241</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Bottentrål, Tobis in N</itemName></region>
+    <region><key>242</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Flyttral Sill/Skarpsill in N</itemName></region>
+    <region><key>243</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Parflyttral Sill/Skarpsill in N</itemName></region>
+    <region><key>244</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Ringnot in N</itemName></region>
+    <region><key>245</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Flyttral Sill/Skarpsill in S</itemName></region>
+    <region><key>246</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Parflyttral Sill/Skarpsill in S</itemName></region>
+    <region><key>247</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Snörpvad in S</itemName></region>
+
+
+
+<!-- Second dimension of results parameter: Species and aggregates of species (speciesDomain). -->
+    <product>
+        <itemName>All species</itemName>
+        <key>total</key>
+        <sel>[allSpecies,all]</sel>
+    </product>
+
+    <product>
+        <itemName>No species, not applicable to any particular species</itemName>
+        <key>na</key>
+        <sel>[noSpecies,all]</sel>
+    </product>
+
+   <product><key>Abborre</key><sel>[species,all]</sel></product>
+   <product><key>Al</key><sel>[species,all]</sel></product>
+   <product><key>Berggylta</key><sel>[species,all]</sel></product>
+   <product><key>Bergtunga</key><sel>[species,all]</sel></product>
+   <product><key>BlavitlingKolmule</key><sel>[species,all]</sel></product>
+   <product><key>Braxen</key><sel>[species,all]</sel></product>
+   <product><key>Fjarsing</key><sel>[species,all]</sel></product>
+   <product><key>Gadda</key><sel>[species,all]</sel></product>
+   <product><key>Gos</key><sel>[species,all]</sel></product>
+   <product><key>Grasej</key><sel>[species,all]</sel></product>
+   <product><key>Halleflundra</key><sel>[species,all]</sel></product>
+   <product><key>Havskatter</key><sel>[species,all]</sel></product>
+   <product><key>Havskrafta</key><sel>[species,all]</sel></product>
+   <product><key>Hummer</key><sel>[species,all]</sel></product>
+   <product><key>Kolja</key><sel>[species,all]</sel></product>
+   <product><key>Krabbtaska</key><sel>[species,all]</sel></product>
+   <product><key>Kummel</key><sel>[species,all]</sel></product>
+   <product><key>Kungsrakor</key><sel>[species,all]</sel></product>
+   <product><key>Langa</key><sel>[species,all]</sel></product>
+   <product><key>Lax</key><sel>[species,all]</sel></product>
+   <product><key>Lubb</key><sel>[species,all]</sel></product>
+   <product><key>Lyrtorsk</key><sel>[species,all]</sel></product>
+   <product><key>Makrill</key><sel>[species,all]</sel></product>
+   <product><key>Marulk</key><sel>[species,all]</sel></product>
+   <product><key>Nordhavsraka</key><sel>[species,all]</sel></product>
+   <product><key>Piggvar</key><sel>[species,all]</sel></product>
+   <product><key>Rocka</key><sel>[species,all]</sel></product>
+   <product><key>Rodspotta</key><sel>[species,all]</sel></product>
+   <product><key>Rodtunga</key><sel>[species,all]</sel></product>
+   <product><key>Sandskadda</key><sel>[species,all]</sel></product>
+   <product><key>SikFiskar</key><sel>[species,all]</sel></product>
+   <product><key>Sikloja</key><sel>[species,all]</sel></product>
+   <product><key>Sill</key><sel>[species,all]</sel></product>
+   <product><key>Sjurygg</key><sel>[species,all]</sel></product>
+   <product><key>Skarpsill</key><sel>[species,all]</sel></product>
+   <product><key>Skarsnultra</key><sel>[species,all]</sel></product>
+   <product><key>Skrubbskadda</key><sel>[species,all]</sel></product>
+   <product><key>Slatvar</key><sel>[species,all]</sel></product>
+   <product><key>Tobisfiskar</key><sel>[species,all]</sel></product>
+   <product><key>Torsk</key><sel>[species,all]</sel></product>
+   <product><key>Vitling</key><sel>[species,all]</sel></product>
+   <product><key>Vitlinglyra</key><sel>[species,all]</sel></product>
+   <product><key>aktaTunga</key><sel>[species,all]</sel></product>
+   <product><key>oring</key><sel>[species,all]</sel></product>
+
+
+<!-- Third dimension of results parameter: Elements of simulation output such as variable names, parameters, equations and general derived results -->
+    <activity>
+        <itemName>Fishing effort</itemName>
+        <key>v_effortAnnual</key>
+        <sel>[all,estItem]</sel>
+    </activity>
+
+    <activity>
+        <itemName>Total catch</itemName>
+        <key>v_catch</key>
+        <sel>[all,estItem]</sel>
+    </activity>
+
+    <activity>
+        <itemName>PMP cost adjustment per segment</itemName>
+        <key>pv_PMPseg</key>
+        <sel>[all,estItem]</sel>
+    </activity>
+
+    <activity>
+        <itemName>Delta of catch function</itemName>
+        <key>pv_delta</key>
+        <sel>[all,estItem]</sel>
+    </activity>
+
+    <activity>
+        <itemName>Sum of all variable costs per fishing day</itemName>
+        <key>pv_varCostSum</key>
+        <sel>[all,estItem]</sel>
+    </activity>
+
+    <activity><key>totalRevenues</key></activity>
+    <activity><key>p_TACOri</key></activity>
+    <activity><key>pv_maxEffFishery</key></activity>
+
+    <activity><key>dualMR</key><itemName>Marginal revenues</itemName><sel>dualResult</sel></activity>
+    <activity><key>dualVarCost</key><itemName>Variable costs</itemName><sel>dualResult</sel></activity>
+    <activity><key>dualPMP</key><itemName>Marginal effect of PMP</itemName><sel>dualResult</sel></activity>
+    <activity><key>dualTAC</key><itemName>Marginal quota rent</itemName><sel>dualResult</sel></activity>
+    <activity><key>dualEffRestrSeg</key><itemName>Marginal cost of segment effort restriction</itemName><sel>dualResult</sel></activity>
+    <activity><key>dualEffRestrFishery</key><itemName>Marginal cost of effort restriction per fishery, or season</itemName><sel>dualResult</sel></activity>
+    <activity><key>dualBoundEffortAnnual</key><itemName>Dual value of bound on effortAnnual</itemName><sel>dualResult</sel></activity>
+
+
+<!-- Fourth dimension of results parameter -->
+    <dim5><key>mean</key><itemName>Mean</itemName></dim5>
+    <dim5><key>var</key><itemName>Variance</itemName></dim5>
+    <dim5><key>ori</key><itemName>Original data</itemName></dim5>
+    <dim5><key>est</key><itemName>Estimated value (or fitted value for observable variables)</itemName></dim5>
+    <dim5><key>sim</key><itemName>Simulation outcome or value of parameter in simulation</itemName></dim5>
+    <dim5><key>M</key><itemName>Dual value of bound on variable or equation</itemName></dim5>
+    <dim5><key>UP</key><itemName>Upper bound of variable or equation</itemName></dim5>
+    <dim5><key>LO</key><itemName>Lower bound of variable or equation</itemName></dim5>
+
+</generated>

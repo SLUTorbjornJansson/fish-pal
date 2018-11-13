@@ -1,0 +1,553 @@
+********************************************************************
+*
+* Standard test suite for the GAMS programs of CAPRI
+*
+* Since: July 2008
+* Author: Alexander Gocht and Wolfgang Britz
+*
+********************************************************************
+
+
+ gams engine=D:\GAMS24.0\gams.exe
+ user = britz
+
+ work dir = d:\capri\gams
+*
+* --- where the HTML page and the listings
+*     will be stored
+*
+ output dir = D:\capri\batchoutput
+
+ res dir = d:\capri_res
+ scr dir = d:\scrdir
+ dat dir = d:\capri\dat
+
+ gams options = scrdir=d:\scrdir
+*
+ number of processors = 16
+
+* ---------------------------------
+*  COCO1
+* ---------------------------------
+
+  task =Prepare national database
+  First year = 1984
+  Last year = 2010
+  Automatic check for selection of years = ON
+  Countries = all
+  Regional breakdown = Countries
+  Estimate areas, yields and crop production = ON
+  Estimate animals = ON
+  Estimate markets = ON
+  Estimate land use = ON
+  execute=gamsrun
+
+* ---------------------------------
+*  COCO2
+* ---------------------------------
+
+  task =Finish national database
+  First year = 1984
+  Last year = 2009
+  Countries = all
+  Regional breakdown = Countries
+  execute=gamsrun
+
+ontext
+* ---------------------------------
+* Find No of fts in Nuts2
+* only necessary when designing a new farm type sample
+* ---------------------------------
+
+  gams options =  scrdir=d:\scrdir -license=
+  task =Find No of fts in Nuts2
+  Additional farm groups from fss from 1.600 onwards = 25
+  execute=gamsrun
+
+* ---------------------------------
+* Define fts from FSS
+* only necessary when designing a new farm type sample
+* ---------------------------------
+
+  task =Define fts from FSS
+  First year = 1984
+  Base year = 2008
+  Last year = 2009
+  Countries = all
+  Regional breakdown = Farm types
+  Time series = ON
+  execute=gamsrun
+
+offtext
+* ---------------------------------
+*
+*  CAPREG time series
+*
+* ---------------------------------
+
+  task =Build regional time series
+
+  First year = 1984
+  Base year = 2004
+  Last year = 2009
+
+  Regional breakdown = NUTS2
+  Time series = ON
+  execute=gamsrun
+
+* ---------------------------------
+*
+*  CAPREG base year 2004 and 2008
+*
+* ---------------------------------
+
+  task =Build regional database
+
+  First year = 1984
+  Base year = 2004
+  Last year = 2009
+  Countries = all
+  Regional breakdown = NUTS2
+  execute=gamsrun
+
+  Regional breakdown = Farm types
+  execute=gamsrun
+
+  Base year = 2008
+  Regional breakdown = NUTS2
+  execute=gamsrun
+
+  Regional breakdown = Farm types
+  execute=gamsrun
+
+* ---------------------------------
+*
+*  GLOBAL data base
+*
+* ---------------------------------
+
+  task =Build global database
+
+  Use new global version = ON
+  First year = 1984
+  Base year = 2008
+  Last year = 2010
+  Countries = BL000000 "Belgium and Luxembourg",DK000000 "Denmark",DE000000 "Germany",EL000000 "Greece",ES000000 "Spain",FR000000 "France",IR000000 "Irland",IT000000 "Italy",NL000000 "The Netherlands",AT000000 "Austria",PT000000 "Portugal",SE000000 "Sweden",FI000000 "Finland",UK000000 "United Kingdom",CZ000000 "Czech Republic",HU000000 "Hungary",PL000000 "Poland",SI000000 "Slovenia",SK000000 "Slovak Republic",EE000000 "Estonia",LT000000 "Lithuania",LV000000 "Latvia",CY000000 "Cyprus",MT000000 "Malta",BG000000 "Bulgaria",RO000000 "Romania",NO000000 "Norway",TUR      "Turkey",AL000000 "Albania",MK000000 "Macedonia",CS000000 "Serbia",MO000000 "Montenegro",HR000000 "Croatia",BA000000 "Bosnia and Herzegovina",KO000000 "Kosovo",
+  Regional breakdown = Countries
+  Update transportcost matrix = ON
+  Update longrun projections = OFF
+  Longrun Option = GLOBIOM_EU "Projections with GLOBIO EU model",
+  Aglink Cosimo model version = aglink2012dgAgri
+  Aglink Cosimo scenario name = Aglink2012dgAgri
+  Load meta information from older task = ON
+  Print gams code to listing = offListing
+  Solprint = On
+  Limrow = 0.0
+  Limcol = 0.0
+
+  execute=gamsrun
+
+
+
+* ---------------------------------
+*
+*  GLOBAL data base
+*
+* ---------------------------------
+
+  task =Build global database
+
+  First year = 1984
+  Base year = 2008
+  Last year = 2010
+  Use new global version = OFF
+  Countries = all
+  Regional breakdown = Countries
+  Update transportcost matrix = ON
+  Update longrun projections = ON
+  Longrun Option = GLOBIOM_EU "Projections with GLOBIO EU model",
+  Aglink Cosimo model version = aglink2010
+  Aglink Cosimo scenario name = Aglink2010
+  execute=gamsrun
+
+* ---------------------------------
+*
+*  HSMU   data base
+*
+* ---------------------------------
+
+  task =Build HSMU database
+
+  Generate GAMS child processes on different threads = ON
+  Base year = 2004
+  Countries = all
+
+  execute=gamsrun
+
+
+* ---------------------------------
+*
+*  HSMU   data base
+*
+* ---------------------------------
+
+  task =Build HSMU database
+
+  Generate GAMS child processes on different threads = ON
+  Base year = 2008
+  Countries = all
+
+  execute=gamsrun
+
+
+
+
+* ---------------------------------
+*
+*  EXPOST run with CAPMOD
+*
+* ---------------------------------
+
+  task =Generate expost results
+
+  Scenario description = AGENDA
+  Scenario description CGE = cge_rd_plus10
+  Generate GAMS child processes on different threads = ON
+  Base year = 2004
+  Simulation years = 2004,
+  Countries = all
+  Regional breakdown = NUTS2
+  Global, spatial multi-commodity model = OFF
+  Endogenous bio-fuel markets in global market model = OFF
+  Endogenous margins between trade block and country prices = OFF
+  Endogenous young animal markets = OFF
+  Regional CGEs = OFF
+  Number of iterations = 99.0
+  Use lower price iterations weights after iteration = 20.0
+  Alternative GAMS license file for GHG emission estimation = gamslice_cplex
+  Aggregates for activities and commodities = ON
+  Environmental Indicators = ON
+  Life-cycle assessment for energy = ON
+  Multi-functionality indicators = ON
+  Iteration tracking = ON
+  Sensitivity experiments with features in supply model = ON
+  Solution printing = Suppress
+  Determine point price elasticities = OFF
+  Solution print at preparatory solve = OFF
+  Abort after preparatory solve = OFF
+  Solution print for pre-steps in 1st iteration with abort = OFF
+  Plus iterlim to zero for 1st pre-steps in 1st iteration = OFF
+  Number of presteps before abort = 1.0
+  Endogenous net migration = ON
+  Fixed budget for factor subsidies = ON
+  Capital markets and investments = DPSV rule
+  Labor markets = Wage curve
+  Land markets = Fixed sectoral land
+  Closure current account and trade balance = Exchange rate
+  Closure household account = Spending
+  Closure government account = Spending
+
+  execute=gamsrun
+
+* ---------------------------------
+*
+*  CAPTRD: trend projection
+*
+* ---------------------------------
+
+  task =Generate trend projection
+
+  First year = 1984
+   Last year = 2020
+  Simulation years = 2020,
+  Last simulation year = 2020
+  Countries = all
+  Regional breakdown = Countries
+  Aglink Cosimo model version = aglink2010
+  Aglink Cosimo scenario name = Aglink2010
+  Scaling to DG Agri baseline = OFF
+  Load meta information from older task = false
+
+  Base year = 2004
+
+  Regional breakdown = Countries
+  execute=gamsrun
+
+  Regional breakdown = NUTS2
+  execute=gamsrun
+
+
+  Base year = 2008
+
+  Regional breakdown = Countries
+  execute=gamsrun
+
+  Regional breakdown = NUTS2
+  execute=gamsrun
+
+
+* -------------------------------------------
+*
+*  CAPTRD: trend projection for farm types
+*
+* -------------------------------------------
+
+  task =Generate farm type trends
+
+  Generate GAMS child processes on different threads = ON
+  Last simulation year = 2020
+  Countries = all
+  Load meta information from older task = OFF
+  Solution printing = Suppress
+
+  Base year farm types = 2004
+  execute=gamsrun
+
+  Base year farm types = 2008
+  execute=gamsrun
+
+
+* -------------------------------------------
+*
+*  CAPMOD: Baseline calibation market model
+*
+* -------------------------------------------
+
+  task =Baseline calibration market model
+
+  Scenario description = tstcal
+  Base year = 2004
+  Simulation years = 2020,
+  Use new global version = OFF
+  Countries = all
+  Regional breakdown = Countries
+  Trace data flow = ON
+  Global, spatial multi-commodity model = ON
+  Endogenous bio-fuel markets in global market model = ON
+  Number of iterations = 1.0
+  Alternative GAMS license file for GHG emission estimation = gamslice_cplex
+  Solution print at preparatory solve = OFF
+  Abort after preparatory solve = OFF
+  Solution print for pre-steps in 1st iteration with abort = OFF
+  Plus iterlim to zero for 1st pre-steps in 1st iteration = OFF
+  Number of presteps before abort = 1.0
+
+  execute=gamsrun
+
+* -------------------------------------------
+*
+*  CAPMOD: Baseline calibation supply models
+*
+* -------------------------------------------
+
+
+  task =Baseline calibration farm types
+
+  Scenario description = mtr_RD
+  Generate GAMS child processes on different threads = ON
+  Simulation years = 2020,
+  Countries = all
+  Regional breakdown = Farm types
+  Number of iterations = 1.0
+  Load meta information from older task = OFF
+  Solution printing = Suppress
+  Determine point price elasticities = ON
+
+  Base year farm types = 2004
+  execute=gamsrun
+
+  Base year farm types = 2008
+  execute=gamsrun
+
+
+* -------------------------------------------
+*
+*  CAPDIS: HSMU baseline
+*
+* -------------------------------------------
+
+  task =HSMU baseline
+
+  Scenario description = tstcal
+  Generate GAMS child processes on different threads = ON
+  Downscale farm type results = OFF
+  Base year = 2004
+  Simulation years = 2020,
+  Countries = all
+
+  execute=gamsrun
+
+
+* -------------------------------------------
+*
+*  REGCGE: Calibration
+*
+* -------------------------------------------
+
+  task =Calibrate CGE
+
+  Countries = all
+  Wage curve elasticity = 0.6
+  Prudency factor for DPSV investment rule = 0.3
+  Base year CAPRI = 04
+  Simulation year CAPRI = 20
+  Baseline scenario CAPRI = MTR_RD
+
+  execute=gamsrun
+
+* -------------------------------------------
+*
+*  REGCGE: Test shocks
+*
+* -------------------------------------------
+
+  task =Run test shocks with CGE
+
+  Countries = all
+  Base year CAPRI = 04
+  Simulation year CAPRI = 20
+  Baseline scenario CAPRI = MTR_RD
+  Use seperate threads = OFF
+  Endogenous net migration = ON
+  Fixed budget for factor subsidies = ON
+  Capital markets and investments = DPSV rule
+  Labor markets = Wage curve
+  Land markets = Fixed sectoral land
+  Closure current account and trade balance = Exchange rate
+  Closure household account = Spending
+  Closure government account = Spending
+  TFP increase 10% = OFF
+  Factor endowment increase 10% = OFF
+  Investment increase 50% = OFF
+  RD measure increase 10% = ON
+  RD measure decrease 100% = OFF
+
+  execute=gamsrun
+
+
+* -------------------------------------------
+*
+*  CAPMOD: Simulation
+*
+* -------------------------------------------
+
+  task =Run scenario with market model
+
+  Scenario description = tstcal
+  Scenario description CGE = cge_rd_noChg
+  Generate GAMS child processes on different threads = ON
+  Base year = 2004
+  Simulation years = 2020,
+  Countries = all
+  Regional breakdown = NUTS2
+  Global, spatial multi-commodity model = ON
+  Endogenous bio-fuel markets in global market model = ON
+  Endogenous margins between trade block and country prices = ON
+  Regional CGEs = ON
+  Number of iterations = 99.0
+  Use lower price iterations weights after iteration = 20.0
+  Alternative GAMS license file for GHG emission estimation = gamslice_cplex
+  Aggregates for activities and commodities = ON
+  Environmental Indicators = ON
+  Life-cycle assessment for energy = ON
+  Multi-functionality indicators = ON
+  Iteration tracking = ON
+  Sensitivity experiments with features in supply model = ON
+  Solution printing = Suppress
+  Determine point price elasticities = OFF
+  Solution print at preparatory solve = OFF
+  Abort after preparatory solve = OFF
+  Solution print for pre-steps in 1st iteration with abort = OFF
+  Plus iterlim to zero for 1st pre-steps in 1st iteration = OFF
+  Number of presteps before abort = 1.0
+  Endogenous net migration = ON
+  Fixed budget for factor subsidies = ON
+  Capital markets and investments = DPSV rule
+  Labor markets = Wage curve
+  Land markets = Fully mobile land
+  Closure current account and trade balance = Exchange rate
+  Closure household account = Spending
+  Closure government account = Spending
+
+  execute=gamsrun
+
+  task =Run scenario without market model
+
+  Scenario description = tstcal
+  Scenario description CGE = cge_rd_noChg
+  Generate GAMS child processes on different threads = ON
+  Base year = 2004
+  Simulation years = 2020,
+  Countries = all
+  Regional breakdown = NUTS2
+  Regional CGEs = ON
+  Number of iterations = 99.0
+  Aggregates for activities and commodities = ON
+  Environmental Indicators = ON
+  Life-cycle assessment for energy = ON
+  Multi-functionality indicators = ON
+  Iteration tracking = ON
+  Sensitivity experiments with features in supply model = ON
+  Solution printing = Suppress
+  Determine point price elasticities = OFF
+  Endogenous net migration = ON
+  Fixed budget for factor subsidies = OFF
+  Capital markets and investments = DPSV rule
+  Labor markets = Wage curve
+  Land markets = Fully mobile land
+  Closure current account and trade balance = Exchange rate
+  Closure household account = Spending
+  Closure government account = Spending
+
+  execute=gamsrun
+
+  Regional breakdown = Farm types
+  execute=gamsrun
+
+* -------------------------------------------
+*
+*  HSMU: Downscale results
+*
+* -------------------------------------------
+
+  task =Downscale scenario results
+
+  Scenario description = tstcal
+  Generate GAMS child processes on different threads = ON
+  Downscale farm type results = OFF
+  Base year = 2004
+  Simulation years = 2020,
+  Countries = all
+
+  execute=gamsrun
+
+
+* -------------------------------------------
+*
+*  REGCGE: Simulation
+*
+* -------------------------------------------
+
+
+  task =Run policy experiment with CGE
+
+  Scenario description CGE = cge_no_shock
+  Countries = all
+  Base year CAPRI = 04
+  Simulation year CAPRI = 20
+  Baseline scenario CAPRI = MTR_RD
+  Use seperate threads = ON
+  Endogenous net migration = ON
+  Fixed budget for factor subsidies = ON
+  Capital markets and investments = DPSV rule
+  Labor markets = Wage curve
+  Land markets = Fixed sectoral land
+  Closure current account and trade balance = Exchange rate
+  Closure household account = Spending
+  Closure government account = Spending
+
+  execute=gamsrun
+
+
+offtext
+

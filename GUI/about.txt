@@ -1,0 +1,32 @@
+<HTML>
+
+  <H2>CAPRI Graphical User Interface</H2>
+
+  <P>by <B>Wolfgang Britz</B>, University Bonn and <B>Alexander Gocht</B>, vTI Braunschweig</P>
+  <P>1999-2011</P>
+
+  <P>We gratefully acknowledge the support of the EU Commission -
+  mainly based on the projects CAPRI, CAP-STRAT, CAPRI-Dynaspat, CAPRI-RD -
+  and the helpful feedback of the users.</P>
+
+  <H2>External libs</H2>
+
+  <P>The code of the GUI embeds classes from many libraries available as open source, e.g. (in alphabetical order):</P>
+  <UL>
+     <LI>flowmap - flowmap layout</LI>
+     <LI>jFreeChart - plotting</LI>
+     <LI>geotools - shapefile handling</LI>
+     <LI>svnkit - software versioning integration</LI>
+     <LI>WEKA - Machine learning</LI>
+  </UL>
+
+  <P>In several cases, the original source code was updated
+  to allow integration into the CAPRI GUI. Errors are
+  hence most probably due to us. We would like to thank the
+  developers of these libs for their efforts and the open
+  source policy.</P>
+
+
+</HTML>
+
+

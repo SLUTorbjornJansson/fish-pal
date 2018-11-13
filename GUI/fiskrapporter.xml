@@ -1,0 +1,47 @@
+<tables>
+<table>
+  <theme>Fishing activities</theme>
+  <name>Effort</name>
+  <itemDim>dim5</itemDim>
+  <item>
+    <itemName>Effort</itemName>
+    <key>days</key>
+  </item>
+</table>
+
+<table>
+    <theme>Fishing activities</theme>
+    <name>Catch</name>
+    <itemDim>dim5</itemDim>
+    <item>
+        <key>catch</key>
+        <itemName>Catch</itemName>
+    </item>
+</table>
+
+<activity>
+    <key>2</key>
+    <itemName>Some fishery</itemName>
+    <sel>[all]</sel>
+</activity>
+<activity><key>3</key><itemName>Another fishery</itemName><sel>[all]</sel></activity>
+
+
+<product>
+    <itemName>All species</itemName>
+    <key>total</key>
+    <sel>[noSpecies,all]</sel>
+</product>
+<product>
+   <key>Aborre</key>
+   <itemName>Aborre</itemName>
+</product>
+<dim5>
+    <itemName>Fishing effort</itemName>
+    <key>days</key>
+</dim5>
+<dim5>
+     <key>catch</key>
+     <itemName>Catch</itemName>
+</dim5>
+</tables>

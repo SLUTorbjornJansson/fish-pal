@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<tables  xmlns:xi="http://www.w3.org/2001/XInclude">
+
+<themes>Meta,Scenario shifter,
+Welfare,CAP,Policy indicators,
+Prices,Markets,BioFuels,Trade,Farm,Farm - totals,Farm EU,
+Feed,Fertilizer,Environment,
+CGE Meta,CGE Policy,CGE Accounts,CGE Price,CGE Production,
+HSMU,DNDC,Multi-Functionality,Energy</themes>
+
+<xi:include href="views/coco_tables.xml"/>
+<xi:include href="views/capreg_tables.xml"/>
+<xi:include href="views/marketmodel_tables.xml"/>
+<xi:include href="views/supplymodel_tables.xml"/>
+<xi:include href="views/cge_tables.xml"/>
+<xi:include href="views/remaining_tables.xml"/>
+<xi:include href="views/dimdefs.xml"/>
+
+</tables>

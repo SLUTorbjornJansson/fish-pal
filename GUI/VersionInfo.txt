@@ -1,0 +1,14 @@
+<HTML>
+<BODY>
+<P font style="font-family:Arial"P><B>Fish PAL User Interface</B></P>
+<P font style="font-family:Arial">Version 2017</P>
+<P font style="font-family:Arial"><Font=1>Realized with GGIG (GAMS Graphical Interface Generator)</P>
+
+<P font style="font-family:Arial">Authors:
+
+               Torbjörn <B>Jansson</B>,
+               Staffan <B>Waldo</B>
+
+<P>
+<HTML>
+</BODY>
