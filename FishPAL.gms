@@ -7,6 +7,7 @@ $ONTEXT
 
 $OFFTEXT
 $EOLCOM //
+$STARS $$$$
 
 *##############################################################################
 *   Manuell styrning av modellen:
@@ -29,7 +30,7 @@ $SETGLOBAL programMode simulation
 $SETGLOBAL projectDirectory seal
 
 *$SETGLOBAL scenario reference
-$SETGLOBAL scenario scenario2
+$SETGLOBAL  scenario scenario2
 *$SETGLOBAL scenario scenario3
 *$SETGLOBAL scenario scenario4
 *$SETGLOBAL scenario scenario5
@@ -65,12 +66,15 @@ DISPLAY "datDir = %datDir%";
 
 
 
+$setglobal scenario_path %projectDirectory%\%scenario%
+$setglobal scenario_path_underScores %projectDirectory%_%scenario%
+$if "%projectDirectory%"=="." $setglobal scenario_path_underScores %projectDirectory%_%scenario%
 
 
 
 *   Läs in en eventuell styrfil från GUI. Isåfall finns namnet lagrat i
 *   globalvariablen scen
-$IF EXIST "include_files\%scen%.gms" $INCLUDE "include_files\%scen%.gms"
+$IFI %GGIG%==ON $INCLUDE "%scen%.gms"
 
 
 *#############################################################
@@ -160,7 +164,7 @@ $include "include_files\declare_simulation_model.gms"
 $IF %programMode%==simulation $INCLUDE "include_files\load_parameters.gms"
 
 *   Define what to change in the current scenario
-$INCLUDE "scenarioFiles\%projectDirectory%\%scenario%.gms"
+$INCLUDE "scenarioFiles\%scenario_path%.gms"
 
 
 *$stop
@@ -305,7 +309,7 @@ p_fiskResultat(fisheryDomain,"allSpecies",dualResult,"sim") $ p_reportDualsFishe
 *   Store report. Suffix the file name by "est" if estimation, else by "sim"
 $SET runtype sim
 $IF %programMode%==estimation $SET runtype est
-EXECUTE_UNLOAD "%resDir%\simulation\%projectDirectory%_%runtype%_%scenario%.gdx" p_fiskresultat,
+EXECUTE_UNLOAD "%resDir%\simulation\%projectDirectory%_%runtype%_%scenario_underscores%.gdx" p_fiskresultat,
                                                       p_reportDualsFishery,
                                                       p_profitFishery,
                                                       p_fixCostSumOri,

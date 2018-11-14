@@ -22,7 +22,7 @@
          <task>
             <name>Estimation</name>
             <gamsFile>FishPAL.gms</gamsFile>
-            <incFile>fisk_settings</incFile>
+            <incFile>include_files\fisk_settings</incFile>
             <resdir>simulation</resdir>
             <xmlTableDef>views\tables_estimation.xml</xmlTableDef>
             <gdxSymbol>p_fiskResultat</gdxSymbol>
@@ -36,7 +36,7 @@
          <task>
             <name>Simulation</name>
             <gamsFile>FishPAL.gms</gamsFile>
-            <incFile>fisk_settings</incFile>
+            <incFile>include_files\fisk_settings</incFile>
             <resdir>simulation</resdir>
             <xmlTableDef>views\tables_simulation.xml</xmlTableDef>
             <gdxSymbol>p_fiskResultat</gdxSymbol>
@@ -46,6 +46,12 @@
             <!--<dim5Dim>3</dim5Dim>-->
             <scenDim>4</scenDim>
          </task>
+         
+         <control>
+            <Type>tab</Type>
+            <Title>General</Title>         
+            <tasks>all</tasks>   
+         </control>
 
          <control>
                   <Type>singlelist</Type>
@@ -72,14 +78,37 @@
          </control>
 
          <control>
-             <Type>filesel</Type>
+             <Type>fileselDir</Type>
              <Title>Scenario description</Title>
              <Value>noChange</Value>
              <Options>..\scenarioFiles\*.gms</Options>
              <range>0</range>
-             <gamsName>scenario</gamsName>
+             <gamsName>scenario_path</gamsName>
              <tasks>Simulation, Estimation
              </tasks>
              <tooltip>Name of the scenario file to run. The results will be stored under the name as well.</tooltip>
          </control>
+
+
+         <control>
+            <Type>tab</Type>
+            <Title>Debug</Title>         
+            <tasks>all</tasks>   
+         </control>
+
+        <control>
+            <Type>text</Type>
+            <Title>Additional output file identifyer</Title>
+            <gamsName>ResId</gamsName>
+            <tasks>Estimation, Simulation</tasks>
+        </control>
+        
+
+        <control>
+            <Type>text</Type>
+            <Title>Additional input file identifyer</Title>
+            <gamsName>InputDataId</gamsName>
+            <tasks>Estimation, Simulation</tasks>
+        </control>
+        
 </GGIG>
