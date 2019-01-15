@@ -26,6 +26,7 @@ PARAMETERS
     p_weightLandings(fishery,species)"Weight in estimation metric of landing deviations"
     p_weightDiscards(fishery,species)"Weight in estimation metric of discard deviations"
     p_weightKwh(segment) "Weight of kwh errors in normal density"
+    p_weightPMP(fishery) "Weight for pmp terms in normal density"
     p_priMaxEffFishery(*,f) "Prior density function items for the fishery effort restriction"
     p_priorLandings(fishery,species,*) "Prior statistics for Landings"
     p_priorDiscards(fishery,species,*) "Prior statistics for Discards"
@@ -94,10 +95,11 @@ e_estimationMetric ..
 
     -SUM(seg, SQR(pv_kwh(seg)-p_kwhOri(seg))*p_weightKwh(seg))
 
-*   Hårdkodat antagande om att variansen av PMP-kostnaden/intäkten är lika stor som för variabla kostnader per dag
+*   Hårdkodat antagande om att variansen av PMP-kostnaden/intäkten är proportionell
+*   mot den för variabla kostnader per dag.
 *   Detta är rimligt på så vis att det är proportionellt mot omsättningen i fisket,
 *   och inte samma för trålare och små kustfisken
-    -SUM(f, SQR[pv_PMPconst(f) + 1/2*pv_PMPslope(f)*v_effortAnnual(f)]*p_weightvarCostAve(f))
+    -SUM(f, SQR[pv_PMPconst(f) + 1/2*pv_PMPslope(f)*v_effortAnnual(f)]*p_weightPMP(f))
 
 *   Annual effort should be "close" to observed effort
     -SUM(f, SQR(v_effortAnnual(f)-p_effortOri(f))*p_weightEffortAnnual(f))
@@ -299,94 +301,195 @@ else
 
 *###############################################################################
 *   Define priors
+*   We need to have parameters for the density functions of the parameters that
+*   we estimate. For normally distributed stuff this means: mean and standard deviation.
+*   For gamma distributed stuff such as (potentially) landings and discards,
+*   it means two other parameters, that we derive mathematically from MODE and
+*   standard deviation.
 *###############################################################################
 
-set fsTemp(f,s) "Permissible combinations in current computation";
 
+    set fsTemp(f,s) "Permissible combinations in current computation";
+
+*-------------------------------------------------------------------------------
 * --- Define priors for landings
-fsTemp(fishery_species) = no;
-fsTemp(fishery_species) $ p_landingsOri(fishery_species) = yes;
-p_priorLandings(fsTemp,"priMode") = p_landingsOri(fsTemp);
-p_priorLandings(fsTemp,"priAcc") = 5;
-p_priorLandings(fsTemp,"priDens") = normalDensity;
+*-------------------------------------------------------------------------------
 
-p_priorLandings(f,s,"priStdev") $ fsTemp(f,s)
-    = p_landingsOri(f,s)
-*    = sum(fishery, p_landingsOri(fishery,s))
-*    / sum(fishery $ p_landingsOri(fishery,s), 1)
-    / p_priorLandings(f,s,"priAcc");
-p_priorLandings(fsTemp,"priVar") = SQR(p_priorLandings(fsTemp,"priStdev"));
-p_priorLandings(fsTemp,"priTemp") $ [p_priorLandings(fsTemp,"priDens") eq gammaDensity]
-        = {sqr(p_priorLandings(fsTemp,"priMode")) +
-            sqrt[sqr(p_priorLandings(fsTemp,"priMode"))
-                    *( sqr(p_priorLandings(fsTemp,"priMode"))
-                       + 4*p_priorLandings(fsTemp,"priVar")) ] }
-        /(2*p_priorLandings(fsTemp,"priVar") );
-;
-    p_priorLandings(fsTemp,"priAlpha") $ [p_priorLandings(fsTemp,"priDens") eq gammaDensity]
-        = p_priorLandings(fsTemp,"priTemp") + 1;
+    fsTemp(fishery_species) = no;
+    fsTemp(fishery_species) $ p_landingsOri(fishery_species) = yes;
 
-    p_priorLandings(fsTemp,"priBeta") $ [p_priorLandings(fsTemp,"priDens") eq gammaDensity]
-        = p_priorLandings(fsTemp,"priTemp") / p_priorLandings(fsTemp,"priMode");
+*     The following line is where we enter an ASSUMPTION about standard deviation.
+*     priAcc means "how many standard deviations away from zero is the MODE"
+*     Higher value means that the landings gets a higher weight and is fitted more closely in estimation
+*     The weight is derived from variance under the section relating to the normal density
+    p_priorLandings(fsTemp,"priAcc") = 5;
+    p_priorLandings(fsTemp,"priMode") = p_landingsOri(fsTemp);
+    p_priorLandings(fsTemp,"priDens") = normalDensity;
 
-p_priorLandings(fsTemp,"priMin") $ [p_priorLandings(fsTemp,"priDens") eq gammaDensity] = p_priorLandings(fsTemp,"priMode")*0.0001;
+    p_priorLandings(f,s,"priStdev") $ fsTemp(f,s)
+        = p_landingsOri(f,s)
+        / p_priorLandings(f,s,"priAcc");
 
+    p_priorLandings(fsTemp,"priVar") = SQR(p_priorLandings(fsTemp,"priStdev"));
+
+*   Landningar: Vikten för normalfördelningen är 1/(2*variansen). Här har vi ökat vikten med en faktor tio.
+    p_weightLandings(f,s) $ p_landingsOri(f,s) = 1/(2*p_priorLandings(f,s,"priVar"));
+
+*       Derive gamma distribution parameters for landings, which are only used
+*       if priDens = gammaDensity.
+
+    p_priorLandings(fsTemp,"priTemp") $ [p_priorLandings(fsTemp,"priDens") eq gammaDensity]
+            = {sqr(p_priorLandings(fsTemp,"priMode")) +
+                sqrt[sqr(p_priorLandings(fsTemp,"priMode"))
+                        *( sqr(p_priorLandings(fsTemp,"priMode"))
+                           + 4*p_priorLandings(fsTemp,"priVar")) ] }
+            /(2*p_priorLandings(fsTemp,"priVar") );
+    ;
+        p_priorLandings(fsTemp,"priAlpha") $ [p_priorLandings(fsTemp,"priDens") eq gammaDensity]
+            = p_priorLandings(fsTemp,"priTemp") + 1;
+
+        p_priorLandings(fsTemp,"priBeta") $ [p_priorLandings(fsTemp,"priDens") eq gammaDensity]
+            = p_priorLandings(fsTemp,"priTemp") / p_priorLandings(fsTemp,"priMode");
+
+    p_priorLandings(fsTemp,"priMin") $ [p_priorLandings(fsTemp,"priDens") eq gammaDensity] = p_priorLandings(fsTemp,"priMode")*0.0001;
+
+
+*-------------------------------------------------------------------------------
 * --- Define priors for discards
-fsTemp(fishery_species) = no;
-fsTemp(fishery_species) $ p_discardsOri(fishery_species) = yes;
+*-------------------------------------------------------------------------------
 
-p_priorDiscards(fsTemp,"priMode") = p_discardsOri(fsTemp);
-p_priorDiscards(fsTemp,"priAcc") = 2;
-p_priorDiscards(fsTemp,"priDens") = normalDensity;
+    fsTemp(fishery_species) = no;
+    fsTemp(fishery_species) $ p_discardsOri(fishery_species) = yes;
 
-p_priorDiscards(f,s,"priStdev") $ fsTemp(f,s)
-    = sum(fishery, p_discardsOri(fishery,s))
-    / sum(fishery $ p_discardsOri(fishery,s), 1)
-    / p_priorDiscards(f,s,"priAcc");
-p_priorDiscards(fsTemp,"priVar") = SQR(p_priorDiscards(fsTemp,"priStdev"));
-p_priorDiscards(fsTemp,"priTemp") $ [p_priorDiscards(fsTemp,"priDens") eq gammaDensity]
-        = {sqr(p_priorDiscards(fsTemp,"priMode")) +
-            sqrt[sqr(p_priorDiscards(fsTemp,"priMode"))
-                    *( sqr(p_priorDiscards(fsTemp,"priMode"))
-                       + 4*p_priorDiscards(fsTemp,"priVar")) ] }
-        /(2*p_priorDiscards(fsTemp,"priVar") );
-;
-    p_priorDiscards(fsTemp,"priAlpha") $ [p_priorDiscards(fsTemp,"priDens") eq gammaDensity]
-        = p_priorDiscards(fsTemp,"priTemp") + 1;
+*   The following line is where we enter an ASSUMPTION about standard deviation.
+*   priAcc means "how many standard deviations away from zero is the MODE"
+*   Higher value means that the discards gets a higher weight and is fitted more closely in estimation
+*   The weight is derived from variance under the section relating to the normal density
+    p_priorDiscards(fsTemp,"priAcc") = 2;
+    p_priorDiscards(fsTemp,"priMode") = p_discardsOri(fsTemp);
+    p_priorDiscards(fsTemp,"priDens") = normalDensity;
 
-    p_priorDiscards(fsTemp,"priBeta") $ [p_priorDiscards(fsTemp,"priDens") eq gammaDensity]
-        = p_priorDiscards(fsTemp,"priTemp") / p_priorDiscards(fsTemp,"priMode");
 
-p_priorDiscards(fsTemp,"priMin") $ [p_priorDiscards(fsTemp,"priDens") eq gammaDensity] = p_priorDiscards(fsTemp,"priMode")*0.0001;
+*   Derive standard deviation and variance from "priAcc"
+    p_priorDiscards(f,s,"priStdev") $ fsTemp(f,s)
+        = sum(fishery, p_discardsOri(fishery,s))
+        / sum(fishery $ p_discardsOri(fishery,s), 1)
+        / p_priorDiscards(f,s,"priAcc");
+    p_priorDiscards(fsTemp,"priVar") = SQR(p_priorDiscards(fsTemp,"priStdev"));
 
+
+*   Vikten för normalfördelningen är 1/(2*variansen).
+    p_weightDiscards(f,s) $ p_discardsOri(f,s) = 1/(2*p_priorDiscards(f,s,"priVar"));
+
+
+*   Derive gamma distribution parameters for discards, which are only used
+*   if priDens = gammaDensity.
+    p_priorDiscards(fsTemp,"priTemp") $ [p_priorDiscards(fsTemp,"priDens") eq gammaDensity]
+            = {sqr(p_priorDiscards(fsTemp,"priMode")) +
+                sqrt[sqr(p_priorDiscards(fsTemp,"priMode"))
+                        *( sqr(p_priorDiscards(fsTemp,"priMode"))
+                           + 4*p_priorDiscards(fsTemp,"priVar")) ] }
+            /(2*p_priorDiscards(fsTemp,"priVar") );
+    ;
+        p_priorDiscards(fsTemp,"priAlpha") $ [p_priorDiscards(fsTemp,"priDens") eq gammaDensity]
+            = p_priorDiscards(fsTemp,"priTemp") + 1;
+
+        p_priorDiscards(fsTemp,"priBeta") $ [p_priorDiscards(fsTemp,"priDens") eq gammaDensity]
+            = p_priorDiscards(fsTemp,"priTemp") / p_priorDiscards(fsTemp,"priMode");
+
+    p_priorDiscards(fsTemp,"priMin") $ [p_priorDiscards(fsTemp,"priDens") eq gammaDensity] = p_priorDiscards(fsTemp,"priMode")*0.0001;
+
+
+*-------------------------------------------------------------------------------
 *   Define prior distribution for fishery effort restriction
+*   The only option available yet is beta density
+*-------------------------------------------------------------------------------
+
 *   Compute maximum possible number of fishing days per vessel and year in each fishery using
 *   a) Segment capacity per period (per vessel), and
 *   b) fishery season information (1 if period is season, else 0)
-p_priMaxEffFishery("priMode",f) = SUM((p,seg) $ segment_fishery(seg,f), p_maxEffSegPeriod(seg,p)*p_season(f,p));
-p_priMaxEffFishery("priMax",f) = SUM((p,seg) $ segment_fishery(seg,f), 365/12*p_season(f,p));
-p_priMaxEffFishery("priMin",f) = SUM((p,seg) $ segment_fishery(seg,f), 0*p_season(f,p));
+   p_priMaxEffFishery("priMode",f) = SUM((p,seg) $ segment_fishery(seg,f), p_maxEffSegPeriod(seg,p)*p_season(f,p));
+   p_priMaxEffFishery("priMax",f) = SUM((p,seg) $ segment_fishery(seg,f), 365/12*p_season(f,p));
+   p_priMaxEffFishery("priMin",f) = SUM((p,seg) $ segment_fishery(seg,f), 0*p_season(f,p));
 
 *   Define a measure of the "peakiness" of the density function. Ideally, we would like to
 *   use something like the variance of the actual number of effective fishing days per
 *   vessel in season. In the wake of such info, we need one other piece of information instead (namely THIS).
-p_priMaxEffFishery("priAcc",f) = 5;
-p_priMaxEffFishery("priDens",f) = betaDens;
+    p_priMaxEffFishery("priAcc",f) = 5;
+    p_priMaxEffFishery("priDens",f) = betaDens;
 
 *       - Compute alpha and beta, see illustrative excel sheet on beta density
 *           (assuming "accuracy"+2 = alpha+beta so that accuracy = 0 implies uniform density)
-p_priMaxEffFishery("priScale",f) = p_priMaxEffFishery("priMax",f)-p_priMaxEffFishery("priMin",f);
+    p_priMaxEffFishery("priScale",f) = p_priMaxEffFishery("priMax",f)-p_priMaxEffFishery("priMin",f);
 
-p_priMaxEffFishery("priAlpha",f) = (p_priMaxEffFishery("priMode",f)-p_priMaxEffFishery("priMin",f))/p_priMaxEffFishery("priScale",f)*((2+p_priMaxEffFishery("priAcc",f))-2)+1;
-p_priMaxEffFishery("priBeta",f)  = (2+p_priMaxEffFishery("priAcc",f))-p_priMaxEffFishery("priAlpha",f);
+    p_priMaxEffFishery("priAlpha",f) = (p_priMaxEffFishery("priMode",f)-p_priMaxEffFishery("priMin",f))/p_priMaxEffFishery("priScale",f)*((2+p_priMaxEffFishery("priAcc",f))-2)+1;
+    p_priMaxEffFishery("priBeta",f)  = (2+p_priMaxEffFishery("priAcc",f))-p_priMaxEffFishery("priAlpha",f);
 
 
-p_priorKwh(seg,"priMode") = p_kwhOri(seg);
-p_priorKwh(seg,"priAcc") = 3;
-p_priorKwh(seg,"priDens") = normalDensity;
-p_priorKwh(seg,"priStdev") = p_priorKwh(seg,"priMode")/p_priorKwh(seg,"priAcc");
-p_priorKwh(seg,"priVar") = SQR(p_priorKwh(seg,"priStdev"));
+*-------------------------------------------------------------------------------
+*   --- Set priors for the kwh per vessel
+*-------------------------------------------------------------------------------
 
+    p_priorKwh(seg,"priMode") = p_kwhOri(seg);
+    p_priorKwh(seg,"priAcc") = 3;
+    p_priorKwh(seg,"priDens") = normalDensity;
+    p_priorKwh(seg,"priStdev") = p_priorKwh(seg,"priMode")/p_priorKwh(seg,"priAcc");
+    p_priorKwh(seg,"priVar") = SQR(p_priorKwh(seg,"priStdev"));
+
+
+    p_weightKwh(seg) $ [p_priorKwh(seg,"priDens") EQ normalDensity]
+        = 1/(2*p_priorKwh(seg,"priVar"));
+
+
+*-------------------------------------------------------------------------------
+*   --- Set priors for average variable cost based on the normal density function
+*-------------------------------------------------------------------------------
+
+*   For variable costs: assume normal distribution with mean "what we observe"...
+*   ... and variance ASSUMED to be such that 2 standard deviations cover 1/2 of the mean in each direction, sigma=Ori/4
+    p_weightvarCostAve(f) $ p_varCostAveOri(f) = 1/(2*SQR(p_varCostAveOri(f)/4));
+
+* --- Definiera parametrar till kostnadsfunktionen. Hur det går till beror på funktionsform.
+*     Nedan antar vi en kvadratisk totalkostnad, dvs linjär marginalkostnad, och låter skattningen
+*     bestämma intercept men inte lutning.
+*     Antagande: interceptet är ungefär halva den observerade genomsnittskostnaden.
+*     om MC = a + b*E så innebär det att b = AC/E
+
+*   Then, we assume a slope corresponding to an a-priori (myopic) elasticity of 1.5
+*   beta = 1/elasticity * AverageCost / EffortOri
+
+*   With the current version, slope is FIXED (set_bounds_estimation.gms)
+*   to the value assigned here, so that this is really a kind of
+*   "very certain prior information"
+    scalar p_elas "Assumed a-priori effort-elasticity for fisheries to marginal costs" /1.5/;
+
+    pv_varCostSlope.l(f) $ p_effortOri(f) = 1/(p_elas - 1/2) * p_varCostAveOri(f)/p_effortOri(f);
+
+
+*-------------------------------------------------------------------------------
+*   --- Set priors for annual fishing effort
+*-------------------------------------------------------------------------------
+
+*   In this version it is not allowed to change in estimation, but we nevertheless
+*   set a weight for completeness
+    p_weightEffortAnnual(f) $ p_effortOri(f) = 1/(2*SQR(p_effortOri(f)/4));
+
+
+*-------------------------------------------------------------------------------
+*   --- Set priors for PMP terms
+*-------------------------------------------------------------------------------
+
+*   For PMP terms, we assume that they are proportional to the variable costs,
+*   implying that it is "easier" to modify PMP for a larger vessel than for a smaller
+*   100 sek/day may be important for a coastal fishery but not for a pelagic trawler
+*   It seems to be more important to fit observed costs than non-observed PMP,
+*   so we make the weight smaller by a uniform factor.
+*   Note that we are fixing "slope" to zero, so that this remaining constant is
+*   equivalent to a normally distributed error term in the FOC equation.
+    p_weightPMP(f) = p_weightvarCostAve(f)/10;
+
+
+    execute_unload "%resdir%\check\priors_%parFileName%.gdx" p_weightvarCostAve p_weightEffortAnnual p_weightLandings p_weightDiscards p_weightKwh p_weightPMP;
 
 *###############################################################################
 *   SKATTA MODELLPARAMETRARNA
@@ -398,7 +501,7 @@ p_priorKwh(seg,"priVar") = SQR(p_priorKwh(seg,"priStdev"));
 *
 *###############################################################################
 
-* STEG 1:
+* STEG 1: FINDING ANY FEASIBLE SOLUTION USING INITIAL PARAMETER VALUES
 *   Prices are original prices
 p_pricesA(f,s) = p_pricesAOri(f,s);
 p_pricesB(s)   = p_pricesBOri(s);
@@ -406,25 +509,6 @@ p_pricesB(s)   = p_pricesBOri(s);
 *   If quota exists, initialize adjustment factor to "1"
 pv_TACAdjustment.L(catchQuotaName,quotaArea)  $ (p_TACOri(catchQuotaName,quotaArea) GT 0) = 1;
 
-
-* --- Definiera parametrar till kostnadsfunktionen. Hur det går till beror på funktionsform.
-*     Nedan antar vi en kvadratisk totalkostnad, dvs linjär marginalkostnad, och låter skattningen
-*     bestämma intercept men inte lutning.
-*     Antagande: interceptet är ungefär halva den observerade genomsnittskostnaden.
-*     om MC = a + b*E så innebär det att b = AC/E
-
-*   Grundantagande: MC = AC (dvs interceptet = AC)
-*pv_varCostConst.l(f) = p_varCostAveOri(f)*1.0;
-*   Här kan man prova att sätta t.ex. minskande MC för pelagiker, genom att sätta interceptet ÖVER AC
-*   Genom att sätta inteceptet UNDER AC blir MC ökande
-*pv_varCostConst.l(f) $ [segment_fishery("'pel_24XX'",f)
-*                     or segment_fishery("'pel_0018'",f)
-*                     or segment_fishery("'pel_1824'",f)]
-*    = p_varCostAveOri(f)*1.1;
-*   Räkna ut lutningen residualt
-*pv_varCostSlope.l(f) $ p_effortOri(f) = (p_varCostAveOri(f) - pv_varCostConst.l(f))*2 / p_effortOri(f);
-
-pv_varCostSlope.l(f) $ p_effortOri(f) = 1/1.5 * p_varCostAveOri(f)/p_effortOri(f);
 pv_varCostConst.l(f) $ p_effortOri(f) = p_varCostAveOri(f) - pv_varCostSlope.l(f)*p_effortOri(f)/2;
 
 v_varCostAve.l(f) = pv_varCostConst.l(f) + 1/2*p_effortOri(f)*pv_varCostSlope.l(f);
@@ -469,7 +553,8 @@ m_fishSim.holdfixed = 0;
 SOLVE m_fishSim USING NLP MAXIMIZING v_profit;
 m_fishSim.iterlim = 100000;
 
-* STEG 2:
+
+* STEG 2: SOLVING THE ACTUAL ESTIMATION PROBLEM STARTING WITH THE FEASIBLE SOLUTION
 
 *   Release parameters to estimate
 $INCLUDE "include_files\set_bounds_estimation.gms"
@@ -486,28 +571,6 @@ v_catch.SCALE(f,s) $ [p_effortOri(f)*p_catchOri(f,s)] = p_catchOri(f,s);
 *   Tell solver that scaling is to be used
 m_estimateFish.SCALEOPT = 1;
 
-
-
-*   --- Define prior information for parameters (set weights to use in estimation metric)
-
-*       For variable costs: assume normal distribution with mean "what we observe"...
-*       ... and variance ASSUMED to be such that 2 standard deviations cover 1/2 of the mean in each direction
-p_weightvarCostAve(f) $ p_varCostAveOri(f) = 1/(2*SQR(p_varCostAveOri(f)/4));
-
-*   Similar for effort annual (but in this version it is not allowed to change in estimation)
-p_weightEffortAnnual(f) $ p_effortOri(f) = 1/(2*SQR(p_effortOri(f)/4));
-
-*   Landningar: Vikten för normalfördelningen är 1/(2*variansen). Här har vi ökat vikten med en faktor tio.
-*p_weightLandings(f,s) $ p_landingsOri(f,s) = 10/(2*SQR(sum(fishery, p_landingsOri(f,s))/sum(fishery $ p_landingsOri(f,s), 1)/4));
-p_weightLandings(f,s) $ p_landingsOri(f,s) = 10/(2*p_priorLandings(f,s,"priVar"));
-
-*   Utkast: Vikten för normalfördelningen är 1/(2*variansen). Här har vi ökat vikten med en faktor tio.
-p_weightDiscards(f,s) $ p_discardsOri(f,s) = 10/(2*p_priorDiscards(f,s,"priVar"));
-
-p_weightKwh(seg) $ [p_priorKwh(seg,"priDens") EQ normalDensity]
-    = 1/(2*p_priorKwh(seg,"priVar"));
-
-execute_unload "%resdir%\check\priors_%parFileName%.gdx" p_weightvarCostAve p_weightEffortAnnual p_weightLandings p_weightDiscards p_weightKwh;
 
 *   Oavsett hur tung kavel man har, så finns det lika mycket deg...
 
