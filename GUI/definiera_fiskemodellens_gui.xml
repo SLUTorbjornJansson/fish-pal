@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GGIG>
+
+         <toolName><attr>Fisk</attr></toolName>
+         <useOnOff><attr>true</attr></useOnOff>
+         <userName><attr>Torbjorn</attr></userName>
+         <userType><attr>administrator</attr></userType>
+
+         <allowAdmin><attr>yes</attr></allowAdmin>
+<!--
+         <dim0Name><attr>fisherydomain</attr></dim0Name>
+         <dim1Name><attr>speciesdomain</attr></dim1Name>
+         <dim2Name><attr>simelement</attr></dim2Name>
+         <dim3Name><attr>Scenario</attr></dim3Name>
+
+         <xmlTables><attr>fiskrapporter.xml</attr></xmlTables>
+
+         <resDir><attr>..\results</attr></resDir>
+         <restartDir><attr>..\restart</attr></restartDir>
+-->
+
+         <task>
+            <name>Estimation</name>
+            <gamsFile>FishPAL.gms</gamsFile>
+            <incFile>include_files\fisk_settings</incFile>
+            <resdir>simulation</resdir>
+            <xmlTableDef>views\tables_estimation.xml</xmlTableDef>
+            <gdxSymbol>p_fiskResultat</gdxSymbol>
+            <regionDim>0,Fishery</regionDim>
+            <productDim>1,Species</productDim>
+            <activityDim>2,ResultLabel</activityDim>
+            <!--<dim5Dim>3</dim5Dim>-->
+            <scenDim>4</scenDim>
+         </task>
+
+         <task>
+            <name>Simulation</name>
+            <gamsFile>FishPAL.gms</gamsFile>
+            <incFile>include_files\fisk_settings</incFile>
+            <resdir>simulation</resdir>
+            <xmlTableDef>views\tables_simulation.xml</xmlTableDef>
+            <gdxSymbol>p_fiskResultat</gdxSymbol>
+            <regionDim>0,Fishery</regionDim>
+            <productDim>1,Species</productDim>
+            <activityDim>2,ResultLabel</activityDim>
+            <!--<dim5Dim>3</dim5Dim>-->
+            <scenDim>4</scenDim>
+         </task>
+         
+         <control>
+            <Type>tab</Type>
+            <Title>General</Title>         
+            <tasks>all</tasks>   
+         </control>
+
+         <control>
+                  <Type>singlelist</Type>
+                  <Title>Estimation mode</Title>
+                  <Options>estimation</Options>
+                  <gamsName>programMode</gamsName>
+                  <tasks>Estimation</tasks>
+         </control>
+
+         <control>
+                  <Type>singlelist</Type>
+                  <Title>Simulation mode</Title>
+                  <Options>simulation</Options>
+                  <gamsName>programMode</gamsName>
+                  <tasks>Simulation</tasks>
+         </control>
+
+         <control>
+                  <Type>checkbox</Type>
+                  <Title>Try BARON</Title>
+                  <value>OFF</value>
+                  <gamsName>tryBaron</gamsName>
+                  <tasks>Estimation</tasks>
+         </control>
+
+         <control>
+             <Type>fileselDir</Type>
+             <Title>Scenario description</Title>
+             <Value>noChange</Value>
+             <Options>..\scenarioFiles\*.gms</Options>
+             <range>0</range>
+             <gamsName>scenario_path</gamsName>
+             <tasks>Simulation, Estimation
+             </tasks>
+             <tooltip>Name of the scenario file to run. The results will be stored under the name as well.</tooltip>
+         </control>
+
+
+         <control>
+            <Type>tab</Type>
+            <Title>Debug</Title>         
+            <tasks>all</tasks>   
+         </control>
+
+        <control>
+            <Type>text</Type>
+            <Title>Additional output file identifyer</Title>
+            <gamsName>ResId</gamsName>
+            <tasks>Estimation, Simulation</tasks>
+        </control>
+        
+
+        <control>
+            <Type>text</Type>
+            <Title>Additional input file identifyer</Title>
+            <gamsName>InputDataId</gamsName>
+            <tasks>Estimation, Simulation</tasks>
+        </control>
+        
+</GGIG>

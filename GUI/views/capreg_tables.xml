@@ -1,0 +1,1752 @@
+<generated>
+<table>
+  <theme>Farm</theme>
+  <name>Supply details, mapping view</name>
+  <clone>Supply details</clone>
+  <regionSel>Regions and countries</regionSel>
+  <defpivot>0R0S</defpivot>
+  <defview>Map</defview>
+</table>
+<table>
+  <theme>Farm</theme>
+  <name>Supply details, cluster view</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Production activity</activityText>
+  <!-- <activitySel>aggregates</activitySel> -->
+  <regionText>Region</regionText>
+  <regionSel>Not farm types</regionSel>
+  <yearText>Year</yearText>
+  <productText>Item</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <defpivot>0RIP</defpivot>
+  <defview>Table</defview>
+  <itemDim>Product</itemDim>
+ <item>
+    <itemName>Revenues[German:Umsatz][Swedish:Intaekter]</itemName>
+    <key>TOOU</key>
+    <unit>Euro/ha or head</unit>
+    <link>Revenues</link>
+ </item>
+ <item>
+    <itemName>Income</itemName>
+    <key>MGVA</key>
+    <unit>Euro/ha or head</unit>
+    <longtext>Premiums + Revenues - variable costs according to the definition of Economic Accounts for Agriculture, income available to farmers to pay for land, labour, capital and profits</longtext>
+    <link>Income Indicators</link>
+ </item>
+ <item>
+    <itemName>Yield[German:Ertrag]</itemName>
+    <key>YILD</key>
+    <unit>kg or 1/1000 head/ha or head</unit>
+ </item>
+ <item>
+    <itemName>Crop share/Animal density[German:Anbauanteil/Bestandsdichte]</itemName>
+    <key>LEVL</key>
+    <unit>% or 0.01 animals/ha</unit>
+    <eval>VAL/VAL[*,UAAR,LEVL,*,*,*] * 100.</eval>
+ </item>
+ <item>
+    <itemName>Production per UAAR[German:Produktion pro ha LNF]</itemName>
+    <key>YILD</key>
+    <unit>kg/ha</unit>
+    <eval>VAL*VAL[*,*,LEVL,*,*,*]/VAL[*,UAAR,LEVL,*,*,*]</eval>
+ </item>
+ <item>
+    <itemName>Income share</itemName>
+    <key>MGVA</key>
+    <eval>VAL*VAL[*,*,LEVL,*,*,*]/(VAL[*,UAAR,LEVL,*,*,*]*VAL[*,UAAR,MGVA,*,*,*])</eval>
+ </item>
+ <item>
+    <itemName>Revenue share</itemName>
+    <key>TOOU</key>
+    <unit>kg/ha</unit>
+    <eval>VAL*VAL[*,*,LEVL,*,*,*]/(VAL[*,UAAR,LEVL,*,*,*]*VAL[*,UAAR,TOOU,*,*,*])</eval>
+ </item>
+ <item>
+    <itemName>Premium share</itemName>
+    <key>PRME</key>
+    <unit>kg/ha</unit>
+    <eval>VAL*VAL[*,*,LEVL,*,*,*]/(VAL[*,UAAR,LEVL,*,*,*]*VAL[*,UAAR,PRME,*,*,*])</eval>
+ </item>
+</table>
+<table>
+  <theme>Farm</theme>
+  <name>Income Indicators</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Production activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Income indicator</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Revenues[German:Umsatz][Swedish:Intaekter]</itemName>
+    <key>TOOU</key>
+    <unit>Euro/ha or head</unit>
+    <link>Revenues</link>
+ </item>
+ <item>
+    <itemName>Total cost[German:Produktionskosten][Swedish:Variabla kostnader]</itemName>
+    <key>TOIN</key>
+    <unit>Euro/ha or head</unit>
+    <link>Costs</link>
+ </item>
+ <item>
+    <itemName>Premiums[German:Praemien][Swedish:Stoed]</itemName>
+    <key>PRME</key>
+    <unit>Euro/ha or head</unit>
+    <link>Premiums</link>
+ </item>
+ <item>
+    <itemName>Income[German:Einkommen][Swedish:Inkomster]</itemName>
+    <key>MGVA</key>
+    <unit>Euro/ha or head</unit>
+    <link>Supply details</link>
+ </item>
+</table>
+<table>
+  <theme>Farm</theme>
+  <name>Income indicators, mapping view</name>
+  <regionSel>Regions and countries</regionSel>
+  <dim5Sel>MapPos</dim5Sel>
+  <activityText>Production activity</activityText>
+  <regionText>Region</regionText>
+  <regionSel>Not farm types</regionSel>
+  <yearText>Year</yearText>
+  <productText>Income indicator</productText>
+  <dim5Text>Denominator</dim5Text>
+  <scenText>Scenario</scenText>
+  <defpivot>0R0S</defpivot>
+  <defview>Map</defview>
+  <itemDim>Product</itemDim>
+ <item>
+    <itemName>Revenues</itemName>
+    <key>TOOU</key>
+    <unit>Euro/ha or head</unit>
+    <link>Revenues</link>
+ </item>
+ <item>
+    <itemName>Total cost</itemName>
+    <key>TOIN</key>
+    <unit>Euro/ha or head</unit>
+    <link>Costs</link>
+ </item>
+ <item>
+    <itemName>Premiums</itemName>
+    <key>PRME</key>
+    <unit>Euro/ha or head</unit>
+    <link>Premiums</link>
+ </item>
+ <item>
+    <itemName>Income</itemName>
+    <key>MGVA</key>
+    <unit>Euro/ha or head</unit>
+    <link>Supply details</link>
+ </item>
+</table>
+<table>
+  <theme>Farm</theme>
+  <name>Income indicators across Member States</name>
+  <regionSel>Countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Member State</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <defpivot>0RSI</defpivot>
+  <itemDim>Product</itemDim>
+ <item>
+    <itemName>Revenues</itemName>
+    <key>TOOU</key>
+    <unit>Euro/ha or head</unit>
+    <link>Revenues</link>
+ </item>
+ <item>
+    <itemName>Total cost</itemName>
+    <key>TOIN</key>
+    <unit>Euro/ha or head</unit>
+    <link>Costs</link>
+ </item>
+ <item>
+    <itemName>Premiums</itemName>
+    <key>PRME</key>
+    <unit>Euro/ha or head</unit>
+    <link>Premiums</link>
+ </item>
+ <item>
+    <itemName>Income</itemName>
+    <key>MGVA</key>
+    <unit>Euro/ha or head</unit>
+    <link>Supply details</link>
+ </item>
+</table>
+<table>
+   <name>Income Indicators, multiplied with activity levels</name>
+   <clone>Income Indicators</clone>
+   <theme>Farm - totals</theme>
+   <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+<table>
+  <name>Income Indicators, multiplied with activity levels, cummulative change</name>
+  <clone>Income Indicators</clone>
+  <theme>Farm - totals</theme>
+  <regionSel>Regions and countries</regionSel>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+  <activityText>Production activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Income indicator</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defview>Line chart</defview>
+  <lineChartMaxObs>2500</lineChartMaxObs>
+  <lineChartSort>YES</lineChartSort>
+  <lineChartCumulative>YES</lineChartCumulative>
+  <zerosAsMissingValues>YES</zerosAsMissingValues>
+  <defpivot>0SR0</defpivot>
+  <compareDim>Scenarios</compareDim>
+  <compareMode>ONLY_ABSOLUTE</compareMode>
+</table>
+<table>
+  <name>Income Indicators, multiplied with activity levels, bar chart of changes</name>
+  <clone>Income Indicators</clone>
+  <theme>Farm - totals</theme>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Production activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Income indicator</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defview>Bar chart</defview>
+  <barChartMaxPlots>10</barChartMaxPlots>
+  <compareDim>Scenarios</compareDim>
+  <compareMode>ONLY_ABSOLUTE</compareMode>
+  <defpivot>0PSI</defpivot>
+</table>
+<table>
+  <theme>Farm</theme>
+  <name>Labour use per activity</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Production activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Labour category</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Total labour</itemName>
+    <key>LABT</key>
+    <unit>hours/ha or head</unit>
+ </item>
+ <item>
+    <itemName>Family labour</itemName>
+    <key>LABF</key>
+    <unit>hours/ha or head</unit>
+ </item>
+</table>
+
+
+
+ <table>
+  <theme>Farm</theme>
+  <subTheme>Income break down</subTheme>
+  <name>Operating costs</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Total Operating cost</itemName>
+    <key>Operating_cost</key>
+    <unit>Euro /ha or head</unit>
+         <longtext>Operating cost as used in FADN - not fully covered</longtext>
+ </item>
+ <item>
+    <itemName>Specific costs - Animals</itemName>
+    <key>SpecAnim_cost</key>
+    <unit>Euro /head</unit>
+         <longtext>specific costs of animal production - feed, animal purchases and veterinary costs</longtext>
+ </item>
+ <item>
+    <itemName>Specific costs - Crops</itemName>
+    <key>SpecCrop_cost</key>
+    <unit>Euro /ha</unit>
+         <longtext>specific costs of crop production  - seed, plant protection, fertilizers</longtext>
+ </item>
+ <item>
+    <itemName>Fuels and energy</itemName>
+    <key>Fuel_energy</key>
+    <unit>Euro /ha or head</unit>
+         <longtext>Fuels and energy</longtext>
+ </item>
+ <item>
+    <itemName>Non specific operating costs (other)</itemName>
+    <key>NonSpec_cost</key>
+    <unit>Euro /ha or head</unit>
+    <longtext>non-specific operating costs except fuel and energy</longtext>
+ </item>
+ <item>
+    <itemName>GHG Mitigation costs</itemName>
+    <key>Miti_cost</key>
+    <unit>Euro /ha or head</unit>
+    <longtext>GHG Mitigation cost</longtext>
+ </item>
+ <item>
+    <itemName>Share of Animal specific costs</itemName>
+    <key>SpecAnim_cost</key>
+    <unit>% of total costs</unit>
+    <longtext>specific costs of animal production - feed, animal purchases and veterinary costs</longtext>
+    <eval>VAL/VAL[*,*,Operating_cost,*,*,*]*100</eval>
+ </item>
+ <item>
+    <itemName>Share of Crop specific costs</itemName>
+    <key>SpecCrop_cost</key>
+    <unit>% of total costs</unit>
+    <longtext>specific costs of crop production  - seed, plant protection, fertilizers</longtext>
+    <eval>VAL/VAL[*,*,Operating_cost,*,*,*]*100</eval>
+ </item>
+ <item>
+    <itemName>Share of fuels and energy costs</itemName>
+    <key>Fuel_energy</key>
+    <unit>% of total costs</unit>
+    <longtext>Fuels and energy</longtext>
+    <eval>VAL/VAL[*,*,Operating_cost,*,*,*]*100</eval>
+ </item>
+ <item>
+    <itemName>Share of other non-specific operating costs</itemName>
+    <key>NonSpec_cost</key>
+    <unit>% of total costs</unit>
+    <longtext>non-specific operating costs except fuel and energy</longtext>
+    <eval>VAL/VAL[*,*,Operating_cost,*,*,*]*100</eval>
+ </item>
+ <item>
+    <itemName>Share of GHG Mitigation costs</itemName>
+    <key>Miti_cost</key>
+    <unit>Euro /ha or head</unit>
+    <longtext>GHG Mitigation cost</longtext>
+    <eval>VAL/VAL[*,*,Operating_cost,*,*,*]*100</eval>
+ </item>
+</table>
+<table>
+  <theme>Farm</theme>
+  <name>Energy and maintenance costs</name>
+  <subTheme>Income break down</subTheme>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+ <item>
+    <itemName>Repair and energy</itemName>
+    <key>RPEN</key>
+    <unit>cst. Euro /ha or head</unit>
+    <link>Further cost breakdown</link>
+ </item>
+ <item>
+    <itemName>Maintenance machinery</itemName>
+    <key>REPM</key>
+    <unit>cst. Euro /ha or head</unit>
+ </item>
+ <item>
+    <itemName>Maintenance buildings</itemName>
+    <key>REPB</key>
+    <unit>cst. Euro /ha or head</unit>
+ </item>
+ <item>
+    <itemName>Electricity</itemName>
+    <key>ELEC</key>
+    <unit>cst. Euro /ha or head</unit>
+ </item>
+ <item>
+    <itemName>Fuel</itemName>
+    <key>EFUL</key>
+    <unit>litre/ha or head</unit>
+ </item>
+ <item>
+    <itemName>Heating</itemName>
+    <key>EGAS</key>
+    <unit>litre/ha or head</unit>
+ </item>
+ <item>
+    <itemName>Lubricants</itemName>
+    <key>ELUB</key>
+    <unit>cst. Euro /ha or head</unit>
+ </item>
+</table>
+
+<table>
+  <theme>Farm</theme>
+  <subTheme>Income break down</subTheme>
+  <name>Revenues</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <defpivot>0PSI</defpivot>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+ <item>
+    <itemName>Revenues</itemName>
+    <key>TOOU</key>
+    <unit>Euro/ha or head</unit>
+    <longtext>value of all outputs produced by that activity</longtext>
+    <link>Supply details</link>
+ </item>
+ <item>
+    <itemName>Main Yield</itemName>
+    <key>Yild</key>
+    <unit>kg/ha/ or head</unit>
+    <link>Income Indicators</link>
+ </item>
+ <item>
+    <itemName>Main Price</itemName>
+    <key>MPRI</key>
+    <unit>Euro/t</unit>
+    <link>Prices</link>
+ </item>
+ <item>
+    <itemName>Main Revenue</itemName>
+    <key>MREV</key>
+    <unit>Euro/ha or head</unit>
+ </item>
+ <item>
+    <itemName>Secondary Product Revenues</itemName>
+    <key>SREV</key>
+    <unit>Euro/ha or head</unit>
+ </item>
+</table>
+
+<table>
+  <theme>Farm</theme>
+  <subTheme>Income break down</subTheme>
+  <name>Costs</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Total costs</itemName>
+    <key>TOIN</key>
+    <unit>Euro /ha or head</unit>
+    <longtext>value of all inputs used by that activity</longtext>
+    <link>Income Indicators</link>
+ </item>
+ <item>
+    <itemName>Fertilizer</itemName>
+    <key>FERT</key>
+    <unit>Euro /ha or head</unit>
+    <link>Fertiliser input</link>
+ </item>
+ <item>
+    <itemName>Remonte[German:Remonte]</itemName>
+    <key>YANI</key>
+    <unit>Euro /ha or head</unit>
+    <longtext>value of young animals used by that activity, e.g. piglets or young cows replacing old ones</longtext>
+ </item>
+ <item>
+    <itemName>Feed[German:Futterkosten]</itemName>
+    <key>FEEDS</key>
+    <unit>Euro /ha or head</unit>
+    <link>Feed Distribution</link>
+ </item>
+ <item>
+    <itemName>Rest[German:Restliche Inputs]</itemName>
+    <key>RESTI</key>
+    <unit>Euro /ha or head</unit>
+    <link>Further cost breakdown</link>
+ </item>
+ <item>
+    <itemName>Share of Fertilizer costs</itemName>
+    <key>FERT</key>
+    <unit>% of total costs</unit>
+    <link>Fertiliser input</link>
+    <eval>VAL/VAL[*,*,TOIN,*,*,*]*100</eval>
+ </item>
+ <item>
+    <itemName>Share of animal purchases</itemName>
+    <key>YANI</key>
+    <unit>% of total costs</unit>
+    <longtext>value of young animals used by that activity, e.g. piglets or young cows replacing old ones</longtext>
+    <eval>VAL/VAL[*,*,TOIN,*,*,*]*100</eval>
+ </item>
+ <item>
+    <itemName>Share of Feed costs</itemName>
+    <key>FEEDS</key>
+    <unit>% of total costs</unit>
+    <link>Feed Distribution</link>
+    <eval>VAL/VAL[*,*,TOIN,*,*,*]*100</eval>
+ </item>
+ <item>
+    <itemName>Share of other costs (Rest)</itemName>
+    <key>RESTI</key>
+    <link>Further cost breakdown</link>
+    <unit>% of total costs</unit>
+    <eval>VAL/VAL[*,*,TOIN,*,*,*]*100</eval>
+ </item>
+</table>
+<table>
+  <theme>Farm</theme>
+  <subTheme>Income break down</subTheme>
+  <name>Further cost breakdown</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Rest</itemName>
+    <key>RESTI</key>
+    <unit>Euro /ha or head</unit>
+    <link>Costs</link>
+ </item>
+ <item>
+    <itemName>Seed[German:Saatgut]</itemName>
+    <key>SEED_cost</key>
+    <unit>Euro /ha</unit>
+ </item>
+ <item>
+    <itemName>Plant protection[German:Pflanzenschutz]</itemName>
+    <key>Plantp_cost</key>
+    <unit>Euro /ha</unit>
+ </item>
+ <item>
+    <itemName>Repair and energy</itemName>
+    <key>RPEN</key>
+    <unit>Euro /ha or head</unit>
+    <link>Energy and maintenance costs</link>
+ </item>
+ <item>
+    <itemName>Other input costs</itemName>
+    <key>Other_in_RESTI</key>
+    <unit>Euro /ha or head</unit>
+ </item>
+</table>
+
+
+<table>
+  <theme>Fertilizer</theme>
+  <name>Fertilizer input per crop and ha</name>
+  <activitySel>Crops</activitySel>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Crop activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Costs</itemName>
+    <key>FERT</key>
+    <unit>Euro /ha</unit>
+    <link>Costs</link>
+ </item>
+ <item>
+    <itemName>Managed Nitrogen</itemName>
+    <key>NITF</key>
+    <unit>N kg/ha</unit>
+    <link>Nutrient balances</link>
+    <pdf>docs\docu.pdf#Input allocation for fertilisers and nutrient balances</pdf>
+ </item>
+ <item>
+    <itemName>Nitrogen removed</itemName>
+    <key>NRET</key>
+    <unit>N kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Mineral nitrogen</itemName>
+    <key>NMIN</key>
+    <unit>N kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Manure nitrogen</itemName>
+    <key>NMAN</key>
+    <unit>N kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Other nitrogen</itemName>
+    <key>NCRD</key>
+    <unit>N kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Managed phosphate</itemName>
+    <key>PHOF</key>
+    <unit>P2O5 kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Phospate removed</itemName>
+    <key>PRET</key>
+    <unit>P2O5 kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Mineral phosphate</itemName>
+    <key>PMIN</key>
+    <unit>P2O5 kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Manure phosphate</itemName>
+    <key>PMAN</key>
+    <unit>P2O5 kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Other phosphate</itemName>
+    <key>PCRD</key>
+    <unit>P2O5 kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Managed  potassium</itemName>
+    <key>POTF</key>
+    <unit>K2O kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Potassium removed</itemName>
+    <key>KRET</key>
+    <unit>K2O kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Mineral potassium</itemName>
+    <key>KMIN</key>
+    <unit>K2O kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Manure potassium</itemName>
+    <key>KMAN</key>
+    <unit>K2O kg/ha</unit>
+ </item>
+ <item>
+    <itemName>Other potassium</itemName>
+    <key>KCRD</key>
+    <unit>K2O kg/ha</unit>
+ </item>
+</table>
+<table>
+  <theme>Fertilizer</theme>
+  <name>Fertilizer input per crop and total area</name>
+  <clone>Fertilizer input per crop and ha</clone>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+  <activitySel>Crops</activitySel>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Crop activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+</table>
+<table>
+  <theme>Fertilizer</theme>
+  <name>Fertilizer input per crop and total area, bar chart of changes</name>
+  <clone>Fertilizer input per crop and total area</clone>
+  <defview>Bar chart</defview>
+  <barChartMaxPlots>4</barChartMaxPlots>
+  <compareDim>Scenarios</compareDim>
+  <compareMode>ONLY_ABSOLUTE</compareMode>
+</table>
+<table>
+  <theme>Feed</theme>
+  <name>Feed Distribution</name>
+  <activitySel>Animals</activitySel>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Animal activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <pdf>docs\docu.pdf#Input allocation for feed</pdf>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Feed cereals[German:Verfuettertes Getriede]</itemName>
+    <key>FCER</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Feed rich protein</itemName>
+    <key>FPRO</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Feed rich energy</itemName>
+    <key>FENE</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Feed from milk product</itemName>
+    <key>FMIL</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Feed other</itemName>
+    <key>FOTH</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Gras</itemName>
+    <key>FGRA</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Fodder maize</itemName>
+    <key>FMAI</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Fodder other on arable land</itemName>
+    <key>FOFA</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Fodder root crops</itemName>
+    <key>FROO</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Straw</itemName>
+    <key>FSTR</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Milk for feeding</itemName>
+    <key>FCOM</key>
+    <unit>kg/head</unit>
+ </item>
+ <item>
+    <itemName>Sheep and Goat Milk for feeding</itemName>
+    <key>FSGM</key>
+    <unit>kg/head</unit>
+ </item>
+</table>
+<table>
+  <theme>Feed</theme>
+  <name>Feed Distribution - multiplied with herd size</name>
+  <clone>Feed Distribution</clone>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+
+<table>
+  <theme>Farm</theme>
+  <subTheme>Sugar</subTheme>
+  <name>A,B,C sugarbeet regime</name>
+  <regionSel>Countries</regionSel>
+  <productSel>Sugarbeet</productSel>
+  <activityText>Activity</activityText>
+  <regionText>Member State</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <defpivot>0RSI</defpivot>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>Production under A-Quota</itemName>
+    <key>SALESa</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Production under B-Quota</itemName>
+    <key>SALESb</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Production C beet</itemName>
+    <key>SALESc</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Prices A beet</itemName>
+    <key>UVAGa</key>
+    <unit>Euro/t</unit>
+ </item>
+ <item>
+    <itemName>Prices B beet</itemName>
+    <key>UVAGB</key>
+    <unit>Euro/t</unit>
+ </item>
+ <item>
+    <itemName>Prices C beet</itemName>
+    <key>UVAGc</key>
+    <unit>Euro/t</unit>
+ </item>
+</table>
+<table>
+  <theme>Farm</theme>
+  <subTheme>Sugar</subTheme>
+  <name>Sugar beet quotas</name>
+  <productSel>Sugarbeet</productSel>
+  <activityText>Activity</activityText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <defpivot>0RSI</defpivot>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>Gross production</itemName>
+    <key>GROF</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Total sugar quota (beet equivalent)</itemName>
+    <key>Quts</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Quota fill rate</itemName>
+    <key>GROF</key>
+    <eval>VAL[*,GROF,*,*,*,*] / VAL[*,QUTS,*,*,*,*]</eval>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>A-Quota (beet equivalent)</itemName>
+    <key>Quta</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>B-Quota (beet equivalent)</itemName>
+    <key>Qutb</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Non-quota production</itemName>
+    <key>GROF</key>
+    <eval>VAL[*,GROF,*,*,*,*] - VAL[*,QUTS,*,*,*,*]</eval>
+    <unit>1000t</unit>
+ </item>
+</table>
+<table>
+  <theme>Farm</theme>
+  <subTheme>Sugar</subTheme>
+  <name>Sugar quotas (white sugar)</name>
+  <productSel>Sugar</productSel>
+  <activityText>Activity</activityText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <defpivot>0RSI</defpivot>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>Net production</itemName>
+    <key>PROD</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Total sugar quota (white sugar)</itemName>
+    <key>Quts</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Quota fill rate</itemName>
+    <key>PROD</key>
+    <eval>VAL[*,PROD,*,*,*,*] / VAL[*,QUTS,*,*,*,*]</eval>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>A-Quota (white sugar)</itemName>
+    <key>Quta</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>B-Quota (white sugar)</itemName>
+    <key>Qutb</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Non-quota production</itemName>
+    <key>PROD</key>
+    <eval>VAL[*,PROD,*,*,*,*] - VAL[*,QUTS,*,*,*,*]</eval>
+    <unit>1000t</unit>
+ </item>
+</table>
+
+<table>
+  <theme>Farm - totals</theme>
+  <name>Revenues, multiplied with activity levels</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Revenues</itemName>
+    <key>TOOU</key>
+    <unit>Mio Euro</unit>
+    <longtext>value of all outputs produced by that activity</longtext>
+    <eval>VAL*VAL[*,*,LEVL,*,*,*]/1000</eval>
+    <link>Supply details</link>
+ </item>
+ <item>
+    <itemName>Output from main yield</itemName>
+    <key>Yild</key>
+    <unit>1000 t</unit>
+    <link>Income Indicators, multiplied with activity levels</link>
+    <eval>VAL*VAL[*,*,LEVL,*,*,*]/1000</eval>
+ </item>
+ <item>
+    <itemName>Main Price</itemName>
+    <key>MPRI</key>
+    <unit>Euro/t</unit>
+    <link>Prices</link>
+ </item>
+ <item>
+    <itemName>Main Revenue</itemName>
+    <key>MREV</key>
+    <unit>Mio Euro</unit>
+    <eval>VAL*VAL[*,*,LEVL,*,*,*]/1000</eval>
+ </item>
+ <item>
+    <itemName>Secondary Product Revenues</itemName>
+    <key>SREV</key>
+    <unit>Mio Euro</unit>
+    <eval>VAL*VAL[*,*,LEVL,*,*,*]/1000</eval>
+ </item>
+</table>
+<table>
+  <theme>Farm - totals</theme>
+  <name>Costs, multiplied with activity levels</name>
+  <clone>Costs</clone>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+<table>
+  <theme>Farm - totals</theme>
+  <name>Further cost breakdown, multiplied with activity levels</name>
+  <clone>Further cost breakdown</clone>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+<table>
+  <theme>Farm - totals</theme>
+  <name>Energy and maintenance costs, multiplied with activity levels</name>
+  <clone>Energy and maintenance costs</clone>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+
+
+<table>
+  <theme>Environment</theme>
+  <name>Environmental indicators</name>
+  <regionSel>Regions and countries</regionSel>
+  <productSel>Environmental indicators</productSel>
+  <activityText>Unit</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Environmental indicator</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Activity</itemDim>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Total</itemName>
+    <key>Impact</key>
+ </item>
+ <item>
+    <itemName>Amount per ha</itemName>
+    <key>ImpactHa</key>
+ </item>
+ <item>
+    <itemName>Impact in GWP</itemName>
+    <key>ImpactGwp</key>
+    <longtext>emitted climate relevant gases converted into CO2 equivalents</longtext>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <name>Environmental indicators, mapping view</name>
+  <regionSel>Regions and countries</regionSel>
+  <productSel>Environmental indicators</productSel>
+  <activityText>Unit</activityText>
+  <regionText>Region</regionText>
+  <regionSel>Not farm types</regionSel>
+  <yearText>Year</yearText>
+  <productText>Environmental indicator</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <defpivot>0R0S</defpivot>
+  <defview>Map</defview>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>Total</itemName>
+    <key>Impact</key>
+    <unit>1000t</unit>
+ </item>
+ <item>
+    <itemName>Amount per ha</itemName>
+    <key>ImpactHa</key>
+ </item>
+ <item>
+    <itemName>Impact  in GWP</itemName>
+    <key>ImpactGwp</key>
+    <longtext>emitted climate relevant gases converted into CO2 equivalents</longtext>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <name>Environmental indicators per activity</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Indicator</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <defpivot>0PSI</defpivot>
+  <itemDim>Product</itemDim>
+ <item>
+    <itemName>Global warming potential from agriculture</itemName>
+    <key>GWPA</key>
+    <unit>kg/ha or hd</unit>
+    <longtext>Output of climate relevant gases fom agriculture converted in CO2 equivalents</longtext>
+ </item>
+ <item>
+    <itemName>Methane output</itemName>
+    <key>GCH4</key>
+    <unit>kg/ha or hd</unit>
+    <link>Methane emissions</link>
+ </item>
+ <item>
+    <itemName>N2O output</itemName>
+    <key>GN2O</key>
+    <unit>kg/ha or hd</unit>
+    <link>N2O emissions</link>
+ </item>
+ <item>
+    <itemName>Ammonia output</itemName>
+    <key>GNH3</key>
+    <unit>kg/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>Water surplus/deficite</itemName>
+    <key>WATR</key>
+    <unit>m-3/ha</unit>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <name>Environmental indicators per activity, multiplied with activity levels</name>
+  <clone>Environmental indicators per activity</clone>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+<table>
+  <theme>Environment</theme>
+  <name>CO2eq emissions per ha</name>
+  <regionSel>Regions and countries</regionSel>
+  <activitySel>CO2eq</activitySel>
+  <activityText>CO2 equivalents emissions</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Total or per ha</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defpivot>0R0I</defpivot>
+ <item>
+    <itemName>Total CO2eq</itemName>
+    <key>GWPA</key>
+    <unit>kg CO2eq/ha</unit>
+    <eval>1000*VAL[*,Impact,GWPA,*,*]/VAL[*,UAAR,LEVL,*,*,*]</eval>
+ </item>
+ <item>
+    <itemName>CH4</itemName>
+    <key>GCH4</key>
+    <unit>kg CO2eq/ha</unit>
+    <eval>1000*21*VAL[*,Impact,GCH4,*,*]/VAL[*,UAAR,LEVL,*,*,*]</eval>
+ </item>
+ <item>
+    <itemName>N2O</itemName>
+    <key>GN2O</key>
+    <unit>kg CO2eq/ha</unit>
+    <eval>1000*310*VAL[*,Impact,GN2O,*,*]/VAL[*,UAAR,LEVL,*,*,*]</eval>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <name>Shannon index</name>
+  <regionSel>Regions and countries</regionSel>
+  <productSel>levl</productSel>
+  <activityText>Unit</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Environmental indicator</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Activity</itemDim>
+  <defpivot>0R0S</defpivot>
+  <defview>Map</defview>
+ <item>
+    <itemName>Shannon index</itemName>
+    <key>SHANN</key>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <subTheme>Nutrient balances</subTheme>
+  <name>Gross Nutrient (NPK) budgets (GNB)</name>
+  <regionSel>Regions and countries</regionSel>
+  <productSel>NUTBAL</productSel>
+  <dim5Sel>NBIL</dim5Sel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Nutrient</productText>
+  <dim5Text>Total or per ha</dim5Text>
+  <scenText>Scenario</scenText>
+  <defpivot>0ISP</defpivot>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>Input with mineral fertilizers</itemName>
+    <key>MINFER</key>
+    <unit>1000t or kg/ha N,P2O5,K2O</unit>
+    <longtext>Application of mineral fertilizers to the soil</longtext>
+    <link>Fertiliser input</link>
+ </item>
+ <item>
+    <itemName>Input with manure (excretion)</itemName>
+    <key>EXCRET</key>
+    <unit>1000t or kg/ha N,P2O5,K2O</unit>
+    <longtext>Nutrients excreted by animals at tail - no correction of losses before application</longtext>
+    <link>Manure output per animal</link>
+ </item>
+ <item>
+    <itemName>Input with crop residues</itemName>
+    <key>CRESID</key>
+    <unit>1000t or kg/ha N,P2O5,K2O</unit>
+    <longtext>Nutrients comprised in crop residues as straw and sugarbeet leafs, losses of grass</longtext>
+ </item>
+ <item>
+    <itemName>Mineralisation from soils</itemName>
+    <key>MINSAT</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>Stock changes of nutrients in the soil (soil depletion or soil accumulation)</longtext>
+ </item>
+ <item>
+    <itemName>Biological nitrogen fixation</itemName>
+    <key>BIOFIX</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>Nitrogen fixed by bacteria in roots of leguminosae</longtext>
+ </item>
+ <item>
+    <itemName>Atmospheric nitrogen deposition</itemName>
+    <key>ATMOSD</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>Dry and wet (snow, rain, ...) deposition of nitrogen to agricultural soil (EMEP)</longtext>
+ </item>
+ <item>
+    <itemName>Nutrient export with crop products</itemName>
+    <key>EXPPRD</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>Output/export of nutrients in harvested material and removed crop residues</longtext>
+ </item>
+ <item>
+    <itemName>Surplus total</itemName>
+    <key>SURTOT</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>Total nutrient surplus according to the definition of the 'land nutrient budget' approach</longtext>
+    <link>Gross Nitrogen Surplus - details</link>
+  </item>
+ </table>
+<table>
+  <theme>Environment</theme>
+  <subTheme>Nutrient balances</subTheme>
+  <name>Gross Nitrogen Surplus - details</name>
+  <regionSel>Regions and countries</regionSel>
+  <productSel>NITF</productSel>
+  <dim5Sel>NBIL</dim5Sel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>hide</productText>
+  <dim5Text>Total or per ha</dim5Text>
+  <scenText>Scenario</scenText>
+  <defpivot>0I0S</defpivot>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>N-Surplus total</itemName>
+    <key>SURTOT</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>Total nitrogen surplus according to the definition of the 'land nutrient budget' approach</longtext>
+    <link>Nutrient budgets - details</link>
+  </item>
+ <item>
+    <itemName>Gaseous N-losses from mineral fertilisers</itemName>
+    <key>GASMIN</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>Losses of NH3, NOx, N2, and N2O from mineral fertilizers</longtext>
+ </item>
+ <item>
+    <itemName>Gaseous N-losses from manure</itemName>
+    <key>GASANI</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>Losses of NH3, NOx, N2, and N2O from manure during housing, storage, grazing, or application of manure on soils</longtext>
+    <link>Gross N Surplus - NH3 losses from manure</link>
+ </item>
+ <item>
+    <itemName>Run-off of N from mineral fertilizer</itemName>
+    <key>RUNMIN</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Run-off of N from manure</itemName>
+    <key>RUNANI</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>N Surplus at soil level</itemName>
+    <key>SURSOI</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <link>Soil Surface N surplus</link>
+    <longtext>Soil surface N-surplus (leaching and denitrification)</longtext>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <subTheme>Nutrient balances</subTheme>
+  <name>Soil Surface N surplus</name>
+  <regionSel>Regions and countries</regionSel>
+  <productSel>NITF</productSel>
+  <dim5Sel>NBIL</dim5Sel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>hide</productText>
+  <dim5Text>Total or per ha</dim5Text>
+  <scenText>Scenario</scenText>
+  <defpivot>0I0S</defpivot>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>N Surplus at soil level</itemName>
+    <key>SURSOI</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>Soil surface N-surplus (leaching and denitrification)</longtext>
+    <link>Gross Nitrogen Surplus - details</link>
+ </item>
+ <item>
+    <itemName>Leaching</itemName>
+    <key>LEACHI</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Denitrification</itemName>
+    <key>DENITR</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Accumulation</itemName>
+    <key>ACCUMU</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <subTheme>Nutrient balances</subTheme>
+  <name>Gross N Surplus - NH3 losses from manure</name>
+  <regionSel>Regions and countries</regionSel>
+  <productSel>NITF</productSel>
+  <dim5Sel>NBIL</dim5Sel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>hide</productText>
+  <dim5Text>Total or per ha</dim5Text>
+  <scenText>Scenario</scenText>
+  <defpivot>0I0S</defpivot>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>Ammonia loss manure</itemName>
+    <key>NH3ANI</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss manure on grazings</itemName>
+    <key>NH3GRA</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss manure in housing</itemName>
+    <key>NH3HOU</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss manure during storaging</itemName>
+    <key>NH3STO</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss manure application</itemName>
+    <key>NH3APP</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <subTheme>Nutrient balances</subTheme>
+  <name>Nutrient balances, compare Member States</name>
+  <regionSel>Countries</regionSel>
+  <productSel>NUTBAL</productSel>
+  <dim5Sel>NBIL</dim5Sel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Nutrient</productText>
+  <dim5Text>Total or per ha</dim5Text>
+  <scenText>Scenario</scenText>
+  <defpivot>0RSI</defpivot>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>Import by mineral fertilizer</itemName>
+    <key>MINFER</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>pure nutrients used by agricultural sector, distributed to crops</longtext>
+ </item>
+ <item>
+    <itemName>Import by manure</itemName>
+    <key>EXCRET</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>nutrients excreted by animals at tail</longtext>
+ </item>
+ <item>
+    <itemName>Import by crop residues</itemName>
+    <key>CRESID</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>nutrients comprised in crop residues as straw and sugarbeet leafs, losses of grass</longtext>
+ </item>
+ <item>
+    <itemName>Mineralisation from soils</itemName>
+    <key>MINSAT</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Biological fixation</itemName>
+    <key>BIOFIX</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>nitrate fixed by bacteria in roots of leguminosae</longtext>
+ </item>
+ <item>
+    <itemName>Atmospheric deposition</itemName>
+    <key>ATMOSD</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>nutrients deposit with rain, snow etc. on soil from the atmosphere</longtext>
+ </item>
+ <item>
+    <itemName>Nutrient retention by crops</itemName>
+    <key>EXPPRD</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>nutrient retention by crops in harvested material and crop residues</longtext>
+ </item>
+ <item>
+    <itemName>Surplus total</itemName>
+    <key>SURTOT</key>
+    <unit>1000t or kg per ha N</unit>
+    <link>Environmental indicators</link>
+ </item>
+ <item>
+    <itemName>Gaseous loss</itemName>
+    <key>GASTOT</key>
+    <unit>1000t or kg per ha N</unit>
+    <link>Nutrient balances - gas losses</link>
+ </item>
+ <item>
+    <itemName>Run off mineral</itemName>
+    <key>RUNMIN</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Run off manure</itemName>
+    <key>RUNANI</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Surplus at soil level</itemName>
+    <key>SURSOI</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <link>Nutrient balances - soil details</link>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <subTheme>Nutrient balances</subTheme>
+  <name>Nutrient balances, mapping view</name>
+  <regionSel>Regions and countries</regionSel>
+  <productSel>NUTBAL</productSel>
+  <dim5Sel>NBIL</dim5Sel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <regionSel>Not farm types</regionSel>
+  <yearText>Year</yearText>
+  <productText>Nutrient</productText>
+  <dim5Text>Total or per ha</dim5Text>
+  <scenText>Scenario</scenText>
+  <defpivot>0R0S</defpivot>
+  <defview>Map</defview>
+  <itemDim>Activity</itemDim>
+ <item>
+    <itemName>Import by mineral fertilizer</itemName>
+    <key>MINFER</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>pure nutrients used by agricultural sector, distributed to crops</longtext>
+ </item>
+ <item>
+    <itemName>Import by manure</itemName>
+    <key>EXCRET</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>nutrients excreted by animals at tail</longtext>
+ </item>
+ <item>
+    <itemName>Import by crop residues</itemName>
+    <key>CRESID</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>nutrients comprised in crop residues as straw and sugarbeet leafs, losses of grass</longtext>
+ </item>
+ <item>
+    <itemName>Mineralisation from soils</itemName>
+    <key>MINSAT</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Biological fixation</itemName>
+    <key>BIOFIX</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>nitrate fixed by bacteria in roots of leguminosae</longtext>
+ </item>
+ <item>
+    <itemName>Atmospheric deposition</itemName>
+    <key>ATMOSD</key>
+    <unit>1000t or kg per ha N</unit>
+    <longtext>nutrients deposit with rain, snow etc. on soil from the atmosphere</longtext>
+ </item>
+ <item>
+    <itemName>Nutrient retention by crops</itemName>
+    <key>EXPPRD</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <longtext>nutrient retention by crops in harvested material and crop residues</longtext>
+ </item>
+ <item>
+    <itemName>Surplus total</itemName>
+    <key>SURTOT</key>
+    <unit>1000t or kg per ha N</unit>
+    <link>Environmental indicators</link>
+ </item>
+ <item>
+    <itemName>Gaseous loss</itemName>
+    <key>GASTOT</key>
+    <unit>1000t or kg per ha N</unit>
+    <link>Nutrient balances - gas losses</link>
+ </item>
+ <item>
+    <itemName>Gaseous loss mineral fertilizer</itemName>
+    <key>GASMIN</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss mineral fertilizer</itemName>
+    <key>NH3MIN</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Gaseous loss manure</itemName>
+    <key>GASANI</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss manure</itemName>
+    <key>NH3ANI</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss manure on grazings</itemName>
+    <key>NH3GRA</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss manure in housing</itemName>
+    <key>NH3HOU</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss manure during storaging</itemName>
+    <key>NH3STO</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Ammonia loss manure application</itemName>
+    <key>NH3APP</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Run off</itemName>
+    <key>RUNTOT</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Run off mineral</itemName>
+    <key>RUNMIN</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Run off manure</itemName>
+    <key>RUNANI</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Surplus at soil level</itemName>
+    <key>SURSOI</key>
+    <unit>1000t or kg per ha N,P2O5,K2O</unit>
+    <link>Nutrient balances - soil details</link>
+ </item>
+ <item>
+    <itemName>Leaching</itemName>
+    <key>LEACHI</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Denitrification</itemName>
+    <key>DENITR</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+ <item>
+    <itemName>Accumulation</itemName>
+    <key>ACCUMU</key>
+    <unit>1000t or kg per ha N</unit>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <subTheme>Manure, N2O and methane</subTheme>
+  <name>Manure output per animal</name>
+  <activitySel>Animals</activitySel>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Animal activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <itemDim>Product</itemDim>
+  <defpivot>0PSI</defpivot>
+ <item>
+    <itemName>Nitrogen</itemName>
+    <key>MANN</key>
+    <unit>kg N / head or 1000 heads</unit>
+    <link>Nutrient balances</link>
+ </item>
+ <item>
+    <itemName>Phospate</itemName>
+    <key>MANP</key>
+    <unit>kg P2O5 / head or 1000 heads</unit>
+ </item>
+ <item>
+    <itemName>Potassium</itemName>
+    <key>MANK</key>
+    <unit>kg K2O / head or 1000 heads</unit>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <name>Manure output per animal, multiplied with herd size</name>
+  <clone>Manure output per animal</clone>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+<table>
+  <theme>Environment</theme>
+  <subTheme>Manure, N2O and methane</subTheme>
+  <name>Methane emissions per activity</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <defpivot>0PSI</defpivot>
+  <itemDim>Product</itemDim>
+ <item>
+    <itemName>Methane output</itemName>
+    <key>GCH4</key>
+    <unit>t/ha or hd</unit>
+    <link>Environmental indicators</link>
+ </item>
+ <item>
+    <itemName>Methane emissions from enteric fermentation (IPCC)</itemName>
+    <key>CH4ENT</key>
+    <unit>t/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>Methane emissions from manure management (IPCC)</itemName>
+    <key>CH4MAN</key>
+    <unit>t/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>Methane emissions from rice production (IPCC)</itemName>
+    <key>CH4RIC</key>
+    <unit>t/ha or hd</unit>
+ </item>
+</table>
+<table>
+  <name>Methane emissions per activity, multiplied with activity levels</name>
+  <clone>Methane emissions per activity</clone>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+
+<table>
+  <name>Methane emissions per activity, multiplied with activity levels at farm type level</name>
+  <clone>Methane emissions per activity</clone>
+  <regionSel>EU027FAAGG</regionSel>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+<table>
+  <theme>Environment</theme>
+  <subTheme>Manure, N2O and methane</subTheme>
+  <name>N2O emissions per activity</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Product</productText>
+  <dim5Text>hide</dim5Text>
+  <dim5Sel>empty</dim5Sel>
+  <scenText>Scenario</scenText>
+  <defpivot>0PSI</defpivot>
+  <itemDim>Product</itemDim>
+ <item>
+    <itemName>N2O output</itemName>
+    <key>GN2O</key>
+    <unit>t/ha or hd</unit>
+    <link>Environmental indicators</link>
+ </item>
+ <item>
+    <itemName>N2O emissions stemming from manure managment (housing and storage) (IPCC)</itemName>
+    <key>N2OMAN</key>
+    <unit>t/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>N2O emissions stemming from manure managment on grazings (IPCC)</itemName>
+    <key>N2OGRA</key>
+    <unit>t/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>N2O direct emissions direct from anorganic fertilizer application (IPCC)</itemName>
+    <key>N2OSYN</key>
+    <unit>t/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>N2O direct emissions direct from manure application on the field (IPCC)</itemName>
+    <key>N2OAPP</key>
+    <unit>t/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>N2O direct emissions direct from crop residues (IPCC)</itemName>
+    <key>N2OCRO</key>
+    <unit>t/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>N2O indirect emissions from ammonia volatilisation (IPCC)</itemName>
+    <key>N2OAMM</key>
+    <unit>t/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>N2O indirect emissions from runoff and leaching (IPCC)</itemName>
+    <key>N2OLEA</key>
+    <unit>t/ha or hd</unit>
+ </item>
+ <item>
+    <itemName>N2O direct emissions from the cultivation of histosols (IPCC)</itemName>
+    <key>N2OHIS</key>
+    <unit>t/ha or hd</unit>
+ </item>
+</table>
+<table>
+  <theme>Environment</theme>
+  <name>N2O emissions per activity, multiplied with activity levels</name>
+  <clone>N2O emissions per activity</clone>
+  <evalAll>VAL*VAL[*,*,LEVL,*,*,*]/1000</evalAll>
+</table>
+
+<table>
+  <theme>Meta</theme>
+  <name>Activity overview, using existing list</name>
+  <regionSel>Regions and countries</regionSel>
+  <activityText>Activity</activityText>
+  <activitySel>Activities</activitySel>
+  <regionText>Region</regionText>
+  <yearText>Year</yearText>
+  <productText>Item</productText>
+  <productSel>AnyThing</productSel>
+  <scenText>Scenario</scenText>
+  <defpivot>0P0A</defpivot>
+  <dim5Sel>empty</dim5Sel>
+  <itemDim>none</itemDim>
+</table>
+<table>
+  <theme>Meta</theme>
+  <name>Activity overview, all cells</name>
+  <regionSel>fromDataCube</regionSel>
+  <activityText>Activity</activityText>
+  <activitySel>Activities</activitySel>
+  <productSel>fromDataCube</productSel>
+  <dim5Sel>fromDataCube</dim5Sel>
+  <defpivot>0P0A</defpivot>
+  <itemDim>none</itemDim>
+</table>
+
+
+
+</generated>

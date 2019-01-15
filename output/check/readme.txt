@@ -1,0 +1,1 @@
+Place for temporary result files for checking certain data, that can be deleted any time

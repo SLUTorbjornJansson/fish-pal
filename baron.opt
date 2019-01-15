@@ -1,0 +1,5 @@
+*   We set some options for BARON
+
+*   Use CONOPT as NLP solver
+NLPSol = 6
+extNlpSolver = CONOPT

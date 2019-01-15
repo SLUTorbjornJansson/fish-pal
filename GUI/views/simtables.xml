@@ -1,0 +1,89 @@
+<generated>
+    <table>
+      <theme>Fishing effort</theme>
+      <name>Effort per fishery</name>
+      <regionSel>fishery</regionSel>
+      <productSel>noSpecies</productSel>
+      <productText>hide</productText>
+      <dim5Text>Type of value</dim5Text>
+      <itemDim>activity</itemDim>
+      <item>
+        <itemName>Days at sea</itemName>
+        <key>v_effortAnnual</key>
+      </item>
+    </table>
+
+    <table>
+      <theme>Fishing effort</theme>
+      <name>Effort per segment</name>
+      <regionSel>segment</regionSel>
+      <productSel>noSpecies</productSel>
+      <productText>hide</productText>
+      <dim5Text>Type of value</dim5Text>
+      <itemDim>activity</itemDim>
+      <item>
+        <itemName>Days at sea</itemName>
+        <key>v_effortAnnual</key>
+      </item>
+    </table>
+
+    <table>
+      <theme>Fishing effort</theme>
+      <name>Effort per gear</name>
+      <regionSel>gear</regionSel>
+      <productSel>noSpecies</productSel>
+      <productText>hide</productText>
+      <dim5Text>Type of value</dim5Text>
+      <itemDim>activity</itemDim>
+      <item>
+        <itemName>Days at sea</itemName>
+        <key>v_effortAnnual</key>
+      </item>
+    </table>
+
+    <table>
+      <theme>Fishing effort</theme>
+      <name>Effort per area</name>
+      <regionSel>area</regionSel>
+      <productSel>noSpecies</productSel>
+      <productText>hide</productText>
+      <dim5Text>Type of value</dim5Text>
+      <itemDim>activity</itemDim>
+      <item>
+        <itemName>Days at sea</itemName>
+        <key>v_effortAnnual</key>
+      </item>
+    </table>
+
+    <table>
+      <theme>Catch</theme>
+      <name>Catch per fishery, gear, segment and area</name>
+      <regionSel>all</regionSel>
+      <productSel>species</productSel>
+      <productText>Species</productText>
+      <dim5Text>Statistic</dim5Text>
+      <itemDim>activity</itemDim>
+      <item>
+        <itemName>Catch</itemName>
+        <key>v_catch</key>
+        <unit>Tons per year</unit>
+      </item>
+      <item>
+        <itemName>Revenue</itemName>
+        <key>totalRevenues</key>
+        <unit>kKr per year</unit>
+      </item>
+    </table>
+
+    <table>
+        <theme>Dual analysis</theme>
+        <name>Partials of Lagrangian w.r.t. effortAnnual</name>
+        <regionSel>fishery</regionSel>
+        <productSel>noSpecies</productSel>
+        <productText>hide</productText>
+        <activitySel>dualResult</activitySel>
+        <dim5Sel>sim</dim5Sel>
+        <dim5Text>hide</dim5Text>
+    </table>
+
+</generated>
