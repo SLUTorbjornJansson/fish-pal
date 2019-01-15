@@ -23,14 +23,14 @@ $SETGLOBAL resDir %SYSTEM.FP%output
 $SETGLOBAL parFileName default
 
 *   Ange vad programmet ska göra (estimation, simulation)
-*$SETGLOBAL programMode estimation
-$SETGLOBAL programMode simulation
+$SETGLOBAL programMode estimation
+*$SETGLOBAL programMode simulation
 
 *   Ange vad simulationen heter (var chocken kommer från och vad resultaten ska kallas)
 $SETGLOBAL projectDirectory seal
 
-*$SETGLOBAL scenario reference
-$SETGLOBAL  scenario scenario2
+$SETGLOBAL scenario reference
+*$SETGLOBAL  scenario scenario2
 *$SETGLOBAL scenario scenario3
 *$SETGLOBAL scenario scenario4
 *$SETGLOBAL scenario scenario5
@@ -75,7 +75,8 @@ $if "%projectDirectory%"=="." $setglobal scenario_path_underScores %projectDirec
 *   Läs in en eventuell styrfil från GUI. Isåfall finns namnet lagrat i
 *   globalvariablen scen
 $IFI %GGIG%==ON $INCLUDE "%scen%.gms"
-
+*$show
+*$stop
 
 *#############################################################
 *           CONVERT EXCEL DATA FILE TO GAMS GDX FORMAT
@@ -309,7 +310,7 @@ p_fiskResultat(fisheryDomain,"allSpecies",dualResult,"sim") $ p_reportDualsFishe
 *   Store report. Suffix the file name by "est" if estimation, else by "sim"
 $SET runtype sim
 $IF %programMode%==estimation $SET runtype est
-EXECUTE_UNLOAD "%resDir%\simulation\%projectDirectory%_%runtype%_%scenario_underscores%.gdx" p_fiskresultat,
+EXECUTE_UNLOAD "%resDir%\simulation\%runtype%_%scenario_path_underscores%.gdx" p_fiskresultat,
                                                       p_reportDualsFishery,
                                                       p_profitFishery,
                                                       p_fixCostSumOri,
