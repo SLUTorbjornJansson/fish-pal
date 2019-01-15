@@ -94,8 +94,10 @@ e_estimationMetric ..
 
     -SUM(seg, SQR(pv_kwh(seg)-p_kwhOri(seg))*p_weightKwh(seg))
 
-*   Hårdkodat antagande om att variansen av PMP-kostnaden/intäkten är sådan att en standardavvikelse är ca 100 kr/dag (0.1 tkr)
-    -SUM(f, SQR(pv_PMPconst(f) + 1/2*pv_PMPslope(f)*v_effortAnnual(f)))/2*sqr(0.1)
+*   Hårdkodat antagande om att variansen av PMP-kostnaden/intäkten är lika stor som för variabla kostnader per dag
+*   Detta är rimligt på så vis att det är proportionellt mot omsättningen i fisket,
+*   och inte samma för trålare och små kustfisken
+    -SUM(f, SQR[pv_PMPconst(f) + 1/2*pv_PMPslope(f)*v_effortAnnual(f)]*p_weightvarCostAve(f))
 
 *   Annual effort should be "close" to observed effort
     -SUM(f, SQR(v_effortAnnual(f)-p_effortOri(f))*p_weightEffortAnnual(f))
@@ -412,7 +414,7 @@ pv_TACAdjustment.L(catchQuotaName,quotaArea)  $ (p_TACOri(catchQuotaName,quotaAr
 *     om MC = a + b*E så innebär det att b = AC/E
 
 *   Grundantagande: MC = AC (dvs interceptet = AC)
-pv_varCostConst.l(f) = p_varCostAveOri(f)*1.0;
+*pv_varCostConst.l(f) = p_varCostAveOri(f)*1.0;
 *   Här kan man prova att sätta t.ex. minskande MC för pelagiker, genom att sätta interceptet ÖVER AC
 *   Genom att sätta inteceptet UNDER AC blir MC ökande
 *pv_varCostConst.l(f) $ [segment_fishery("'pel_24XX'",f)
@@ -420,7 +422,11 @@ pv_varCostConst.l(f) = p_varCostAveOri(f)*1.0;
 *                     or segment_fishery("'pel_1824'",f)]
 *    = p_varCostAveOri(f)*1.1;
 *   Räkna ut lutningen residualt
-pv_varCostSlope.l(f) $ p_effortOri(f) = (p_varCostAveOri(f) - pv_varCostConst.l(f))*2 / p_effortOri(f);
+*pv_varCostSlope.l(f) $ p_effortOri(f) = (p_varCostAveOri(f) - pv_varCostConst.l(f))*2 / p_effortOri(f);
+
+pv_varCostSlope.l(f) $ p_effortOri(f) = 1/1.5 * p_varCostAveOri(f)/p_effortOri(f);
+pv_varCostConst.l(f) $ p_effortOri(f) = p_varCostAveOri(f) - pv_varCostSlope.l(f)*p_effortOri(f)/2;
+
 v_varCostAve.l(f) = pv_varCostConst.l(f) + 1/2*p_effortOri(f)*pv_varCostSlope.l(f);
 
 
@@ -439,8 +445,8 @@ pv_delta.L(f,s) = p_catchOri(f,s)*p_effortOri(f)**(-p_catchElasticity(f));
 *   Set calibration term intercept to zero for a start
 pv_PMPconst.L(f) = 0;
 
-*   Slope has to be upward sloping
-pv_PMPslope.L(f) = 1;
+*   Slope has to be upward sloping (NOT if varcost is upwards sloping)
+pv_PMPslope.L(f) = 0;
 
 *   Initialize season length
 pv_maxEffFishery.L(f) = p_priMaxEffFishery("priMode",f);

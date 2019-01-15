@@ -310,5 +310,12 @@ fishery_with_problem(f) = yes $ [pv_varCostConst.l(f) lt 0];
 
 if([card(fishery_with_problem) gt 0],
     execute_unload "%ERROR_FILE%";
-    abort "ERROR: Some fisheries have negative variable costs. That is senseless! Check in %system.fn% and in %ERROR_FILE%", fishery_with_problem;
+    display "WARNING: Some fisheries have negative intercept terms for the variable costs in %system.fn%. Check pv_varCostConst.l in %ERROR_FILE%. Problem fisheries are: ", fishery_with_problem;
+);
+
+fishery_with_problem(f) = yes $ [(pv_varCostConst.l(f) + pv_varCostSlope.l(f)*p_effortOri(f)/2) lt 0];
+
+if([card(fishery_with_problem) gt 0],
+    execute_unload "%ERROR_FILE%";
+    abort "ERROR: Some fisheries have negative average variable costs. That is senseless! Inspect all data in %system.fn% and in %ERROR_FILE%", fishery_with_problem;
 );

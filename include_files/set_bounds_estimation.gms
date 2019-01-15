@@ -38,7 +38,8 @@ pv_PMPconst.UP(f) = +INF;
 
 * --- For now: assume slope corresponding to an a-priori (myopic) elasticity of 2
 *   beta = 1/elasticity * AverageCost / EffortOri
-pv_PMPslope.FX(f) $ p_effortOri(f) = 1/1 * p_varCostAveOri(f)/p_effortOri(f);
+*TJ pv_PMPslope.FX(f) $ p_effortOri(f) = 1/1.5 * p_varCostAveOri(f)/p_effortOri(f);
+pv_PMPslope.FX(f) = pv_PMPslope.L(f);
 
 
 * --- "Adjustment of quotas needed to fit to catches from observed fishing efforts"
@@ -63,8 +64,16 @@ pv_delta.UP(f,s) = [p_catchOri(f,s)/p_effortOri(f)*1000] $ fishery_species(f,s);
 v_sortB.UP(f,s) $ [p_landingObligation(f,s) eq 0]
     = [p_discardsOri(f,s)*10000] $ fishery_species(f,s);
 
-*v_catchScale.LO(f) = 0;
-*v_catchScale.UP(f) = 10000;
+
+
+
+* --- For gamma distributed items, we must bound the solution away from zero to prevent math errors.
+*     The probability is zero there any way, so it should not affect the solution
+*     We choose 1 promille of the modal value as lower bound.
+
+v_landings.LO(f,s) $ [p_priorLandings(f,s,"priDens") eq gammaDensity] = p_priorLandings(f,s,"priMode")*0.001;
+v_discards.LO(f,s) $ [p_priorDiscards(f,s,"priDens") eq gammaDensity] = p_priorDiscards(f,s,"priMode")*0.001;
+
 
 * --- Release season per fishery.
 *        Lower bound is prior minimum plus one promille of mode in order to avoid log of zero
@@ -75,6 +84,8 @@ v_sortB.UP(f,s) $ [p_landingObligation(f,s) eq 0]
 *        -a most likely season priMode (dictated by biological, meteorological and political considerations in Excel)
 pv_maxEffFishery.LO(f) = p_priMaxEffFishery("priMin",f)+ABS(p_priMaxEffFishery("priMode",f))*0.001;
 pv_maxEffFishery.UP(f) = p_priMaxEffFishery("priMax",f)-ABS(p_priMaxEffFishery("priMode",f))*0.001;
+
+
 
 pv_kwh.lo(seg) = 0;
 pv_kwh.up(seg) = p_kwhOri(seg)*100;
