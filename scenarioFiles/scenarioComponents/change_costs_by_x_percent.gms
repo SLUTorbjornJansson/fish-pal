@@ -30,7 +30,7 @@ $setlocal SEAL_COST_CHANGE_RATE %1
 
 * --- Check that it is not less than -100
 if(%SEAL_COST_CHANGE_RATE% < -100,
-    abort "ERROR: You tried to reduce catch by more than 100%, which is physically impossible! The argument was %SEAL_CATCH_CHANGE_RATE%";
+    abort "ERROR: You tried to reduce cost by more than 100%, which is physically impossible! The argument was %SEAL_COST_CHANGE_RATE%";
 )
 
 * --- Check that there is an argument at all
