@@ -23,7 +23,7 @@
             <name>Estimation</name>
             <gamsFile>FishPAL.gms</gamsFile>
             <incFile>include_files\fisk_settings</incFile>
-            <resdir>simulation</resdir>
+            <resdir>estimation</resdir>
             <xmlTableDef>views\tables_estimation.xml</xmlTableDef>
             <gdxSymbol>p_fiskResultat</gdxSymbol>
             <regionDim>0,Fishery</regionDim>
@@ -46,6 +46,13 @@
             <!--<dim5Dim>3</dim5Dim>-->
             <scenDim>4</scenDim>
          </task>
+         
+         <workstep>
+                  <name>Modelling</name>
+                  <tasks>Estimation, Simulation
+                  </tasks>
+         </workstep>
+
          
          <control>
             <Type>tab</Type>
