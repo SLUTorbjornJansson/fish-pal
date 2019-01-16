@@ -252,7 +252,7 @@ MODEL m_estimateFish "Estimation model used to determine levels of the parameter
     e_csEffRestrFishery,e_csEffRestrSeg,e_csCatchQuota,
     e_csEffNonNeg,e_csEffortRegulation
 
-*   Reporting equations are also needed
+*   Reporting equations are also needed because we need v_varCostAve
     m_reportingEquations
     /;
 
