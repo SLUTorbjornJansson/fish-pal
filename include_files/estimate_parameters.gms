@@ -765,6 +765,7 @@ p_fiskResultat(effortGroup,area,"v_effortPerEffortGroup","UP") = p_maxEffortPerE
 p_fiskResultat(fisheryDomain,speciesDomain,addVars,addStat) $ [NOT p_fiskResultat(fisheryDomain,speciesDomain,addVars,addStat)]
     = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskResultat(fishery,speciesDomain,addVars,addStat));
 
+$include "include_files\compute_statistics.gms"
 
 *   Spara resultaten i en fil
 
