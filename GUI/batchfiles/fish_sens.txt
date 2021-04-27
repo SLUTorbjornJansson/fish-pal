@@ -1,0 +1,120 @@
+* ---------------------------------
+*
+* General settings for batch file mode
+*
+* ---------------------------------
+
+  gamsexe = c:\gams\win64\24.9\gams.exe
+
+* Enter here the output directory for the HTML page with the report from the batch mode
+ output dir = ..\output\batchOutput
+
+ work dir = C:\github\fish-pal\trunk
+
+ Res dir = C:\github\fish-pal\trunk\output
+
+ Restart dir = C:\github\fish-pal\trunk\output
+
+ Dat dir = C:\github\fish-pal\trunk\Inputfiles
+
+ scr dir = ..\output\temp
+
+* ---------------------------------
+*   Set-up scenarios and sensitivity experiments
+* ---------------------------------
+  MACRO = allScenarios reference\scenario2\scenario3\scenario4\scenario5\scenario6
+  MACRO = allVarCostSlopeShifts 0\-25\+25
+  MACRO = allCatchElasShifts 0\-25\+25
+  MACRO = allPriceShifts 0\-25\+25
+
+
+* ---------------------------------
+*
+* Task specific settings for batch file mode
+*
+* ---------------------------------
+*
+
+  task = Simulation
+
+  Simulation mode = simulation
+*  Scenario description = seal\reference
+  Shift (%) variable cost slope = 0
+  Shift (%) catch elasticity = 0
+  Shift (%) fish prices = 0
+  Additional output file identifyer =
+
+
+* Run all scenarios with standard settings
+  FOR curScenario = %allScenarios%
+      Scenario description = seal\%curScenario%
+*      execute=Gamsrun
+  ENDFOR
+*EXIT
+
+
+* Run all scenarios with modified settings (sensitivity analyses)
+  FOR curScenario = %allScenarios%
+
+*-----------------------------------------------------------------
+*   Starting sensitivity experiments for scenario %curScenario%
+*-----------------------------------------------------------------
+
+     startParallel
+        Scenario description = seal\%curScenario%
+
+        FOR curVarCostSlopeShift = %allVarCostSlopeShifts%
+          FOR curCatchElasShift = %allCatchElasShifts%
+            FOR curPriceShift = %allPriceShifts%
+
+              Shift (%) variable cost slope = %curVarCostSlopeShift%
+              Shift (%) catch elasticity = %curCatchElasShift%
+              Shift (%) fish prices = %curPriceShift%
+
+              IF %curVarCostSlopeShift%=0
+                MACRO = a vcM
+              ENDIF
+
+              IF %curVarCostSlopeShift%=-25
+                MACRO = a vcL
+              ENDIF
+
+              IF %curVarCostSlopeShift%=+25
+                MACRO = a vcH
+              ENDIF
+
+              IF %curCatchElasShift%=0
+                MACRO = b ceM
+              ENDIF
+
+              IF %curCatchElasShift%=-25
+                MACRO = b ceL
+              ENDIF
+
+              IF %curCatchElasShift%=+25
+                MACRO = b ceH
+              ENDIF
+
+
+              IF %curPriceShift%=0
+                MACRO = c pM
+              ENDIF
+
+              IF %curPriceShift%=-25
+                MACRO = c pL
+              ENDIF
+
+              IF %curPriceShift%=+25
+                MACRO = c pH
+              ENDIF
+
+              Additional output file identifyer = _%a%_%b%_%c%
+              execute=Gamsrun
+
+            ENDFOR
+          ENDFOR
+        ENDFOR
+    collectParallel
+  ENDFOR
+
+

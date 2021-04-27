@@ -48,15 +48,15 @@ quotaUptake(quotaArea, catchQuotaName) $p_fiskResultat(quotaArea,catchQuotaName,
 $set fileName %resDir%\simulation\outputForPresentation_%runtype%%scenario%    ;
 
 *EXECUTE_UNLOAD "%resDir%\simulation\outputForPresentation_%runtype%%scenario%.gdx" outputEconomics effortAnnual catchInfo quotaUptake;
-EXECUTE_UNLOAD "%resDir%\simulation\outputForPresentation_%runtype%%scenario%.gdx" outputEconomics effortAnnual catchInfo quotaUptake;
+EXECUTE_UNLOAD "%resDir%\simulation\outputForPresentation_%runtype%%scenario%%ResId%.gdx" outputEconomics effortAnnual catchInfo quotaUptake;
 
 *$set fileName %outDir%\Output
 
 
-execute "GDXXRW i=%resDir%\simulation\outputForPresentation_%runtype%%scenario%.gdx o=%resDir%\simulation\outputForPresentation_%runtype%%scenario%.xlsx par=outputEconomics rng=outputEconomics!A1 cdim=2 rdim=1" ;
-execute "GDXXRW i=%resDir%\simulation\outputForPresentation_%runtype%%scenario%.gdx o=%resDir%\simulation\outputForPresentation_%runtype%%scenario%.xlsx par=effortAnnual rng=effortAnnual!A1 cdim=0 rdim=1" ;
-execute "GDXXRW i=%resDir%\simulation\outputForPresentation_%runtype%%scenario%.gdx o=%resDir%\simulation\outputForPresentation_%runtype%%scenario%.xlsx par=catchInfo rng=catchInfo!A1 cdim=3 rdim=1" ;
-execute "GDXXRW i=%resDir%\simulation\outputForPresentation_%runtype%%scenario%.gdx o=%resDir%\simulation\outputForPresentation_%runtype%%scenario%.xlsx par=quotaUptake rng=quotaUptake!A1 " ;
+execute "GDXXRW i=%resDir%\simulation\outputForPresentation_%runtype%%scenario%%ResId%.gdx o=%resDir%\simulation\outputForPresentation_%runtype%%scenario%%ResId%.xlsx par=outputEconomics rng=outputEconomics!A1 cdim=2 rdim=1" ;
+execute "GDXXRW i=%resDir%\simulation\outputForPresentation_%runtype%%scenario%%ResId%.gdx o=%resDir%\simulation\outputForPresentation_%runtype%%scenario%%ResId%.xlsx par=effortAnnual rng=effortAnnual!A1 cdim=0 rdim=1" ;
+execute "GDXXRW i=%resDir%\simulation\outputForPresentation_%runtype%%scenario%%ResId%.gdx o=%resDir%\simulation\outputForPresentation_%runtype%%scenario%%ResId%.xlsx par=catchInfo rng=catchInfo!A1 cdim=3 rdim=1" ;
+execute "GDXXRW i=%resDir%\simulation\outputForPresentation_%runtype%%scenario%%ResId%.gdx o=%resDir%\simulation\outputForPresentation_%runtype%%scenario%%ResId%.xlsx par=quotaUptake rng=quotaUptake!A1 " ;
 
 
 
@@ -66,6 +66,6 @@ $IF not %scenario% == LandingOblKrafta $goto endLandingOblKrafta
 
 PARAMETER p_margValueIndQuota(catchQuotaName,quotaArea, seg) ;
 p_margValueIndQuota(catchQuotaName,quotaArea, seg) = e_indQuota.M(catchQuotaName,quotaArea, seg)    ;
-EXECUTE_UNLOAD "%resDir%\simulation\outputForPresentation_%runtype%%scenario%IndQuota.gdx" p_margValueIndQuota ;
+EXECUTE_UNLOAD "%resDir%\simulation\outputForPresentation_%runtype%%scenario%IndQuota%ResId%.gdx" p_margValueIndQuota ;
 
 $label endLandingOblKrafta

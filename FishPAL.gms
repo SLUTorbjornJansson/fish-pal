@@ -23,8 +23,8 @@ $SETGLOBAL resDir %SYSTEM.FP%output
 $SETGLOBAL parFileName default
 
 *   Ange vad programmet ska göra (estimation, simulation)
-$SETGLOBAL programMode estimation
-*$SETGLOBAL programMode simulation
+*$SETGLOBAL programMode estimation
+$SETGLOBAL programMode simulation
 
 *   Ange vad simulationen heter (var chocken kommer från och vad resultaten ska kallas)
 $SETGLOBAL projectDirectory seal
@@ -56,9 +56,23 @@ $SETGLOBAL scenario reference
 *$SETGLOBAL scenario quotaRemovalSillN
 
 
+*   Ange ett suffix till filnamnet för resultaten, för att t.ex. skilja
+*   känslighetsanalysens resultat från originalresultaten i samma scenario
+*   Normalt sett är ResId tomt.
+$SETGLOBAL ResId
+
+
+*   Ställ in skift för diverse modellparametrar, för känslighetsanalys.
+*   Ange +/- procent, tex +10 för plus tio procent, osv.
+*   Dessa parametrar används av filen shift_parameters.gms längre ned.
+$SETGLOBAL SHIFT_VARCOST_SLOPE 0
+$SETGLOBAL SHIFT_CATCH_ELAS 0
+$SETGLOBAL SHIFT_FISH_PRICES 0
+
+
 ** 1 if model equations are changed in simulation scenario, 0 otherwise. OFF is default for estimation! **
-*$SETGLOBAL SimChangesModelEq off
-$SETGLOBAL SimChangesModelEq on
+$SETGLOBAL SimChangesModelEq off
+*$SETGLOBAL SimChangesModelEq on
 
 
 
@@ -163,6 +177,9 @@ $include "include_files\declare_simulation_model.gms"
 
 
 $IF %programMode%==simulation $INCLUDE "include_files\load_parameters.gms"
+
+*   Sensitivity analysis: optional shift of parameters
+$INCLUDE "include_files\shift_parameters.gms"
 
 *   Define what to change in the current scenario
 $INCLUDE "scenarioFiles\%scenario_path%.gms"
@@ -310,7 +327,7 @@ p_fiskResultat(fisheryDomain,"allSpecies",dualResult,"sim") $ p_reportDualsFishe
 *   Store report. Suffix the file name by "est" if estimation, else by "sim"
 $SET runtype sim
 $IF %programMode%==estimation $SET runtype est
-EXECUTE_UNLOAD "%resDir%\simulation\%runtype%_%scenario_path_underscores%.gdx" p_fiskresultat,
+EXECUTE_UNLOAD "%resDir%\simulation\%runtype%_%scenario_path_underscores%%ResId%.gdx" p_fiskresultat,
                                                       p_reportDualsFishery,
                                                       p_profitFishery,
                                                       p_fixCostSumOri,
@@ -321,7 +338,7 @@ EXECUTE_UNLOAD "%resDir%\simulation\%runtype%_%scenario_path_underscores%.gdx" p
 
 
 * Skriv ut alla resultat för att kolla hur det blev
-EXECUTE_UNLOAD "TEMP_%programMode%.GDX";
+EXECUTE_UNLOAD "TEMP_%programMode%%ResId%.GDX";
 
 
 

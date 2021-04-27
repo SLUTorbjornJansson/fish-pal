@@ -46,18 +46,18 @@
             <!--<dim5Dim>3</dim5Dim>-->
             <scenDim>4</scenDim>
          </task>
-         
+
          <workstep>
                   <name>Modelling</name>
                   <tasks>Estimation, Simulation
                   </tasks>
          </workstep>
 
-         
+
          <control>
             <Type>tab</Type>
-            <Title>General</Title>         
-            <tasks>all</tasks>   
+            <Title>General</Title>
+            <tasks>all</tasks>
          </control>
 
          <control>
@@ -99,23 +99,55 @@
 
          <control>
             <Type>tab</Type>
-            <Title>Debug</Title>         
-            <tasks>all</tasks>   
+            <Title>Optional parameters</Title>
+            <tasks>all</tasks>
+         </control>
+
+         <control>
+                  <Type>singlelist</Type>
+                  <Title>Shift (%) variable cost slope</Title>
+                  <Options>-50,-25,-10,0,+10,+25,+50</Options>
+                  <Value>0</Value>
+                  <gamsName>SHIFT_VARCOST_SLOPE</gamsName>
+                  <tasks>Simulation</tasks>
+                  <longText>Shift the slope of the variable cost function by this percent relative to the calibration point</longText>
+         </control>
+
+         <control>
+                  <Type>singlelist</Type>
+                  <Title>Shift (%) catch elasticity</Title>
+                  <Options>-50,-25,-10,0,+10,+25,+50</Options>
+                  <Value>0</Value>
+                  <gamsName>SHIFT_CATCH_ELAS</gamsName>
+                  <tasks>Simulation</tasks>
+                  <longText>Shift the elasticity of catch w.r.t. effort by this percent relative to the calibration point</longText>
+         </control>
+
+         <control>
+                  <Type>singlelist</Type>
+                  <Title>Shift (%) fish prices</Title>
+                  <Options>-50,-25,-10,0,+10,+25,+50</Options>
+                  <Value>0</Value>
+                  <gamsName>SHIFT_FISH_PRICES</gamsName>
+                  <tasks>Simulation</tasks>
+                  <longText>Shift the price of catch (all species) by this percent relative to the calibration point</longText>
          </control>
 
         <control>
             <Type>text</Type>
             <Title>Additional output file identifyer</Title>
             <gamsName>ResId</gamsName>
+            <Value></Value>
             <tasks>Estimation, Simulation</tasks>
+            <longText>A string entered here appears as suffix to the result file name</longText>
         </control>
-        
+
 
         <control>
             <Type>text</Type>
-            <Title>Additional input file identifyer</Title>
-            <gamsName>InputDataId</gamsName>
+            <Title>A generic argument for the model</Title>
+            <gamsName>Arg1</gamsName>
             <tasks>Estimation, Simulation</tasks>
         </control>
-        
+
 </GGIG>
