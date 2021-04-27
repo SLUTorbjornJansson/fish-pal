@@ -1,18 +1,32 @@
+*-------------------------------------------------------------------------------
 $ontext
     FishPAL
 
     Sensitivity analysis:
-    Shift variable cost slope and recalibrate
-$offtext
+    Shift selected variables and recalibrate.
 
-*$set SHIFT_PERCENT %1
+    The parameters to shift are defined using $SETGLOBAL in the parent program
+    or in the GUI.
+
+    The following parameter shifters are supported (defined in percent diff):
+    SHIFT_VARCOST_SLOPE    Slope of variable cost function
+    SHIFT_CATCH_ELAS       Catch elasticity parameter BETA
+    SHIFT_FISH_PRICES      Prices of all fish
+
+
+    @author: Torbjörn Jansson, SLU
+$offtext
+*-------------------------------------------------------------------------------
+
+
+*   Invent a file name to use if some error is found and data must be unloaded
 $set ERROR_FILE %resDir%\chk_%scenario_path_underscores%_%ResId%.gdx
+
 
 *-------------------------------------------------------------------------------
 *   Shift slope of variable cost functions by percent %SHIFT_VARCOST_SLOPE%
 *-------------------------------------------------------------------------------
 
-*parameter p_oldMC(f) "Marginal cost before shift";
 parameter p_oldAC(f) "Average cost before shift";
 
 
@@ -45,8 +59,6 @@ pv_varCostConst.l(f)
 
     pv_delta.l(f,s) $ p_oldCatch(f,s) = p_oldCatch(f,s)*p_effortOri(f)**(-p_catchElasticity(f));
 
-*    pv_delta.fx(f,s) = pv_delta.l(f,s);
-
 
 *-------------------------------------------------------------------------------
 *   Shift fish prices by %SHIFT_FISH_PRICES%
@@ -59,10 +71,10 @@ pv_varCostConst.l(f)
 
     p_pricesB(s) = p_pricesB(s)*(1 + (%SHIFT_FISH_PRICES%)/100);
 
+
 *-------------------------------------------------------------------------------
 *   Re-calibrate the model by solving it under bounds and then recomputing PMP-terms
 *-------------------------------------------------------------------------------
-
 
 $INCLUDE "include_files\set_bounds_simulation.gms"
 
@@ -80,6 +92,7 @@ MODEL m_fishCal "Primal simulation model with profit maximization"
      m_reportingEquations/;
 
 
+*   Solve model to obtain dual values on v_effortAnnual
     $$INCLUDE "include_files\compute_subsidies.gms"
     SOLVE m_fishCal USING NLP MAXIMIZING v_profit;
 
