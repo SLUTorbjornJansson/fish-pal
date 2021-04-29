@@ -76,12 +76,16 @@
     <region><sel>[gear,all]</sel><key>'Tungegarn'</key><itemName></itemName></region>
     <region><sel>[gear,all]</sel><key>'Ålredskap'</key><itemName></itemName></region>
 
-    <region><sel>[area,all]</sel><key>'2224'</key><itemName>ICES areas 22-24</itemName></region>
-    <region><sel>[area,all]</sel><key>'2529+32'</key><itemName>ICES areas 25-29+32</itemName></region>
-    <region><sel>[area,all]</sel><key>'3031'</key><itemName>ICES areas 30-31</itemName></region>
-    <region><sel>[area,all]</sel><key>'K'</key><itemName>Kattegatt</itemName></region>
-    <region><sel>[area,all]</sel><key>'S'</key><itemName>Skagerack</itemName></region>
-    <region><sel>[area,all]</sel><key>'N'</key><itemName>North Sea</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'2224'</key><itemName>ICES areas 22-24</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'2529+32'</key><itemName>ICES areas 25-29+32</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'3031'</key><itemName>ICES areas 30-31</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'K'</key><itemName>Kattegatt</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'S'</key><itemName>Skagerack</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'N'</key><itemName>North Sea</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'KS'</key><itemName>Kattegatt and Skagerack</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'KSN'</key><itemName>Kattegatt, Skagerack and North Sea</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'BALTIC'</key><itemName>Baltic</itemName></region>
+    <region><sel>[quotaArea,area,all]</sel><key>'BALTIC_EAST'</key><itemName>Baltic East</itemName></region>
 
     <region><key>1</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Grimnät/Garn in 2224</itemName></region>
     <region><key>2</key><sel>[fishery,all]</sel><itemName>DFN_VL0012_N/A using Piggvar/ Vargarn in 2224</itemName></region>
@@ -331,49 +335,50 @@
     <region><key>246</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Parflyttral Sill/Skarpsill in S</itemName></region>
     <region><key>247</key><sel>[fishery,all]</sel><itemName>PEL_24XX using Snörpvad in S</itemName></region>
 
+    <region>
+        <itemName>All fisheries</itemName>
+        <key>total</key>
+        <sel>[fishery,gear,area,segment,all]</sel>
+    </region>
+
 
 
 <!-- Second dimension of results parameter: Species and aggregates of species (speciesDomain). -->
     <product>
         <itemName>All species</itemName>
-        <key>total</key>
+        <key>allSpecies</key>
         <sel>[allSpecies,all]</sel>
     </product>
 
-    <product>
-        <itemName>No species, not applicable to any particular species</itemName>
-        <key>na</key>
-        <sel>[noSpecies,all]</sel>
-    </product>
 
    <product><key>Abborre</key><sel>[species,all]</sel></product>
    <product><key>Al</key><sel>[species,all]</sel></product>
    <product><key>Berggylta</key><sel>[species,all]</sel></product>
    <product><key>Bergtunga</key><sel>[species,all]</sel></product>
-   <product><key>BlavitlingKolmule</key><sel>[species,all]</sel></product>
+   <product><key>BlavitlingKolmule</key><sel>[quotaSpecies,species,all]</sel></product>
    <product><key>Braxen</key><sel>[species,all]</sel></product>
    <product><key>Fjarsing</key><sel>[species,all]</sel></product>
    <product><key>Gadda</key><sel>[species,all]</sel></product>
    <product><key>Gos</key><sel>[species,all]</sel></product>
-   <product><key>Grasej</key><sel>[species,all]</sel></product>
+   <product><key>Grasej</key><sel>[quotaSpecies,species,all]</sel></product>
    <product><key>Halleflundra</key><sel>[species,all]</sel></product>
    <product><key>Havskatter</key><sel>[species,all]</sel></product>
    <product><key>Havskrafta</key><sel>[species,all]</sel></product>
    <product><key>Hummer</key><sel>[species,all]</sel></product>
-   <product><key>Kolja</key><sel>[species,all]</sel></product>
+   <product><key>Kolja</key><sel>[quotaSpecies,species,all]</sel></product>
    <product><key>Krabbtaska</key><sel>[species,all]</sel></product>
-   <product><key>Kummel</key><sel>[species,all]</sel></product>
+   <product><key>Kummel</key><sel>[quotaSpecies,species,all]</sel></product>
    <product><key>Kungsrakor</key><sel>[species,all]</sel></product>
-   <product><key>Langa</key><sel>[species,all]</sel></product>
-   <product><key>Lax</key><sel>[species,all]</sel></product>
+   <product><key>Langa</key><sel>[quotaSpecies,species,all]</sel></product>
+   <product><key>Lax</key><sel>[quotaSpecies,species,all]</sel></product>
    <product><key>Lubb</key><sel>[species,all]</sel></product>
    <product><key>Lyrtorsk</key><sel>[species,all]</sel></product>
    <product><key>Makrill</key><sel>[species,all]</sel></product>
-   <product><key>Marulk</key><sel>[species,all]</sel></product>
-   <product><key>Nordhavsraka</key><sel>[species,all]</sel></product>
+   <product><key>Marulk</key><sel>[quotaSpecies,species,all]</sel></product>
+   <product><key>Nordhavsraka</key><sel>[quotaSpecies,species,all]</sel></product>
    <product><key>Piggvar</key><sel>[species,all]</sel></product>
-   <product><key>Rocka</key><sel>[species,all]</sel></product>
-   <product><key>Rodspotta</key><sel>[species,all]</sel></product>
+   <product><key>Rocka</key><sel>[quotaSpecies,species,all]</sel></product>
+   <product><key>Rodspotta</key><sel>[quotaSpecies,species,all]</sel></product>
    <product><key>Rodtunga</key><sel>[species,all]</sel></product>
    <product><key>Sandskadda</key><sel>[species,all]</sel></product>
    <product><key>SikFiskar</key><sel>[species,all]</sel></product>
@@ -384,12 +389,30 @@
    <product><key>Skarsnultra</key><sel>[species,all]</sel></product>
    <product><key>Skrubbskadda</key><sel>[species,all]</sel></product>
    <product><key>Slatvar</key><sel>[species,all]</sel></product>
-   <product><key>Tobisfiskar</key><sel>[species,all]</sel></product>
+   <product><key>Tobisfiskar</key><sel>[quotaSpecies,species,all]</sel></product>
    <product><key>Torsk</key><sel>[species,all]</sel></product>
-   <product><key>Vitling</key><sel>[species,all]</sel></product>
+   <product><key>Vitling</key><sel>[quotaSpecies,species,all]</sel></product>
    <product><key>Vitlinglyra</key><sel>[species,all]</sel></product>
-   <product><key>aktaTunga</key><sel>[species,all]</sel></product>
-   <product><key>oring</key><sel>[species,all]</sel></product>
+
+   <product><key>aktaTunga</key><sel>[quotaSpecies,species,all]</sel><itemName>Aekta Tunga</itemName></product>
+   <product><key>oring</key><sel>[species,all]</sel><itemName>Oering</itemName></product>
+
+
+    <product><key>Berg_o_Rodtunga</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>Havskrafta_rist</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>Havskrafta_ejRist</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>Havskrafta_bur</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>MakrillKust</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>MakrillEjKust</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>Piggvar_Slatvar</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>Sand_o_Skrskr</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>SillKust</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>SillEjKust</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>SkarpsillKust</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>SkarpsillEjKust</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>TorskPassiv</key><sel>[quotaSpecies,all]</sel></product>
+    <product><key>TorskAktiv</key><sel>[quotaSpecies,all]</sel></product>
+
 
 
 <!-- Third dimension of results parameter: Elements of simulation output such as variable names, parameters, equations and general derived results -->
@@ -437,13 +460,13 @@
 
 
 <!-- Fourth dimension of results parameter -->
-    <dim5><key>mean</key><itemName>Mean</itemName></dim5>
-    <dim5><key>var</key><itemName>Variance</itemName></dim5>
-    <dim5><key>ori</key><itemName>Original data</itemName></dim5>
-    <dim5><key>est</key><itemName>Estimated value (or fitted value for observable variables)</itemName></dim5>
-    <dim5><key>sim</key><itemName>Simulation outcome or value of parameter in simulation</itemName></dim5>
-    <dim5><key>M</key><itemName>Dual value of bound on variable or equation</itemName></dim5>
-    <dim5><key>UP</key><itemName>Upper bound of variable or equation</itemName></dim5>
-    <dim5><key>LO</key><itemName>Lower bound of variable or equation</itemName></dim5>
+    <dim5><key>mean</key><itemName>Mean</itemName><sel>[all]</sel></dim5>
+    <dim5><key>var</key><itemName>Variance</itemName><sel>[all]</sel></dim5>
+    <dim5><key>ori</key><itemName>Original data</itemName><sel>[all]</sel></dim5>
+    <dim5><key>est</key><itemName>Estimated value (or fitted value for observable variables)</itemName><sel>[all]</sel></dim5>
+    <dim5><key>sim</key><itemName>Simulation outcome or value of parameter in simulation</itemName><sel>[sim,all]</sel></dim5>
+    <dim5><key>M</key><itemName>Dual value of bound on variable or equation</itemName><sel>[all]</sel></dim5>
+    <dim5><key>UP</key><itemName>Upper bound of variable or equation</itemName><sel>[all]</sel></dim5>
+    <dim5><key>LO</key><itemName>Lower bound of variable or equation</itemName><sel>[all]</sel></dim5>
 
 </generated>

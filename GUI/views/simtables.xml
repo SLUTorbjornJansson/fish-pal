@@ -3,8 +3,10 @@
       <theme>Fishing effort</theme>
       <name>Effort per fishery</name>
       <regionSel>fishery</regionSel>
-      <productSel>noSpecies</productSel>
+      <regionText>Fishery</regionText>
+      <productSel>allSpecies</productSel>
       <productText>hide</productText>
+      <dim5sel>sim</dim5sel>
       <dim5Text>Type of value</dim5Text>
       <itemDim>activity</itemDim>
       <item>
@@ -17,7 +19,7 @@
       <theme>Fishing effort</theme>
       <name>Effort per segment</name>
       <regionSel>segment</regionSel>
-      <productSel>noSpecies</productSel>
+      <productSel>allSpecies</productSel>
       <productText>hide</productText>
       <dim5Text>Type of value</dim5Text>
       <itemDim>activity</itemDim>
@@ -31,7 +33,7 @@
       <theme>Fishing effort</theme>
       <name>Effort per gear</name>
       <regionSel>gear</regionSel>
-      <productSel>noSpecies</productSel>
+      <productSel>allSpecies</productSel>
       <productText>hide</productText>
       <dim5Text>Type of value</dim5Text>
       <itemDim>activity</itemDim>
@@ -45,7 +47,8 @@
       <theme>Fishing effort</theme>
       <name>Effort per area</name>
       <regionSel>area</regionSel>
-      <productSel>noSpecies</productSel>
+      <regionText>Fishing area</regionText>
+      <productSel>allSpecies</productSel>
       <productText>hide</productText>
       <dim5Text>Type of value</dim5Text>
       <itemDim>activity</itemDim>
@@ -54,6 +57,9 @@
         <key>v_effortAnnual</key>
       </item>
     </table>
+
+
+    <!-- Report tables for CATCH -->
 
     <table>
       <theme>Catch</theme>
@@ -69,21 +75,122 @@
         <unit>Tons per year</unit>
       </item>
       <item>
+        <itemName>Landings</itemName>
+        <key>v_landings</key>
+        <unit>Tons per year</unit>
+      </item>
+      <item>
+        <itemName>Discards</itemName>
+        <key>v_discards</key>
+        <unit>Tons per year</unit>
+      </item>
+      <item>
+        <itemName>Sort A</itemName>
+        <key>v_sortA</key>
+        <unit>Tons per year</unit>
+      </item>
+      <item>
+        <itemName>Sort B</itemName>
+        <key>v_sortB</key>
+        <unit>Tons per year</unit>
+      </item>
+      <item>
+        <itemName>Price A</itemName>
+        <key>p_pricesA</key>
+        <unit>SEK/kg</unit>
+      </item>
+      <item>
+        <itemName>Price B</itemName>
+        <key>p_pricesB</key>
+        <unit>SEK/kg</unit>
+      </item>
+      <item>
         <itemName>Revenue</itemName>
-        <key>totalRevenues</key>
-        <unit>kKr per year</unit>
+        <key>totalSalesRevenues</key>
+        <unit>1000 SEK</unit>
       </item>
     </table>
 
     <table>
+      <theme>Catch</theme>
+      <name>Quotas</name>
+      <defpivot>0PRA</defpivot>
+      <regionSel>quotaArea</regionSel>
+      <productSel>quotaSpecies</productSel>
+      <productText>Quota name</productText>
+      <dim5Text>Statistic</dim5Text>
+      <itemDim>activity</itemDim>
+      <item>
+        <itemName>Quota</itemName>
+        <key>e_catchQuota</key>
+        <unit>Tons per year</unit>
+      </item>
+      <item>
+        <itemName>Baseline quota</itemName>
+        <key>p_TACori</key>
+        <unit>Tons per year</unit>
+      </item>
+
+      <item>
+        <itemName>Catch</itemName>
+        <key>v_catch</key>
+        <unit>Tons per year</unit>
+      </item>
+      <item>
+        <itemName>Landings</itemName>
+        <key>v_landings</key>
+        <unit>Tons per year</unit>
+      </item>
+      <item>
+        <itemName>Discards</itemName>
+        <key>v_discards</key>
+        <unit>Tons per year</unit>
+      </item>
+    </table>
+
+
+
+    <!--// Create a table with results of the dual analysis
+
+    <table>
+      <theme>Dual analysis</theme>
+      <name>Partials of Lagrangian w.r.t. effortAnnual</name>
+      <regionSel>fishery</regionSel>
+      <regionText>Fishery</regionText>
+      <productSel>allSpecies</productSel>
+      <productText>hide</productText>
+      <dim5Text>Type of value</dim5Text>
+      <itemDim>activity</itemDim>
+      <item>
+        <itemName>Marginal revenue</itemName>
+        <key>dualMR</key>
+      </item>
+    </table> //-->
+
+    <table>
         <theme>Dual analysis</theme>
         <name>Partials of Lagrangian w.r.t. effortAnnual</name>
+        <defpivot>0R0A</defpivot>
+        <scenText>Scenario</scenText>
+
         <regionSel>fishery</regionSel>
-        <productSel>noSpecies</productSel>
+        <regionText>Fishery</regionText>
+
+        <productSel>allSpecies</productSel>
         <productText>hide</productText>
+
+        <!-- <activitySel>all</activitySel> -->
         <activitySel>dualResult</activitySel>
+        <activityText>Partial</activityText>
+
         <dim5Sel>sim</dim5Sel>
-        <dim5Text>hide</dim5Text>
+        <dim5Text>Type of value</dim5Text>
+
+        <itemDim>product</itemDim>
+        <item>
+            <itemName>Simulated</itemName>
+            <key>allSpecies</key>
+        </item>
     </table>
 
 </generated>
