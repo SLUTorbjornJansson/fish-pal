@@ -81,6 +81,10 @@ $INCLUDE "include_files\set_bounds_simulation.gms"
 *   Fix effortAnnual in order to obtain dual values to use in calibration
     v_effortAnnual.fx(f) = p_effortOri(f);
 
+*   ... but leave a tiny slack in order to be able to identify any binding quotas
+    v_effortAnnual.lo(f) = p_effortOri(f)*0.9995;
+    v_effortAnnual.up(f) = p_effortOri(f)*1.0005;
+
 
 MODEL m_fishCal "Primal simulation model with profit maximization"
     /m_coreEquations,

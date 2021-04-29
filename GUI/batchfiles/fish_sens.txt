@@ -60,10 +60,13 @@
 *   Starting sensitivity experiments for scenario %curScenario%
 *-----------------------------------------------------------------
 
-     startParallel
+
         Scenario description = seal\%curScenario%
 
         FOR curVarCostSlopeShift = %allVarCostSlopeShifts%
+
+*         Run two loops in parallel (typically nine scenarios)
+          startParallel
           FOR curCatchElasShift = %allCatchElasShifts%
             FOR curPriceShift = %allPriceShifts%
 
@@ -113,8 +116,11 @@
 
             ENDFOR
           ENDFOR
+          collectParallel
+
+
         ENDFOR
-    collectParallel
+
   ENDFOR
 
 

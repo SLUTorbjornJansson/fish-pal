@@ -98,12 +98,15 @@ set speciesDomain;
 set resLabel;
 set time;
 
+set solutionStats;
+
 *   Find dimensions of result parameter using "projections" of the gdx-file
 $gdxin %resdir%\%FILENAME_PREFIX%_%REF_SCEN%
 $load fisheryDomain
 $load speciesDomain
 $load resLabel<p_fiskResultat.dim3
 $load time<p_fiskResultat.dim4
+$load solutionStats<p_solutionStats.dim1
 $gdxin
 
 
@@ -153,15 +156,19 @@ else
 *-------------------------------------------------------------------------------
 * Loopa över alla filnamn och läs in motsvarande gdx-fil
 *-------------------------------------------------------------------------------
-
+parameter p_solutionStats(solutionStats);
+parameter p_solutionStatsSens(solutionStats,scenAll,sens);
 parameter p_fiskResultat(fisheryDomain,speciesDomain,resLabel,time);
 parameter p_fiskResultatSens(fisheryDomain,speciesDomain,resLabel,time,scenAll,sens);
 
 *   Läs in referensscenariot. Detta görs separat eftersom vi inte laddar några
 *   känslighetsanalyser för just det scenariot.
-execute_load "%RESDIR%\%FILENAME_PREFIX%_%REF_SCEN%" p_fiskResultat;
+execute_load "%RESDIR%\%FILENAME_PREFIX%_%REF_SCEN%" p_fiskResultat, p_solutionStats;
 p_fiskResultatSens(selFishery,selSpecies,selResLabel,selTime,scenRef,sensDefault)
     = p_fiskResultat(selFishery,selSpecies,selResLabel,selTime);
+
+p_solutionStatsSens(solutionStats,scenRef,sensDefault)
+    = p_solutionStats(solutionStats);
 
 
 *   Läs in alla känslighetsanalyser för vart och ett av de scenarier som finns
@@ -171,9 +178,12 @@ file f "Any file. Apparently needed for put_utility to work" /".\output\temp\tmp
 
 loop((scenSens,sens),
     put_utility 'gdxin' / '%RESDIR%\%FILENAME_PREFIX%_', scenSens.tl:0,'_', sens.tl:0;
-    execute_load p_fiskResultat;
+    execute_load p_fiskResultat, p_solutionStats;
     p_fiskResultatSens(selFishery,selSpecies,selResLabel,selTime,scenSens,sens)
         = p_fiskResultat(selFishery,selSpecies,selResLabel,selTime);
+
+    p_solutionStatsSens(solutionStats,scenSens,sens)
+        = p_solutionStats(solutionStats);
 
 );
 

@@ -29,9 +29,9 @@ $SETGLOBAL programMode simulation
 *   Ange vad simulationen heter (var chocken kommer från och vad resultaten ska kallas)
 $SETGLOBAL projectDirectory seal
 
-$SETGLOBAL scenario reference
-*$SETGLOBAL  scenario scenario2
-*$SETGLOBAL scenario scenario3
+*$SETGLOBAL scenario reference
+*$SETGLOBAL scenario scenario2
+$SETGLOBAL scenario scenario3
 *$SETGLOBAL scenario scenario4
 *$SETGLOBAL scenario scenario5
 *$SETGLOBAL scenario scenario6
@@ -224,17 +224,15 @@ $INCLUDE "include_files\set_bounds_simulation.gms"
 *     deviation from the previous iteration to determine if it converged.
 *     We create an artificial iteration zero containing p_effortOri
 
-set iterations "Iterations with the model to converge to equilibrium subsidies" /i0*i100/;
-set iterUsed(iterations) "Iterations that were used in the process";
-alias(iterations,iterations1);
-scalar p_convergenceTolerance "Mean squared deviation criterion for exit" /0.001/;
-scalar p_meanSquaredDeviation /+inf/;
-parameter p_iterDeviations(iterations);
-parameter p_iterEffort(iterations,f);
-parameter p_iterReport(f,iterations) "A report for the list file with changes in iterations";
+p_meanSquaredDeviation = +inf;
+p_convergenceTolerance = 0.001;
+p_stopSolvingModel = 0;
 p_iterEffort(iterations,f) $ (ord(iterations) eq 1) = p_effortOri(f);
 
-loop(iterations $ [(p_meanSquaredDeviation gt p_convergenceTolerance) and (ord(iterations) gt 1)],
+* --- Disable solution output during iterations 2 = no output at all.
+m_fishSim.solprint = 2;
+
+loop(iterations $ [(not p_stopSolvingModel) and (ord(iterations) gt 1)],
     iterUsed(iterations) = yes;
     $$INCLUDE "include_files\compute_subsidies.gms"
     SOLVE m_fishSim USING NLP MAXIMIZING v_profit;
@@ -249,12 +247,36 @@ loop(iterations $ [(p_meanSquaredDeviation gt p_convergenceTolerance) and (ord(i
 
         p_iterDeviations(iterations) = p_meanSquaredDeviation;
     );
+
+    p_stopSolvingModel $ [p_meanSquaredDeviation lt p_convergenceTolerance] = 1;
+
+    p_stopSolvingModel $ [ord(iterations) eq card(iterations)] = 1;
 );
 
+* --- Solve once more with full output and store iteration result under "last" iteration
+m_fishSim.solprint = 1;
+SOLVE m_fishSim USING NLP MAXIMIZING v_profit;
+p_iterEffort("sim",f) = v_effortAnnual.l(f);
+
+
+* --- Att göra: analysera lösningen för att se att det inte var något
+*     uppenbart problem, t.ex. infeasible, icke-konvergerat eller liknande.
+p_solutionStats("iterCount") = card(iterUsed);
+p_solutionStats("solveStat") = m_fishSim.solvestat;
+p_solutionStats("modelStat") = m_fishSim.modelstat;
+p_solutionStats("deviation") = p_meanSquaredDeviation;
+p_solutionStats("tolerance") = p_convergenceTolerance;
+p_solutionStats("stopCode")  = p_stopSolvingModel;
+
+
+
 * --- Make a simple report for the listing by converting the effort in each
-*     iteration to deviation relative to the first iteration, and remove all
+*     iteration to deviation relative to the previous iteration, and remove all
 *     tiny numbers.
-p_iterReport(f,iterUsed) = p_iterEffort(iterUsed,f)/p_iterEffort("i0",f)-1;
+p_iterReport(f,iterTot) = p_iterEffort(iterTot,f);
+
+p_iterReport(f,iterations) $ [iterUsed(iterations) and ord(iterations) gt 1]
+    = p_iterEffort(iterations,f)/p_iterEffort(iterations-1,f)-1;
 p_iterReport(f,iterUsed) $ [abs(p_iterReport(f,iterUsed)) lt 0.001] = 0;
 display p_iterDeviations, p_iterReport, p_subsidyBudgetSpent;
 
@@ -334,11 +356,12 @@ EXECUTE_UNLOAD "%resDir%\simulation\%runtype%_%scenario_path_underscores%%ResId%
                                                       v_vessels,
                                                       p_reportDualsFisheryQuota
                                                       fisheryDomain
-                                                      speciesDomain;
+                                                      speciesDomain
+                                                      p_solutionStats;
 
 
 * Skriv ut alla resultat för att kolla hur det blev
-EXECUTE_UNLOAD "TEMP_%programMode%%ResId%.GDX";
+*EXECUTE_UNLOAD "TEMP_%programMode%%ResId%.GDX";
 
 
 

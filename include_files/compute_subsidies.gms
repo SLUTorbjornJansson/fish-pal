@@ -10,6 +10,21 @@ $ONTEXT
 
 $OFFTEXT
 
+*   --- Make a somewhat conservative forecast of the fishery effort to use
+*       in the computation of subsidies. If we use the efforts of the last
+*       iteration, we may have "cycling".
+
+    if(card(iterUsed) eq 0,
+*       If we have no iterations so far, use baseline data
+        p_projectedEffort(f) = p_effortOri(f);
+    else
+*       If we do have iterations, use weighted average of last iteration and
+*       of the last projected effort.
+        p_projectedEffort(f)
+            = (1*v_effortAnnual.L(f) + 1*p_projectedEffort(f)) / 2;
+
+    );
+
 *  p_subsidyPerDAS(f) = 1.00;
 *$exit
 * --- Subsidy that is proportional to the share in total seal damage
@@ -18,8 +33,8 @@ $OFFTEXT
 *     observed revenues whenever there is a seal flag in the log book
 
     p_sealDamage(f) =
-    SUM(s $ fishery_species(f,s), p_pricesA(f,s)*p_shareA(f,s)*pv_delta.l(f,s) * v_effortAnnual.L(f)**p_catchElasticity(f)
-                                + p_pricesB(s)*  p_shareB(f,s)*pv_delta.l(f,s) * v_effortAnnual.L(f)**p_catchElasticity(f)*p_landingObligation(f,s))
+    SUM(s $ fishery_species(f,s), p_pricesA(f,s)*p_shareA(f,s)*pv_delta.l(f,s) * p_projectedEffort(f)**p_catchElasticity(f)
+                                + p_pricesB(s)*  p_shareB(f,s)*pv_delta.l(f,s) * p_projectedEffort(f)**p_catchElasticity(f)*p_landingObligation(f,s))
     * p_ShareDASseal(f);
 
 
@@ -28,9 +43,9 @@ $OFFTEXT
 
     p_subsidyPerDAS(f) = p_subsidyBudget
                  * p_sealDamage(f) / sum(fishery, p_sealDamage(fishery))
-                 / v_effortAnnual.L(f);
+                 / p_projectedEffort(f);
 
-    p_subsidyBudgetSpent = sum(f, p_subsidyPerDAS(f)*v_effortAnnual.L(f));
+    p_subsidyBudgetSpent = sum(f, p_subsidyPerDAS(f)*p_projectedEffort(f));
 
     display "In %system.fn%:", p_subsidyPerDAS;
 

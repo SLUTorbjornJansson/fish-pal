@@ -202,3 +202,11 @@ sets
 *   Skapa set som underlättar aggregeringen
 SET addVars(resLabel) "Variabler som kan adderas utan att bli meningslösa (kvantiteter)" /v_effortAnnual,v_catch,v_varCostAve/;
 SET addStat(statItem) "Datatyper som kan adderas utan att bli meningslösa"  /ori,est/;
+
+*   Skapa set som används för att styra iterativ lösning av modellen
+set iterTot /sim,i0*i100/;
+set iterations(iterTot) "Iterations with the model to converge to equilibrium subsidies" /i0*i100/;
+set iterUsed(iterations) "Iterations that were used in the process";
+alias(iterations,iterations1);
+
+option kill = iterUsed;

@@ -29,14 +29,29 @@ PARAMETERS
     p_fiskResultat(fisheryDomain,*,resLabel,statItem) "Rapport från fiskmodellen för GUI"
 
     p_ShareDASseal(fishery) "Share of days at sea when seal damage is observed"
-    p_subsidyPerDAS(fishery)      "Subsidy per fishery (tkr/DAS)"
+    p_subsidyPerDAS(fishery)"Subsidy per fishery (tkr/DAS)"
     p_sealDamage(fishery)   "Total value of seal damage per fishery"
+    p_projectedEffort(fishery) "Projected effort for next iteration. Partial adjustment for subsidy computation"
+
+*   Parameters for steering and monitoring convergence behaviour
+    p_iterDeviations(iterations) "Sum of squared deviations of effort from previous simulation, used as convergence measure"
+    p_iterEffort(iterTot,f) "Effort level in each iteration"
+    p_iterReport(f,iterTot) "A report for the list file with relative change from previous iteration"
+    p_solutionStats(*) "Some characteristics of the solution"
     ;
 
+
+
 SCALARS
+*   Items for subsidy computations
     p_subsidyBudgetOri      "Original target amount for subsidy (tkr)"
     p_subsidyBudget         "Target amount for subsidy used in model (tkr)"
     p_subsidyBudgetSpent    "Amount of subsidy spent (tkr)"
+
+*   Items for steering and checking convergense
+    p_convergenceTolerance "Mean squared deviation criterion for exit"
+    p_meanSquaredDeviation "Mean squared deviation of current iteration"
+    p_stopSolvingModel "Signal if we should stop solving the model because (1) it converged, (2) iteration limit was reached"
     ;
 
 *###############################################################################
