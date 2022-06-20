@@ -7,6 +7,14 @@
          <userType><attr>administrator</attr></userType>
 
          <allowAdmin><attr>yes</attr></allowAdmin>
+
+		 <!-- Set logo and icon of the tool -->
+         <icon><attr>fish_pal_icon.gif</attr></icon>
+         <systemlogo><attr>AgriFood_logo.jpg</attr></systemlogo>		
+		 
+         <datDir><attr>../inputfiles</attr></datDir>
+         <modelDir><attr>..</attr></modelDir>
+         <resDir><attr>../output</attr></resDir>		 
 <!--
          <dim0Name><attr>fisherydomain</attr></dim0Name>
          <dim1Name><attr>speciesdomain</attr></dim1Name>
@@ -48,7 +56,13 @@
          </task>
 
          <workstep>
-                  <name>Modelling</name>
+                  <name>Prepare data</name>
+                  <tasks>
+                  </tasks>
+         </workstep>
+
+         <workstep>
+                  <name>Analyse scenarios</name>
                   <tasks>Estimation, Simulation
                   </tasks>
          </workstep>
