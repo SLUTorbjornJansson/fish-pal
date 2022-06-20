@@ -2,7 +2,7 @@ $ONTEXT
 
     @purpose: Perform estimations of behavioural and economic parameters of the fishery model.
 
-    @author: Torbjörn Jansson, Staffan Waldo
+    @author: Torbjï¿½rn Jansson, Staffan Waldo
 
     @date: 2013-09-23
 
@@ -95,10 +95,10 @@ e_estimationMetric ..
 
     -SUM(seg, SQR(pv_kwh(seg)-p_kwhOri(seg))*p_weightKwh(seg))
 
-*   Hårdkodat antagande om att variansen av PMP-kostnaden/intäkten är proportionell
-*   mot den för variabla kostnader per dag.
-*   Detta är rimligt på så vis att det är proportionellt mot omsättningen i fisket,
-*   och inte samma för trålare och små kustfisken
+*   Hï¿½rdkodat antagande om att variansen av PMP-kostnaden/intï¿½kten ï¿½r proportionell
+*   mot den fï¿½r variabla kostnader per dag.
+*   Detta ï¿½r rimligt pï¿½ sï¿½ vis att det ï¿½r proportionellt mot omsï¿½ttningen i fisket,
+*   och inte samma fï¿½r trï¿½lare och smï¿½ kustfisken
     -SUM(f, SQR[pv_PMPconst(f) + 1/2*pv_PMPslope(f)*v_effortAnnual(f)]*p_weightPMP(f))
 
 *   Annual effort should be "close" to observed effort
@@ -332,7 +332,7 @@ else
 
     p_priorLandings(fsTemp,"priVar") = SQR(p_priorLandings(fsTemp,"priStdev"));
 
-*   Landningar: Vikten för normalfördelningen är 1/(2*variansen). Här har vi ökat vikten med en faktor tio.
+*   Landningar: Vikten fï¿½r normalfï¿½rdelningen ï¿½r 1/(2*variansen). Hï¿½r har vi ï¿½kat vikten med en faktor tio.
     p_weightLandings(f,s) $ p_landingsOri(f,s) = 1/(2*p_priorLandings(f,s,"priVar"));
 
 *       Derive gamma distribution parameters for landings, which are only used
@@ -378,7 +378,7 @@ else
     p_priorDiscards(fsTemp,"priVar") = SQR(p_priorDiscards(fsTemp,"priStdev"));
 
 
-*   Vikten för normalfördelningen är 1/(2*variansen).
+*   Vikten fï¿½r normalfï¿½rdelningen ï¿½r 1/(2*variansen).
     p_weightDiscards(f,s) $ p_discardsOri(f,s) = 1/(2*p_priorDiscards(f,s,"priVar"));
 
 
@@ -422,9 +422,9 @@ else
 *           (assuming "accuracy"+2 = alpha+beta so that accuracy = 0 implies uniform density)
    p_priMaxEffFishery("priScale",f) = p_priMaxEffFishery("priMax",f)-p_priMaxEffFishery("priMin",f);
 
+   p_priMaxEffFishery("priAlpha",f) = (p_priMaxEffFishery("priMode",f)-p_priMaxEffFishery("priMin",f))/p_priMaxEffFishery("priScale",f)*((2+p_priMaxEffFishery("priAcc",f))-2)+1;
+   p_priMaxEffFishery("priBeta",f)  = (2+p_priMaxEffFishery("priAcc",f))-p_priMaxEffFishery("priAlpha",f);
 
-    p_priMaxEffFishery("priAlpha",f) = (p_priMaxEffFishery("priMode",f)-p_priMaxEffFishery("priMin",f))/p_priMaxEffFishery("priScale",f)*((2+p_priMaxEffFishery("priAcc",f))-2)+1;
-    p_priMaxEffFishery("priBeta",f)  = (2+p_priMaxEffFishery("priAcc",f))-p_priMaxEffFishery("priAlpha",f);
 
 
 *-------------------------------------------------------------------------------
@@ -450,11 +450,11 @@ else
 *   ... and variance ASSUMED to be such that 2 standard deviations cover 1/2 of the mean in each direction, sigma=Ori/4
     p_weightvarCostAve(f) $ p_varCostAveOri(f) = 1/(2*SQR(p_varCostAveOri(f)/4));
 
-* --- Definiera parametrar till kostnadsfunktionen. Hur det går till beror på funktionsform.
-*     Nedan antar vi en kvadratisk totalkostnad, dvs linjär marginalkostnad, och låter skattningen
-*     bestämma intercept men inte lutning.
-*     Antagande: interceptet är ungefär halva den observerade genomsnittskostnaden.
-*     om MC = a + b*E så innebär det att b = AC/E
+* --- Definiera parametrar till kostnadsfunktionen. Hur det gï¿½r till beror pï¿½ funktionsform.
+*     Nedan antar vi en kvadratisk totalkostnad, dvs linjï¿½r marginalkostnad, och lï¿½ter skattningen
+*     bestï¿½mma intercept men inte lutning.
+*     Antagande: interceptet ï¿½r ungefï¿½r halva den observerade genomsnittskostnaden.
+*     om MC = a + b*E sï¿½ innebï¿½r det att b = AC/E
 
 *   Then, we assume a slope corresponding to an a-priori (myopic) elasticity of 1.5
 *   beta = 1/elasticity * AverageCost / EffortOri
@@ -494,10 +494,10 @@ else
 
 *###############################################################################
 *   SKATTA MODELLPARAMETRARNA
-*   Steg 1: hitta en startpunkt (särskilt för komplementaritetsvillkoren!)
-*           över huvud taget genom att lösa den primala modellen
+*   Steg 1: hitta en startpunkt (sï¿½rskilt fï¿½r komplementaritetsvillkoren!)
+*           ï¿½ver huvud taget genom att lï¿½sa den primala modellen
 *
-*   Steg 2: gör en snabb optimering av skattningen, som bara ger en approximation.
+*   Steg 2: gï¿½r en snabb optimering av skattningen, som bara ger en approximation.
 *
 *
 *###############################################################################
@@ -573,7 +573,7 @@ v_catch.SCALE(f,s) $ [p_effortOri(f)*p_catchOri(f,s)] = p_catchOri(f,s);
 m_estimateFish.SCALEOPT = 1;
 
 
-*   Oavsett hur tung kavel man har, så finns det lika mycket deg...
+*   Oavsett hur tung kavel man har, sï¿½ finns det lika mycket deg...
 
 *   --- Initialize dual values to the existing solution obtained from the primal model in STEP 1
 v_lambdaCatch.L(f,s) $ fishery_species(f,s) = e_catch.M(f,s);
@@ -593,11 +593,11 @@ v_estimationMetric.L = 1;
 *SOLVE m_estimateFish USING NLP MAXIMIZING v_estimationMetric;
 *$stop
 
-*   --- För att hitta en bra startpunkt till MINLP-problemet (som löses med BARON),
-*       så gör vi först en approximation, där vi introducerar komplementaritesvillkoren
-*       stegvis. Först tillåter vi att x*y < my (om x > 0 och y > 0 är variabler), och låter
-*       så my gå från ett stort positivt tal mot noll. När my = 0 så är komplementaritetsvillkoren
-*       exakt uppfyllda. Denna algoritm, hur stort my är från början, etc, måste provas in manuellt.
+*   --- Fï¿½r att hitta en bra startpunkt till MINLP-problemet (som lï¿½ses med BARON),
+*       sï¿½ gï¿½r vi fï¿½rst en approximation, dï¿½r vi introducerar komplementaritesvillkoren
+*       stegvis. Fï¿½rst tillï¿½ter vi att x*y < my (om x > 0 och y > 0 ï¿½r variabler), och lï¿½ter
+*       sï¿½ my gï¿½ frï¿½n ett stort positivt tal mot noll. Nï¿½r my = 0 sï¿½ ï¿½r komplementaritetsvillkoren
+*       exakt uppfyllda. Denna algoritm, hur stort my ï¿½r frï¿½n bï¿½rjan, etc, mï¿½ste provas in manuellt.
 
 
 * --- With complementarity constraints and mu
@@ -633,7 +633,7 @@ IF(p_useApproximation1,
     usePenalty = 1;
     m_estimateFish.SOLPRINT = 2;
     SOLVE m_estimateFish USING NLP MAXIMIZING v_estimationMetric;
-    DISPLAY "Initial try med penalty, my=0 (initierad av förra lösningen): ", v_estimationMetric.L;
+    DISPLAY "Initial try med penalty, my=0 (initierad av fï¿½rra lï¿½sningen): ", v_estimationMetric.L;
 );
 
 
@@ -677,7 +677,7 @@ p_subsidyBudget = sum(f, p_subsidyPerDAS(f)*v_effortAnnual.L(f));
 *$SETGLOBAL scenario %scenario%
 
 *-------------------------------------------------------------------------------
-*   Spara parametrarna i en datafil, att använda i simulation
+*   Spara parametrarna i en datafil, att anvï¿½nda i simulation
 *-------------------------------------------------------------------------------
 
 EXECUTE_UNLOAD "%resdir%\estimation\par_%parFileName%.gdx"
@@ -730,7 +730,7 @@ p_fiskResultat(f,s,"pv_delta","ori") = p_catchOri(f,s)*p_effortOri(f)**(-p_catch
 p_fiskResultat(f,s,"pv_delta","est") = pv_delta.L(f,s);
 p_fiskResultat(f,s,"pv_delta","M") = pv_delta.M(f,s);
 
-*   Rapportera målfunktionens värde
+*   Rapportera mï¿½lfunktionens vï¿½rde
 p_fiskResultat("total","allSpecies","v_estimationMetric","est") = v_estimationMetric.L;
 
 
@@ -762,7 +762,7 @@ p_fiskResultat(effortGroup,area,"v_effortPerEffortGroup","M") = e_effortPerEffor
 p_fiskResultat(effortGroup,area,"v_effortPerEffortGroup","UP") = p_maxEffortPerEffortGroup(effortGroup,area);
 
 
-*   Aggregera fishery till segment etc, men bara för aggregaten, inte för enskilda fishery
+*   Aggregera fishery till segment etc, men bara fï¿½r aggregaten, inte fï¿½r enskilda fishery
 p_fiskResultat(fisheryDomain,speciesDomain,addVars,addStat) $ [NOT p_fiskResultat(fisheryDomain,speciesDomain,addVars,addStat)]
     = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskResultat(fishery,speciesDomain,addVars,addStat));
 

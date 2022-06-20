@@ -3,30 +3,31 @@ $ONTEXT
     @about Fisheries Policy AnaLysis tool, for Swedish fisheries.
            This file is used for simulation and also calibration/estimation of parameters
 
-    @author Staffan Waldo, Torbjörn Jansson
+    @author Staffan Waldo, Torbjï¿½rn Jansson
 
 $OFFTEXT
 $EOLCOM //
 $STARS $$$$
+$SETGLOBAL ERROR_FILE "error_fish_pal.gdx"
 
 *##############################################################################
 *   Manuell styrning av modellen:
 *##############################################################################
 
-*   Ange var rådata till modellen finns
+*   Ange var rï¿½data till modellen finns
 $SETGLOBAL datDir %SYSTEM.FP%inputfiles
 
 *   Ange var resultat ska sparas
 $SETGLOBAL resDir %SYSTEM.FP%output
 
-*   Ange namnet på filen där modellparametrarna från estimation sparas (och läses från vid simulation)
+*   Ange namnet pï¿½ filen dï¿½r modellparametrarna frï¿½n estimation sparas (och lï¿½ses frï¿½n vid simulation)
 $SETGLOBAL parFileName default
 
-*   Ange vad programmet ska göra (estimation, simulation)
+*   Ange vad programmet ska gï¿½ra (estimation, simulation)
 $SETGLOBAL programMode estimation
 *$SETGLOBAL programMode simulation
 
-*   Ange vad simulationen heter (var chocken kommer från och vad resultaten ska kallas)
+*   Ange vad simulationen heter (var chocken kommer frï¿½n och vad resultaten ska kallas)
 $SETGLOBAL projectDirectory seal
 
 $SETGLOBAL scenario reference
@@ -56,15 +57,15 @@ $SETGLOBAL scenario reference
 *$SETGLOBAL scenario quotaRemovalSillN
 
 
-*   Ange ett suffix till filnamnet för resultaten, för att t.ex. skilja
-*   känslighetsanalysens resultat från originalresultaten i samma scenario
-*   Normalt sett är ResId tomt.
+*   Ange ett suffix till filnamnet fï¿½r resultaten, fï¿½r att t.ex. skilja
+*   kï¿½nslighetsanalysens resultat frï¿½n originalresultaten i samma scenario
+*   Normalt sett ï¿½r ResId tomt.
 $SETGLOBAL ResId
 
 
-*   Ställ in skift för diverse modellparametrar, för känslighetsanalys.
-*   Ange +/- procent, tex +10 för plus tio procent, osv.
-*   Dessa parametrar används av filen shift_parameters.gms längre ned.
+*   Stï¿½ll in skift fï¿½r diverse modellparametrar, fï¿½r kï¿½nslighetsanalys.
+*   Ange +/- procent, tex +10 fï¿½r plus tio procent, osv.
+*   Dessa parametrar anvï¿½nds av filen shift_parameters.gms lï¿½ngre ned.
 $SETGLOBAL SHIFT_VARCOST_SLOPE 0
 $SETGLOBAL SHIFT_CATCH_ELAS 0
 $SETGLOBAL SHIFT_FISH_PRICES 0
@@ -86,7 +87,7 @@ $if "%projectDirectory%"=="." $setglobal scenario_path_underScores %projectDirec
 
 
 
-*   Läs in en eventuell styrfil från GUI. Isåfall finns namnet lagrat i
+*   Lï¿½s in en eventuell styrfil frï¿½n GUI. Isï¿½fall finns namnet lagrat i
 *   globalvariablen scen
 $IFI %GGIG%==ON $INCLUDE "%scen%.gms"
 *$show
@@ -98,7 +99,7 @@ $IFI %GGIG%==ON $INCLUDE "%scen%.gms"
 
 $CALL gdxxrw %datDir%\data_gams_2019.xlsx o=%datDir%\inData.gdx index=index!A1
 
-* Ange att set ska läsas från indata-filen
+* Ange att set ska lï¿½sas frï¿½n indata-filen
 $set fileNameForSetDefnitions %datDir%\inData.gdx
 
 *##############################################################################
@@ -114,7 +115,7 @@ $include "include_files\define_sets.gms"
 
 $include "include_files\declare_parameters.gms"
 
-* Läs in parametrar från Excel (via gdx-filen som tillverkats tidigare)
+* Lï¿½s in parametrar frï¿½n Excel (via gdx-filen som tillverkats tidigare)
 $GDXIN "%fileNameForSetDefnitions%"
 
 $LOAD p_pricesAOri p_pricesBOri p_costOri p_maxEffSegPeriod p_season p_TACOri
@@ -123,24 +124,22 @@ $LOAD p_catchElasticityPerGearGroup
 $LOAD p_subsidyBudget
 $LOAD p_ShareDASseal
 
-* Stäng GDX-filen genom att anropa GDXIN utan argument
+* Stï¿½ng GDX-filen genom att anropa GDXIN utan argument
 $GDXIN
 
-display p_costOri, p_effortOri ;
 
-*$stop
 
-*** SW program som jag inte vet var jag ska göra av
-*** anger min-level för landings för arter som ska modelleras (ton/år)
-*** många små-fångster blåses upp av GAMS och ger dålig estimation
+*** SW program som jag inte vet var jag ska gï¿½ra av
+*** anger min-level fï¿½r landings fï¿½r arter som ska modelleras (ton/ï¿½r)
+*** mï¿½nga smï¿½-fï¿½ngster blï¿½ses upp av GAMS och ger dï¿½lig estimation
 
 PARAMETER minLevelLandingsOri(f,s) ;
 minLevelLandingsOri(f,s) = 0.001 ;
 p_landingsOri(f,s)$(p_landingsOri(f,s) < minLevelLandingsOri(f,s))=0 ;
 
 
-* p_discardsShare  är andel av totala landningar (alla arter) som är utkast (per art)
-* p_discardOri är utkast i ton
+* p_discardsShare  ï¿½r andel av totala landningar (alla arter) som ï¿½r utkast (per art)
+* p_discardOri ï¿½r utkast i ton
 
 parameter totalLanding(f) ;
 totalLanding(f) =  SUM(s, p_landingsOri(f,s));
@@ -165,10 +164,45 @@ $include "include_files\define_handy_sets.gms"
 *   This is specific to current data file used!
 *##############################################################################
 
-*   If there are no vessels, then there should be no fishing in that segment
-LOOP(segment $ [p_vesselsOri(segment) EQ 0],
-    p_effortOri(fishery) $ segment_fishery(segment,fishery) = 0;
+
+
+
+
+*#############################################################
+*    ASSERT THAT DATA IS COMPLETE ACCORDING TO SOME BASIC RULES
+*#############################################################
+
+
+set problem_segment(seg) "Some problem with this segment";
+set problem_fishery(fishery) "Some problem with this fishery";
+
+* --- Assert that there are vessels if we have fishing effort
+LOOP(segment,
+    problem_segment(segment) $ [sum(f $ segment_fishery(segment,f), p_effortOri(f))
+                                and (not p_vesselsOri(segment))] = yes;
 );
+
+if(card(problem_segment),
+    display "Some segment has effort but no vessels. All data unloaded to %ERROR_FILE%.", problem_segment;
+    execute_unload "%ERROR_FILE%";
+    abort "Error: fleet is missing";
+else
+    display "Successfully checked for fleet existence";
+);
+
+
+* --- Assert that each fishery that has effort also has some vessel
+problem_fishery(f) $ [p_effortOri(f)
+                      and (not sum(seg $ segment_fishery(seg,f), p_vesselsOri(seg)))] = yes; 
+
+if(card(problem_fishery),
+    display "Some fishery has effort but no vessels. All data unloaded to %ERROR_FILE%.", problem_fishery;
+    execute_unload "%ERROR_FILE%";
+    abort "Error: fleet is missing for some fishery";
+else
+    display "Successfully checked for fleet existence for each fishery";
+);
+
 
 
 *#############################################################
@@ -265,7 +299,7 @@ SOLVE m_fishSim USING NLP MAXIMIZING v_profit;
 p_iterEffort("sim",f) = v_effortAnnual.l(f);
 
 
-* --- Att göra: analysera lösningen för att se att det inte var något
+* --- Att gï¿½ra: analysera lï¿½sningen fï¿½r att se att det inte var nï¿½got
 *     uppenbart problem, t.ex. infeasible, icke-konvergerat eller liknande.
 p_solutionStats("iterCount") = card(iterUsed);
 p_solutionStats("solveStat") = m_fishSim.solvestat;
@@ -294,16 +328,16 @@ display p_iterDeviations, p_iterReport, p_subsidyBudgetSpent;
 
 
 *###############################################################################
-* --- Skriv parameter för GUI
+* --- Skriv parameter fï¿½r GUI
 *###############################################################################
 
-*   Dim 1: Fisheries och aggregat såsom segment, area (fisheryDomain)
-*   Dim 2: Species och aggregat såsom catchQuotaName, alla arter osv (speciesDomain)
-*   Dim 3: Dataetikett såsom dagar till sjöss, kvot, kostnad, vinst, pris...
-*   Dim 4: Etikett för typ av data. Ex. sim, est, ori, LO, UP, M
+*   Dim 1: Fisheries och aggregat sï¿½som segment, area (fisheryDomain)
+*   Dim 2: Species och aggregat sï¿½som catchQuotaName, alla arter osv (speciesDomain)
+*   Dim 3: Dataetikett sï¿½som dagar till sjï¿½ss, kvot, kostnad, vinst, pris...
+*   Dim 4: Etikett fï¿½r typ av data. Ex. sim, est, ori, LO, UP, M
 
 
-*   Rapportera värden på variabler, parametrar och ekvationer
+*   Rapportera vï¿½rden pï¿½ variabler, parametrar och ekvationer
 p_fiskresultat(f,s,"v_catch","sim")                     = v_catch.L(f,s);
 p_fiskResultat(f,s,"v_landings","sim")                  = v_landings.L(f,s);
 p_fiskResultat(f,s,"v_discards","sim")                  = v_discards.L(f,s);
@@ -326,7 +360,7 @@ p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(c
 p_fiskresultat(fisheryDomain,speciesDomain,resLabel,"sim") $ [(NOT fishery(fisheryDomain)) and (NOT p_fiskresultat(fisheryDomain,speciesDomain,resLabel,"sim"))]
     = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel,"sim"));
 
-*   Aggregera från fiske och art till kvotområde och kvotnamn (art).
+*   Aggregera frï¿½n fiske och art till kvotomrï¿½de och kvotnamn (art).
 p_fiskresultat(f,catchQuotaName,resLabel,"sim") $ [(NOT p_fiskresultat(f,catchQuotaName,resLabel,"sim"))]
     = SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel,"sim"));
 
@@ -337,19 +371,19 @@ p_fiskresultat(quotaArea,catchQuotaName,resLabel,"sim") $ [(NOT p_fiskresultat(q
 *   --- Include the computations of all report items (using the data loaded above)
 $include "include_files\compute_reports.gms"
 
-*   Rapportera lönsamhetsmått per fiske
+*   Rapportera lï¿½nsamhetsmï¿½tt per fiske
 p_fiskResultat(fisheryDomain,"allSpecies",resLabel,"sim") $ p_profitFishery(fisheryDomain,resLabel)
     = p_profitFishery(fisheryDomain,resLabel);
 
-*   Intäkter per fiskart
+*   Intï¿½kter per fiskart
 p_fiskResultat(f,s,"totalSalesRevenues","sim")
     = v_sortA.L(f,s)*p_pricesAOri(f,s) + v_sortB.L(f,s)*p_pricesBOri(s)*p_landingObligation(f,s);
 
-*   Rapportera dualvärden (Lagrange-funktionens partialderivator m.a.p. effortannual)
+*   Rapportera dualvï¿½rden (Lagrange-funktionens partialderivator m.a.p. effortannual)
 p_fiskResultat(fisheryDomain,"allSpecies",dualResult,"sim") $ p_reportDualsFishery(fisheryDomain,dualResult)
     = p_reportDualsFishery(fisheryDomain,dualResult);
 
-*   Lägg till lönsamhetsresultaten per fiske
+*   Lï¿½gg till lï¿½nsamhetsresultaten per fiske
 *p_fiskresultat(f,"total","days")
 
 *   Store report. Suffix the file name by "est" if estimation, else by "sim"
@@ -366,12 +400,12 @@ EXECUTE_UNLOAD "%resDir%\simulation\%runtype%_%scenario_path_underscores%%ResId%
                                                       p_solutionStats;
 
 
-* Skriv ut alla resultat för att kolla hur det blev
+* Skriv ut alla resultat fï¿½r att kolla hur det blev
 *EXECUTE_UNLOAD "TEMP_%programMode%%ResId%.GDX";
 
 
 
-** SW kod för output till paper mm
+** SW kod fï¿½r output till paper mm
 
 $INCLUDE "include_files\outputForPresentation.gms"
 $IF %programMode%==estimation $INCLUDE "include_files\easyEstimationOutputSW.gms"
