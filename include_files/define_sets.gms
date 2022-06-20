@@ -8,25 +8,25 @@
 *   In reporting, it is one of the result files from the simulation
 $GDXIN "%fileNameForSetDefnitions%"
 
-* Definiera primära set, som är byggstenar för alla andra set i modellen
+* Definiera primï¿½ra set, som ï¿½r byggstenar fï¿½r alla andra set i modellen
 SETS
     segment     "Fartygstyp"
-    s_segment   "Används för att skapa en domän för segment"
-    gear      "Redskap, målart och maskstorlek"
-    s_gear    "Används för att skapa en domän för gear"
-    area        "Fiskeområde"
-    s_area      "Används för att skapa en domän för area"
-    species     "Fiskart och användning"
-    s_species   "Används för att skapa en domän för species"
-    period      "Del av kalenderår"
+    s_segment   "Anvï¿½nds fï¿½r att skapa en domï¿½n fï¿½r segment"
+    gear      "Redskap, mï¿½lart och maskstorlek"
+    s_gear    "Anvï¿½nds fï¿½r att skapa en domï¿½n fï¿½r gear"
+    area        "Fiskeomrï¿½de"
+    s_area      "Anvï¿½nds fï¿½r att skapa en domï¿½n fï¿½r area"
+    species     "Fiskart och anvï¿½ndning"
+    s_species   "Anvï¿½nds fï¿½r att skapa en domï¿½n fï¿½r species"
+    period      "Del av kalenderï¿½r"
 
 *   Convenient subsets and tuples (combinations of elements belonging together)
     fishery     "Permissible combination of segment, gear and area"
-    s_fishery   "Används för att skapa en domän för fishery"
+    s_fishery   "Anvï¿½nds fï¿½r att skapa en domï¿½n fï¿½r fishery"
     quotaArea   "Catch quota regions"
-    s_quotaArea "Används för att skapa en domän för quotaArea"
+    s_quotaArea "Anvï¿½nds fï¿½r att skapa en domï¿½n fï¿½r quotaArea"
     catchQuotaName "Species used in quota definition, which are sometimes aggregates of species"
-    s_catchQuotaName "Används för att skapa en domän för catchQuotaName"
+    s_catchQuotaName "Anvï¿½nds fï¿½r att skapa en domï¿½n fï¿½r catchQuotaName"
     s_effortGroup "List of elements for EffortGroup"
     gearGroup   "Groups of gear, for instance fixed gear"
 
@@ -44,31 +44,31 @@ ALIAS(period,p);
 ALIAS(fishery,f);
 
 
-* Läs in set från GDX-filen
+* Lï¿½s in set frï¿½n GDX-filen
 $LOAD s_segment=segment s_gear=gear s_area=area s_species=species
 $LOAD s_fishery=fishery s_quotaArea=quotaArea s_varCost=varCost s_fixCost=fixCost period s_catchQuotaName=catchQuotaName
 $LOAD s_effortGroup=effortGroup gearGroup
 
-* Skapa ett set som innehåller "species UNION catchQuotaName", att ha som domän för vissa parametrar (för resultatfiler)
-* För att klara UNIONEN använder vi tricket "$ONMULTI" för att lägga till nya delvis överlappande element
-* På samma sätt vill vi ha en domän i resultatdatan som innehåller fishery UNION segment UNION "andra grejer"
+* Skapa ett set som innehï¿½ller "species UNION catchQuotaName", att ha som domï¿½n fï¿½r vissa parametrar (fï¿½r resultatfiler)
+* Fï¿½r att klara UNIONEN anvï¿½nder vi tricket "$ONMULTI" fï¿½r att lï¿½gga till nya delvis ï¿½verlappande element
+* Pï¿½ samma sï¿½tt vill vi ha en domï¿½n i resultatdatan som innehï¿½ller fishery UNION segment UNION "andra grejer"
 
 
 $ONMULTI
-* Skapa en domän, dvs ett set som kan användas i deklarationer i GAMS, för species, catchQuotaName
-* Det krävs två rader eftersom vissa element i species upprepas i catchQuotaName.
+* Skapa en domï¿½n, dvs ett set som kan anvï¿½ndas i deklarationer i GAMS, fï¿½r species, catchQuotaName
+* Det krï¿½vs tvï¿½ rader eftersom vissa element i species upprepas i catchQuotaName.
 SETS
-    speciesDomain(*) "Lägg till species" /allSpecies "Alla arter",SET.s_species /
-    speciesDomain(*) "Lägg till catchQuotaName" /SET.s_catchQuotaName,SET.s_area /
+    speciesDomain(*) "Lï¿½gg till species" /allSpecies "Alla arter",SET.s_species /
+    speciesDomain(*) "Lï¿½gg till catchQuotaName" /SET.s_catchQuotaName,SET.s_area /
 
-    fisheryDomain(*) "Lägg till fishery, segment mm" /total "Alla fisketyper", na "Not applicable or not used", SET.s_fishery,SET.s_segment,SET.s_gear,SET.s_area/
-    fisheryDomain(*) "Lägg till quotaArea" /SET.s_quotaArea, SET.s_effortGroup/
+    fisheryDomain(*) "Lï¿½gg till fishery, segment mm" /total "Alla fisketyper", na "Not applicable or not used", SET.s_fishery,SET.s_segment,SET.s_gear,SET.s_area/
+    fisheryDomain(*) "Lï¿½gg till quotaArea" /SET.s_quotaArea, SET.s_effortGroup/
 
-* Nu kan vi göra species och catchQuotaName som delmängder av speciesDomain
-    species(speciesDomain) "Lägg till element i species" /SET.s_species /
-    catchQuotaName(speciesDomain) "Lägg till element i catchQuotaName" /SET.s_catchQuotaName/
+* Nu kan vi gï¿½ra species och catchQuotaName som delmï¿½ngder av speciesDomain
+    species(speciesDomain) "Lï¿½gg till element i species" /SET.s_species /
+    catchQuotaName(speciesDomain) "Lï¿½gg till element i catchQuotaName" /SET.s_catchQuotaName/
 
-* ... och likaså definiera fishery, segment etc som delmängder av fisheryDomain
+* ... och likasï¿½ definiera fishery, segment etc som delmï¿½ngder av fisheryDomain
     fishery(fisheryDomain) "Definiera element i fishery" /SET.s_fishery/
     segment(fisheryDomain) "Definiera element i segment" /SET.s_segment/
     gear(fisheryDomain) "Definiera element i gear" /SET.s_gear/
@@ -77,19 +77,19 @@ SETS
     effortGroup(fisheryDomain) "Groups of fisheries that are fall under the same effort regulation" /SET.s_effortGroup/
 
 * ... Variabla kostnader plus total variabel kostnad
-    cost(*)    "Kostnader: fasta, rörliga, summor" /SET.s_fixCost, SET.s_varCost/
+    cost(*)    "Kostnader: fasta, rï¿½rliga, summor" /SET.s_fixCost, SET.s_varCost/
     fixCost(cost) "Fasta kostnader" /SET.s_fixCost/
     varCost(cost) "Variabla kostnader plus total variabel kostnad " /SET.s_varCost/
     ;
 $OFFMULTI
 
-*   Här följer definitioner av alla "kors-set" a.k.a. "tuples, mappings".
-*   Vi gör det i ett eget block för att kunna ha "domain checking":
-*   Vi måste allstå först definiera alla "enskilda" set, såsom fishery, segment...
-*   för att kunna använda dessa som domän åt kors-setten.
+*   Hï¿½r fï¿½ljer definitioner av alla "kors-set" a.k.a. "tuples, mappings".
+*   Vi gï¿½r det i ett eget block fï¿½r att kunna ha "domain checking":
+*   Vi mï¿½ste allstï¿½ fï¿½rst definiera alla "enskilda" set, sï¿½som fishery, segment...
+*   fï¿½r att kunna anvï¿½nda dessa som domï¿½n ï¿½t kors-setten.
 
 SETS
-    f_seg_g_a(fishery,segment,gear,area)  "Fiskart och användning"
+    f_seg_g_a(fishery,segment,gear,area)  "Fiskart och anvï¿½ndning"
     quotaArea_area(quotaArea,area)          "Composition of quota regions in terms of geographical regions"
     catchQuotaName_species(catchQuotaName,s)    "Composition of quota regions in terms of geographical regions"
     segment_fishery(segment,fishery)        "Segment to which each fishery belongs"
@@ -104,11 +104,11 @@ SETS
     fishery_gear(fishery,gear) "Fishery using gear"
     gearGroup_gear(gearGroup,gear) "Gear belonging to each group"
 
-*   Definitioner av olika aggregat som är smidiga att använda vid rapportering
+*   Definitioner av olika aggregat som ï¿½r smidiga att anvï¿½nda vid rapportering
     fisheryDomain_fishery(fisheryDomain,fishery) "Mapping of fishery to aggregate"
 ;
 
-* Läs in tuples från GDX-filen
+* Lï¿½s in tuples frï¿½n GDX-filen
 $LOAD f_seg_g_a quotaArea_area catchQuotaName_species fishery_catchQuotaName fishery_effortGroup gearGroup_gear
 
 * Close the GDX-file
@@ -199,11 +199,12 @@ sets
     ;
 
 
-*   Skapa set som underlättar aggregeringen
-SET addVars(resLabel) "Variabler som kan adderas utan att bli meningslösa (kvantiteter)" /v_effortAnnual,v_catch,v_varCostAve/;
-SET addStat(statItem) "Datatyper som kan adderas utan att bli meningslösa"  /ori,est/;
+*   Skapa set som underlï¿½ttar aggregeringen
+SET addVars(resLabel) "Variabler som kan adderas utan att bli meningslï¿½sa (kvantiteter)" /v_effortAnnual,v_catch,v_varCostAve/;
+SET addStat(statItem) "Datatyper som kan adderas utan att bli meningslï¿½sa"  /sim,ori,est/;
+*set aggregateStatItem(statItem) "Aggregate these items, including for instance est and ori";
 
-*   Skapa set som används för att styra iterativ lösning av modellen
+*   Skapa set som anvï¿½nds fï¿½r att styra iterativ lï¿½sning av modellen
 set iterTot /sim,i0*i100/;
 set iterations(iterTot) "Iterations with the model to converge to equilibrium subsidies" /i0*i100/;
 set iterUsed(iterations) "Iterations that were used in the process";

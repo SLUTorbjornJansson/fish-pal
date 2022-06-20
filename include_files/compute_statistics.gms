@@ -2,7 +2,7 @@ $ONTEXT
 
     @purpose: Compute descriptive statistics of estimates, based on criterion
 
-    @author: Torbjörn Jansson
+    @author: Torbjï¿½rn Jansson
 
     @date: 2019-12-12
 
@@ -129,23 +129,27 @@ f_s_cur(f,s)
 
 p_statReport("discards","n")
     = card(f_s_cur);
+    
 
-p_statReport("discards","meanEst") = g_mean(f_s_cur, v_discards.l);
-p_statReport("discards","meanObs") = g_mean(f_s_cur, p_discardsOri);
-
-p_statReport("discards","PCC")
-  = g_PCC(f_s_cur, v_discards.l, p_statReport("discards","meanEst"), p_discardsOri, p_statReport("discards","meanObs"));
-
-* Compute various mean square errors, using macros.
-* u = the errors
-u(f_s_cur) = v_discards.l(f_s_cur) - p_discardsOri(f_s_cur);
-v(f_s_cur) = p_weightDiscards(f_s_cur)*2;
-
-p_statReport("discards","msd") = g_msd(f_s_cur,u);
-p_statReport("discards","rmsd") = g_rmsd(f_s_cur,u);
-p_statReport("discards","mswd") = g_mswd(f_s_cur,u,v);
-p_statReport("discards","rmswd") = g_rmswd(f_s_cur,u,v);
-p_statReport("discards","nrmsd") = g_nrmsd(f_s_cur,u,p_discardsOri);
+* Compute some statistics on the fit of estimated discards to original data, but only if there are some discards (n > 0)
+if(p_statReport("discards","n") gt 0,    
+    p_statReport("discards","meanEst") = g_mean(f_s_cur, v_discards.l);
+    p_statReport("discards","meanObs") = g_mean(f_s_cur, p_discardsOri);
+    
+    p_statReport("discards","PCC")
+      = g_PCC(f_s_cur, v_discards.l, p_statReport("discards","meanEst"), p_discardsOri, p_statReport("discards","meanObs"));
+   
+*   Compute various mean square errors, using macros.
+*   u = the errors
+    u(f_s_cur) = v_discards.l(f_s_cur) - p_discardsOri(f_s_cur);
+    v(f_s_cur) = p_weightDiscards(f_s_cur)*2;
+    
+    p_statReport("discards","msd") = g_msd(f_s_cur,u);
+    p_statReport("discards","rmsd") = g_rmsd(f_s_cur,u);
+    p_statReport("discards","mswd") = g_mswd(f_s_cur,u,v);
+    p_statReport("discards","rmswd") = g_rmswd(f_s_cur,u,v);
+    p_statReport("discards","nrmsd") = g_nrmsd(f_s_cur,u,p_discardsOri);  
+);
 
 *-------------------------------------------------------------------------------
 * --- For varCostAve
@@ -261,8 +265,6 @@ p_statReport("kwh","n")
 p_statReport("kwh","meanEst") = g_mean(seg_cur, pv_kwh.l);
 p_statReport("kwh","meanObs") = g_mean(seg_cur, p_kwhOri);
 
-p_statReport("kwh","PCC")
-  = g_PCC(seg_cur, pv_kwh.l, p_statReport("kwh","meanEst"), p_kwhOri, p_statReport("kwh","meanObs"));
 
 * Compute various mean square errors, using macros.
 * x = the errors
@@ -274,6 +276,19 @@ p_statReport("kwh","rmsd") = g_rmsd(seg_cur,x);
 p_statReport("kwh","mswd") = g_mswd(seg_cur,x,y);
 p_statReport("kwh","rmswd") = g_rmswd(seg_cur,x,y);
 p_statReport("kwh","nrmsd") = g_nrmsd(seg_cur,x,p_kwhOri);
+
+
+* Compute the variances of estimates and observations around their means
+
+p_statReport("kwh","varEst")
+  = g_var(seg_cur, pv_kwh.l, p_statReport("kwh","meanEst"));
+
+p_statReport("kwh","varObs")
+  = g_var(seg_cur, p_kwhOri, p_statReport("kwh","meanObs"));
+
+* Compute the Pearson Correlation Coefficient, but only if the variances of obs and est are both nonzero
+p_statReport("kwh","PCC") $ [p_statReport("kwh","varEst") and p_statReport("kwh","varObs")]
+  = g_PCC(seg_cur, pv_kwh.l, p_statReport("kwh","meanEst"), p_kwhOri, p_statReport("kwh","meanObs"));
 
 
 *-------------------------------------------------------------------------------

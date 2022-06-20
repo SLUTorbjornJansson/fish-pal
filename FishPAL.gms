@@ -129,17 +129,17 @@ $GDXIN
 
 
 
-*** SW program som jag inte vet var jag ska g�ra av
-*** anger min-level f�r landings f�r arter som ska modelleras (ton/�r)
-*** m�nga sm�-f�ngster bl�ses upp av GAMS och ger d�lig estimation
+*** SW program som jag inte vet var jag ska göra av
+*** anger min-level för landings för arter som ska modelleras (ton/år)
+*** många små-fångster blåses upp av GAMS och ger dålig estimation
 
 PARAMETER minLevelLandingsOri(f,s) ;
-minLevelLandingsOri(f,s) = 0.001 ;
+minLevelLandingsOri(f,s) = 0.01 ;
 p_landingsOri(f,s)$(p_landingsOri(f,s) < minLevelLandingsOri(f,s))=0 ;
 
 
-* p_discardsShare  �r andel av totala landningar (alla arter) som �r utkast (per art)
-* p_discardOri �r utkast i ton
+* p_discardsShare  Är andel av totala landningar (alla arter) som är utkast (per art)
+* p_discardOri Är utkast i ton
 
 parameter totalLanding(f) ;
 totalLanding(f) =  SUM(s, p_landingsOri(f,s));
@@ -357,15 +357,15 @@ p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","M") = e_catchQuota.M(cat
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(catchQuotaName,quotaArea);
 
 *   Aggregera fishery till segment, area osv.
-p_fiskresultat(fisheryDomain,speciesDomain,resLabel,"sim") $ [(NOT fishery(fisheryDomain)) and (NOT p_fiskresultat(fisheryDomain,speciesDomain,resLabel,"sim"))]
-    = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel,"sim"));
+p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat) $ [(NOT fishery(fisheryDomain)) and (NOT p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat))]
+    = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel,addStat));
 
 *   Aggregera fr�n fiske och art till kvotomr�de och kvotnamn (art).
-p_fiskresultat(f,catchQuotaName,resLabel,"sim") $ [(NOT p_fiskresultat(f,catchQuotaName,resLabel,"sim"))]
-    = SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel,"sim"));
+p_fiskresultat(f,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(f,catchQuotaName,resLabel,addStat))]
+    = SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel,addStat));
 
-p_fiskresultat(quotaArea,catchQuotaName,resLabel,"sim") $ [(NOT p_fiskresultat(quotaArea,catchQuotaName,resLabel,"sim")) AND p_TACOri(catchQuotaName,quotaArea)]
-    = SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskresultat(f,s,resLabel,"sim"));
+p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat)) AND p_TACOri(catchQuotaName,quotaArea)]
+    = SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskresultat(f,s,resLabel,addStat));
 
 
 *   --- Include the computations of all report items (using the data loaded above)
