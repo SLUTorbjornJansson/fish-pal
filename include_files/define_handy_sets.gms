@@ -2,6 +2,7 @@
 * (=true if the number of gears and areas in which the segment carries out the fishery is >0)
 segment_fishery(seg,f) = SUM((g,a) $ f_seg_g_a(f,seg,g,a), 1);
 
+
 * Find out in which quota areas each fishery is active, useful in restrictions
 quotaArea_fishery(quotaArea,f) = SUM((g,seg,a) $ (quotaArea_area(quotaArea,a) AND f_seg_g_a(f,seg,g,a)), 1);
 

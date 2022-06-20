@@ -23,15 +23,15 @@ $SETGLOBAL resDir %SYSTEM.FP%output
 $SETGLOBAL parFileName default
 
 *   Ange vad programmet ska göra (estimation, simulation)
-*$SETGLOBAL programMode estimation
-$SETGLOBAL programMode simulation
+$SETGLOBAL programMode estimation
+*$SETGLOBAL programMode simulation
 
 *   Ange vad simulationen heter (var chocken kommer från och vad resultaten ska kallas)
 $SETGLOBAL projectDirectory seal
 
-*$SETGLOBAL scenario reference
+$SETGLOBAL scenario reference
 *$SETGLOBAL scenario scenario2
-$SETGLOBAL scenario scenario3
+*$SETGLOBAL scenario scenario3
 *$SETGLOBAL scenario scenario4
 *$SETGLOBAL scenario scenario5
 *$SETGLOBAL scenario scenario6
@@ -96,7 +96,7 @@ $IFI %GGIG%==ON $INCLUDE "%scen%.gms"
 *           CONVERT EXCEL DATA FILE TO GAMS GDX FORMAT
 *#############################################################
 
-$CALL gdxxrw %datDir%\data_gams_2012_seal.xlsx o=%datDir%\inData.gdx index=index!A1
+$CALL gdxxrw %datDir%\data_gams_2019.xlsx o=%datDir%\inData.gdx index=index!A1
 
 * Ange att set ska läsas från indata-filen
 $set fileNameForSetDefnitions %datDir%\inData.gdx
@@ -126,7 +126,9 @@ $LOAD p_ShareDASseal
 * Stäng GDX-filen genom att anropa GDXIN utan argument
 $GDXIN
 
+display p_costOri, p_effortOri ;
 
+*$stop
 
 *** SW program som jag inte vet var jag ska göra av
 *** anger min-level för landings för arter som ska modelleras (ton/år)
@@ -145,7 +147,7 @@ totalLanding(f) =  SUM(s, p_landingsOri(f,s));
 p_discardsOri(f,s) = p_discardShareOri(f,s)*totalLanding(f) ;
 
 p_catchOri(f,s) = p_landingsOri(f,s)+p_discardsOri(f,s);
-display p_discardShareOri, p_discardsOri ;
+
 
 
 *##############################################################################
@@ -175,11 +177,15 @@ LOOP(segment $ [p_vesselsOri(segment) EQ 0],
 
 $include "include_files\declare_simulation_model.gms"
 
+* SWtext Ontext and Offtext
+$Ontext
 
 $IF %programMode%==simulation $INCLUDE "include_files\load_parameters.gms"
 
 *   Sensitivity analysis: optional shift of parameters
 $INCLUDE "include_files\shift_parameters.gms"
+
+$Offtext
 
 *   Define what to change in the current scenario
 $INCLUDE "scenarioFiles\%scenario_path%.gms"

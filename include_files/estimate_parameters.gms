@@ -415,12 +415,13 @@ else
 *   Define a measure of the "peakiness" of the density function. Ideally, we would like to
 *   use something like the variance of the actual number of effective fishing days per
 *   vessel in season. In the wake of such info, we need one other piece of information instead (namely THIS).
-    p_priMaxEffFishery("priAcc",f) = 5;
-    p_priMaxEffFishery("priDens",f) = betaDens;
+   p_priMaxEffFishery("priAcc",f) = 5;
+   p_priMaxEffFishery("priDens",f) = betaDens;
 
 *       - Compute alpha and beta, see illustrative excel sheet on beta density
 *           (assuming "accuracy"+2 = alpha+beta so that accuracy = 0 implies uniform density)
-    p_priMaxEffFishery("priScale",f) = p_priMaxEffFishery("priMax",f)-p_priMaxEffFishery("priMin",f);
+   p_priMaxEffFishery("priScale",f) = p_priMaxEffFishery("priMax",f)-p_priMaxEffFishery("priMin",f);
+
 
     p_priMaxEffFishery("priAlpha",f) = (p_priMaxEffFishery("priMode",f)-p_priMaxEffFishery("priMin",f))/p_priMaxEffFishery("priScale",f)*((2+p_priMaxEffFishery("priAcc",f))-2)+1;
     p_priMaxEffFishery("priBeta",f)  = (2+p_priMaxEffFishery("priAcc",f))-p_priMaxEffFishery("priAlpha",f);
