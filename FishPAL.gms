@@ -24,37 +24,14 @@ $SETGLOBAL resDir %SYSTEM.FP%output
 $SETGLOBAL parFileName default
 
 *   Ange vad programmet ska g�ra (estimation, simulation)
-$SETGLOBAL programMode estimation
-*$SETGLOBAL programMode simulation
+*$SETGLOBAL programMode estimation
+$SETGLOBAL programMode simulation
 
 *   Ange vad simulationen heter (var chocken kommer fr�n och vad resultaten ska kallas)
-$SETGLOBAL projectDirectory seal
+$SETGLOBAL projectDirectory fuel_tax
 
-$SETGLOBAL scenario reference
-*$SETGLOBAL scenario scenario2
-*$SETGLOBAL scenario scenario3
-*$SETGLOBAL scenario scenario4
-*$SETGLOBAL scenario scenario5
-*$SETGLOBAL scenario scenario6
-
-
-*$SETGLOBAL scenario no_seal_cost
-*$SETGLOBAL scenario increase_catch_by_50_percent
-*$SETGLOBAL scenario no_seal_cost_and_increase_catch_by_50_percent
-*$SETGLOBAL scenario no_seal_cost_and_increase_catch_by_100_percent
-
-*   Vissa scenario-filer ligger inte i en under-katalog, utan i scenario-roten "."
-*$SETGLOBAL projectDirectory .
-*$SETGLOBAL scenario nochange
-*$SETGLOBAL scenario ref_2017
-*$SETGLOBAL scenario no_cod_trawl_2224
-*$SETGLOBAL scenario TACcut2224
-*$SETGLOBAL scenario TACcut2224_noTrawl
-*$SETGLOBAL scenario LandingOblKrafta
-*$SETGLOBAL scenario prisChockRodtunga
-*$SETGLOBAL scenario noDiscard
-*$SETGLOBAL scenario noCodInMetier107
-*$SETGLOBAL scenario quotaRemovalSillN
+*   Ange specifikt vilken scenariofil i ovan nämnda katalog vi vill använda
+$SETGLOBAL scenario energy_tax
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja
@@ -215,15 +192,11 @@ else
 
 $include "include_files\declare_simulation_model.gms"
 
-* SWtext Ontext and Offtext
-$Ontext
-
 $IF %programMode%==simulation $INCLUDE "include_files\load_parameters.gms"
 
 *   Sensitivity analysis: optional shift of parameters
-$INCLUDE "include_files\shift_parameters.gms"
+*$INCLUDE "include_files\shift_parameters.gms"
 
-$Offtext
 
 *   Define what to change in the current scenario
 $INCLUDE "scenarioFiles\%scenario_path%.gms"
@@ -252,8 +225,6 @@ OPTION NLP=CONOPT;
 * This has to come after the scenario file, where the policy equations are defined
 $IF %programMode%==estimation $INCLUDE "include_files\estimate_parameters.gms"
 
-
-*display p_catchElasticity ;
 
 
 *###############################################################################
@@ -372,6 +343,10 @@ p_fiskresultat(f,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(f,catch
 
 p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat)) AND p_TACOri(catchQuotaName,quotaArea)]
     = SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskresultat(f,s,resLabel,addStat));
+
+*   Aggregate species to all species, in tons
+set aggResLabel(resLabel) /v_catch,v_landings,v_discards,v_sortA,v_sortB/;
+p_fiskresultat(fisheryDomain,"allSpecies",aggResLabel,addStat) = sum(s, p_fiskresultat(fisheryDomain,s,aggResLabel,addStat));
 
 
 *   --- Include the computations of all report items (using the data loaded above)

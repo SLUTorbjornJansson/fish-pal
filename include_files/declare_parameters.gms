@@ -30,12 +30,17 @@ PARAMETERS
     p_kwhOri(segment) "Average kwh per vessel per segment"
     p_fiskResultat(fisheryDomain,*,resLabel,statItem) "Rapport fr�n fiskmodellen f�r GUI"
 
+*   Seal scenario parameters
     p_ShareDASseal(fishery) "Share of days at sea when seal damage is observed"
     p_subsidyPerDAS(fishery)"Subsidy per fishery (tkr/DAS)"
     p_sealDamage(fishery)   "Total value of seal damage per fishery"
-    p_projectedEffort(fishery) "Projected effort for next iteration. Partial adjustment for subsidy computation"
+
+*   Parameters relating to some exogenous shocks such as variable costs
+    p_fuelUsePerDay(fishery) "Fuel use per fishery in litres per day"
+    p_fuelTaxPerLitre(fishery) "Tax on fuel in SEK/litre"
 
 *   Parameters for steering and monitoring convergence behaviour
+    p_projectedEffort(fishery) "Projected effort for next iteration. Partial adjustment for subsidy computation"
     p_iterDeviations(iterations) "Sum of squared deviations of effort from previous simulation, used as convergence measure"
     p_iterEffort(iterTot,f) "Effort level in each iteration"
     p_iterReport(f,iterTot) "A report for the list file with relative change from previous iteration"
@@ -67,3 +72,11 @@ PARAMETER p_marginalCatch(f,s);
 PARAMETER p_reportDualsFishery(fisheryDomain,resLabel) "Resultat f�r den marginella l�nsamheten i varje fiske, inklusive skuggpriser";
 PARAMETER p_kwhPerEffortGroupOri(effortGroup,area,*);
 PARAMETER p_kwhPerFisheryInEffortGroup(fishery,effortGroup,area,*);
+
+
+*###############################################################################
+*   Initialize parameters that can in fact be zero but should be reported anyway
+*###############################################################################
+
+OPTION KILL=p_fuelUsePerDay;
+OPTION KILL=p_fuelTaxPerLitre;

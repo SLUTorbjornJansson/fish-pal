@@ -135,6 +135,8 @@ p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingB") $ quota
 *p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingB") $ quotaArea_fishery(quotaArea,f)
 *    = p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalCatch") * p_shareB(f,s) * p_landingObligation(f,s);
 
+*   Compute how much the quota rent costs each fishery on the margin, i.e. the marginal catch times the quota rent of each species landed
+
 p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"dualTAC") $ quotaArea_fishery(quotaArea,f)
     = p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"shadowPriceQuota")
     * (p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingA")
