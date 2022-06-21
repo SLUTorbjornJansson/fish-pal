@@ -8,7 +8,7 @@
 
 
 *###############################################################################
-*   Rapportera lönsamhet per fiske
+*   Rapportera lï¿½nsamhet per fiske
 *###############################################################################
 
 p_profitFishery(f,"totalSalesRevenues") = SUM(s $ fishery_species(f,s),v_sortA.L(f,s)*p_pricesAOri(f,s) + v_sortB.L(f,s)*p_pricesBOri(s)*p_landingObligation(f,s));
@@ -16,11 +16,11 @@ p_profitFishery(f,"totalSalesRevenues") = SUM(s $ fishery_species(f,s),v_sortA.L
 
 p_profitFishery(f,"totalVariableCosts") = -v_varCostAve.L(f)*v_effortAnnual.L(f);
 
-*   Täckningsbidrag (inklusive arbete som rörlig kostnad)
+*   Tï¿½ckningsbidrag (inklusive arbete som rï¿½rlig kostnad)
 p_profitFishery(f,"totalContrMarg") = p_profitFishery(f,"totalSalesRevenues")
                                     + p_profitFishery(f,"totalVariableCosts");
 
-*   Förädlingsvärde (value added)
+*   Fï¿½rï¿½dlingsvï¿½rde (value added)
 
 p_VCshareLab(f) = [p_varCostOri(f,"VC_LABOUR")+ p_varCostOri(f,"VC_UNPAIDLABOUR")] / SUM(varCost, p_varCostOri(f,varCost)) ;
 
@@ -31,7 +31,7 @@ p_profitFishery(f,"totalSubsidy") = p_subsidyPerDAS(f)*v_effortAnnual.L(f);
 
 p_profitFishery(f,"totalModifiedGrossVA") = p_profitFishery(f,"totalGrossVA") + p_profitFishery(f,"totalSubsidy");
 
-*   Rapportera även PMP-termens storlek
+*   Rapportera ï¿½ven PMP-termens storlek
 p_profitFishery(f,"totalPMP") = -(pv_PMPconst.L(f)*v_effortAnnual.L(f) + 1/2*pv_PMPslope.L(f)*sqr(v_effortAnnual.L(f)));
 
 *   Aggregera fishery till segment, area osv.
@@ -50,7 +50,7 @@ p_profitFishery(seg,"totalProfit") = p_profitFishery(seg,"totalContrMarg")
 p_profitFishery("total",resLabel) = SUM(seg, p_profitFishery(seg,resLabel));
 
 
-*   Beräkna genomsnittliga kostnader och intäkter per DAS
+*   Berï¿½kna genomsnittliga kostnader och intï¿½kter per DAS
 p_profitFishery(fisheryDomain,"aveRevenues")      $ p_fiskresultat(fisheryDomain,"allSpecies","v_effortAnnual","sim")
     = p_profitFishery(fisheryDomain,"totalSalesRevenues")      / p_fiskresultat(fisheryDomain,"allSpecies","v_effortAnnual","sim");
 
@@ -105,17 +105,17 @@ p_kwhPerEffortGroupOri(effortGroup,area,"sim") = v_effortPerEffortGroup.L(effort
 *###############################################################################
 *   Rapportera marginaleffekter - Lagrangefunktionens partialderivator!
 *   1) Med detaljerade uppgifter om varje kvot
-*   2) Med total kvotränta för hela fisket
+*   2) Med total kvotrï¿½nta fï¿½r hela fisket
 *###############################################################################
 
-*   1: Detaljerade skuggpriser på kvoter
+*   1: Detaljerade skuggpriser pï¿½ kvoter
 
-* --- Rapportera kvoträntor per fishery, uppdelat på kvotområde och art,
-*     men omräknat som marginalkostnad per fiskedag
+* --- Rapportera kvotrï¿½ntor per fishery, uppdelat pï¿½ kvotomrï¿½de och art,
+*     men omrï¿½knat som marginalkostnad per fiskedag
 
 p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"shadowPriceQuota") $  quotaArea_fishery(quotaArea,f)
     = - SUM(s $ [catchQuotaName_quotaArea_fishery_species(catchQuotaName,quotaArea,f,s)
-                  AND (p_TACOri(catchQuotaName,quotaArea) GT 0)], e_catchQuota.M(catchQuotaName,quotaArea));
+                  AND (p_TACnetto(catchQuotaName,quotaArea) GT 0)], e_catchQuota.M(catchQuotaName,quotaArea));
 
 
 p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingA") $ quotaArea_fishery(quotaArea,f)
@@ -141,14 +141,14 @@ p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"dualTAC") $ quotaArea_fish
       +p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingB"));
 
 
-*   2: Marginalintäkter och kostnader per fiske, med aggregerad kostnad för alla kvoträntor
+*   2: Marginalintï¿½kter och kostnader per fiske, med aggregerad kostnad fï¿½r alla kvotrï¿½ntor
 
-*   Marginalintäkter från försäljning av fisk (derivatan av fångsfnk. gånger marknadspriset)
+*   Marginalintï¿½kter frï¿½n fï¿½rsï¿½ljning av fisk (derivatan av fï¿½ngsfnk. gï¿½nger marknadspriset)
 p_reportDualsFishery(f,"dualMR")
     = SUM(s $ fishery_species(f,s), (p_pricesAOri(f,s)*p_shareA(f,s)+p_pricesBOri(s)*p_shareB(f,s)*p_landingObligation(f,s))
                                     *pv_delta.L(f,s)*[p_catchElasticity(f)*v_effortAnnual.L(f)**(p_catchElasticity(f)-1)]);
 
-*   Marginalintäkter från stöd
+*   Marginalintï¿½kter frï¿½n stï¿½d
 p_reportDualsFishery(f,"dualSubsidy")
     = p_subsidyPerDAS(f);
 
@@ -158,12 +158,12 @@ p_reportDualsFishery(f,"dualVarCost") = - (pv_varCostConst.L(f) + pv_varCostSlop
 *   Kalibreringstermen
 p_reportDualsFishery(f,"dualPMP") = - (pv_PMPconst.L(f) + pv_PMPslope.L(f)*v_effortAnnual.L(f));
 
-*   Marginella skuggkostnader för fångstkvoter (kvotpris)
+*   Marginella skuggkostnader fï¿½r fï¿½ngstkvoter (kvotpris)
 p_reportDualsFishery(f,"dualTAC")
     = SUM((quotaArea,catchQuotaName), p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"dualTAC"));
 
-*   Effortrestriktioner per segment: skuggpriset är detsamma för alla ingående fisken
-*   Genom att summera över segment hittar vi det segment till vilket detta fiske hör.
+*   Effortrestriktioner per segment: skuggpriset ï¿½r detsamma fï¿½r alla ingï¿½ende fisken
+*   Genom att summera ï¿½ver segment hittar vi det segment till vilket detta fiske hï¿½r.
 p_reportDualsFishery(f,"dualEffRestrSeg")
     = - SUM(seg $ segment_fishery(seg,f), e_effRestrSeg.M(seg));
 
@@ -176,18 +176,18 @@ p_reportDualsFishery(f,"dualEffortRegulation")
     = sum((effortGroup,area) $ [fishery_effortGroup(f,effortGroup) and fishery_area(f,area) and p_maxEffortPerEffortGroup(effortGroup,area)],
                     -e_effortRegulation.M(effortGroup,area) * sum(seg $ segment_fishery(seg,f), pv_kwh.L(seg)));
 
-*   Ev. skuggpris på en gräns för EffortAnnual (t.ex. icke-negativitet)
+*   Ev. skuggpris pï¿½ en grï¿½ns fï¿½r EffortAnnual (t.ex. icke-negativitet)
 p_reportDualsFishery(f,"dualBoundEffortAnnual")
     = -v_effortAnnual.M(f);
 
-*   Beräkna summan av alla partialderivatorna, dvs alla dualResults.
+*   Berï¿½kna summan av alla partialderivatorna, dvs alla dualResults.
 p_reportDualsFishery(f,"sumOfDuals") = sum(dualResult $ (not sameas(dualResult,"sumOfDuals")), p_reportDualsFishery(f,dualResult));
 
 *$macro weightedMean(setMapping, data, weight) \
 *         [sum(setMapping, data*weight) / sum(setMapping, weight)] $ sum(setMapping, weight)
 
-*   Aggregera fishery till segment, area osv. genom att vikta med fiskeansträngning, men bara om vikten är icke-noll
-*   Aggregat (tex segment) tolkas därför som genomsnittligt värde per fiskedag för alla fisken (f) som ingår i segmentet, viktat med fiskets fiskedagar
+*   Aggregera fishery till segment, area osv. genom att vikta med fiskeanstrï¿½ngning, men bara om vikten ï¿½r icke-noll
+*   Aggregat (tex segment) tolkas dï¿½rfï¿½r som genomsnittligt vï¿½rde per fiskedag fï¿½r alla fisken (f) som ingï¿½r i segmentet, viktat med fiskets fiskedagar
 p_reportDualsFishery(fisheryDomain,dualResult)
     $ [(NOT fishery(fisheryDomain))
       AND SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), v_effortAnnual.L(fishery))]

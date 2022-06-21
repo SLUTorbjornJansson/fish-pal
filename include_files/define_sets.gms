@@ -161,7 +161,9 @@ sets
         pv_delta
         v_varCostAve
 
-        p_TACOri
+        p_TACOri        "Original (regulation) catch quota per species and region"
+        p_TACchange     "Change in catch quota following all trades with other countries and between regions"
+        p_TACnetto      "Effective catch quota after quota change"
         p_landingObligation "Landing obligation per fishery and species"
         pv_maxEffFishery
         pv_kwh

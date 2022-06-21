@@ -127,7 +127,7 @@ e_estimationMetric ..
 *                                           -p_discardsOri(f,s)] * p_weightDiscards(f,s))
 
 *   Deviations of quotas from official quotas is governed by the adjustment factor, originally = 1
-    -SUM((catchQuotaName,quotaArea) $ (p_TACOri(catchQuotaName,quotaArea) GT 0), SQR(pv_TACAdjustment(catchQuotaName,quotaArea)-1))
+    -SUM((catchQuotaName,quotaArea) $ (p_TACnetto(catchQuotaName,quotaArea) GT 0), SQR(pv_TACAdjustment(catchQuotaName,quotaArea)-1))
 
 *   Fishery season length is assumed to be beta distributed. Penalty is the log of the beta density.
     +SUM(f $ (p_priMaxEffFishery("priDens",f) EQ betaDens),
@@ -142,7 +142,7 @@ e_penalty $ usePenalty ..
     v_penalty*p_mu =E=
 
 *   Total violation of quota compl. slackness
-    SUM((catchQuotaName,quotaArea) $ (p_TACOri(catchQuotaName,quotaArea) GT 0), v_csCatchQuota(catchQuotaName,quotaArea))
+    SUM((catchQuotaName,quotaArea) $ (p_TACnetto(catchQuotaName,quotaArea) GT 0), v_csCatchQuota(catchQuotaName,quotaArea))
 
 *   Total violation of non-negativity compl. slackness
     +SUM(f, v_csEffNonNeg(f))
@@ -179,14 +179,14 @@ e_focSortA(f,s) $ fishery_species(f,s) .. // Generate this equation for fishery-
     p_pricesAOri(f,s) - v_lambdaSortA(f,s)
 *   Consider the cost of quota rent, but only if there is actually a quota for the species and area combination
     - SUM((catchQuotaName,quotaArea) $ (catchQuotaName_quotaArea_fishery_species(catchQuotaName,quotaArea,f,s)
-                                  AND (p_TACOri(catchQuotaName,quotaArea) GT 0)), v_lambdaCatchQuota(catchQuotaName,quotaArea))
+                                  AND (p_TACnetto(catchQuotaName,quotaArea) GT 0)), v_lambdaCatchQuota(catchQuotaName,quotaArea))
     =E= 0;
 
 e_focSortB(f,s) $ fishery_species(f,s) .. // Generate this equation for fishery-species combinations that are possible (permissible)
     p_pricesBOri(s)*p_landingObligation(f,s) - v_lambdaSortB(f,s)
 *   Consider the cost of quota rent, but only if there is actually a quota for the species and area combination
     - SUM((catchQuotaName,quotaArea) $ (catchQuotaName_quotaArea_fishery_species(catchQuotaName,quotaArea,f,s)
-                                  AND (p_TACOri(catchQuotaName,quotaArea) GT 0)), p_landingObligation(f,s)*v_lambdaCatchQuota(catchQuotaName,quotaArea))
+                                  AND (p_TACnetto(catchQuotaName,quotaArea) GT 0)), p_landingObligation(f,s)*v_lambdaCatchQuota(catchQuotaName,quotaArea))
     =E= 0;
 
 
@@ -216,8 +216,8 @@ e_csEffortRegulation(effortGroup,area) $ p_maxEffortPerEffortGroup(effortGroup,a
     v_csEffortRegulation(effortGroup,area);
 
 
-e_csCatchQuota(catchQuotaName,quotaArea) $ (p_TACOri(catchQuotaName,quotaArea) GT 0) ..
-    [p_TACOri(catchQuotaName,quotaArea)*pv_TACAdjustment(catchQuotaName,quotaArea)
+e_csCatchQuota(catchQuotaName,quotaArea) $ (p_TACnetto(catchQuotaName,quotaArea) GT 0) ..
+    [p_TACnetto(catchQuotaName,quotaArea)*pv_TACAdjustment(catchQuotaName,quotaArea)
     - SUM((f,s) $ catchQuotaName_quotaArea_fishery_species(catchQuotaName,quotaArea,f,s), v_landings(f,s))
      ]*v_lambdaCatchQuota(catchQuotaName,quotaArea)
     =L= v_csCatchQuota(catchQuotaName,quotaArea);
@@ -508,7 +508,7 @@ p_pricesA(f,s) = p_pricesAOri(f,s);
 p_pricesB(s)   = p_pricesBOri(s);
 
 *   If quota exists, initialize adjustment factor to "1"
-pv_TACAdjustment.L(catchQuotaName,quotaArea)  $ (p_TACOri(catchQuotaName,quotaArea) GT 0) = 1;
+pv_TACAdjustment.L(catchQuotaName,quotaArea)  $ (p_TACnetto(catchQuotaName,quotaArea) GT 0) = 1;
 
 pv_varCostConst.l(f) $ p_effortOri(f) = p_varCostAveOri(f) - pv_varCostSlope.l(f)*p_effortOri(f)/2;
 
@@ -741,8 +741,10 @@ p_fiskResultat(f,"allSpecies","v_varCostAve","M") = v_varCostAve.M(f);
 
 *   Rapportera kvoter
 p_fiskResultat(quotaArea,catchQuotaName,"p_TACOri","ori") = p_TACOri(catchQuotaName,quotaArea);
-p_fiskResultat(quotaArea,catchQuotaName,"p_TACOri","est")
-    = p_TACOri(catchQuotaName,quotaArea)*pv_TACAdjustment.L(catchQuotaName,quotaArea);
+p_fiskResultat(quotaArea,catchQuotaName,"p_TACchange","ori") = p_TACchange(catchQuotaName,quotaArea);
+p_fiskResultat(quotaArea,catchQuotaName,"p_TACnetto","ori") = p_TACnetto(catchQuotaName,quotaArea);
+p_fiskResultat(quotaArea,catchQuotaName,"p_TACnetto","est")
+    = p_TACnetto(catchQuotaName,quotaArea)*pv_TACAdjustment.L(catchQuotaName,quotaArea);
 
 *   Rapportera efforrestriktion per fishery
 p_fiskResultat(f,"allSpecies","pv_maxEffFishery","ori") = p_priMaxEffFishery("priMode",f);

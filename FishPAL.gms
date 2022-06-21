@@ -118,7 +118,7 @@ $include "include_files\declare_parameters.gms"
 * L�s in parametrar fr�n Excel (via gdx-filen som tillverkats tidigare)
 $GDXIN "%fileNameForSetDefnitions%"
 
-$LOAD p_pricesAOri p_pricesBOri p_costOri p_maxEffSegPeriod p_season p_TACOri
+$LOAD p_pricesAOri p_pricesBOri p_costOri p_maxEffSegPeriod p_season p_TACOri p_TACchange
 $LOAD p_landingsOri p_discardShareOri p_effortOri p_vesselsOri p_landingObligation p_maxEffortPerEffortGroup p_kwhOri
 $LOAD p_catchElasticityPerGearGroup
 $LOAD p_subsidyBudget
@@ -147,6 +147,10 @@ p_discardsOri(f,s) = p_discardShareOri(f,s)*totalLanding(f) ;
 
 p_catchOri(f,s) = p_landingsOri(f,s)+p_discardsOri(f,s);
 
+
+* --- Compute available catch quota as original quota plus change in quota
+
+p_TACnetto(catchQuotaName,quotaArea) = p_TACOri(catchQuotaName,quotaArea) + p_TACchange(catchQuotaName,quotaArea);
 
 
 *##############################################################################
@@ -249,7 +253,7 @@ OPTION NLP=CONOPT;
 $IF %programMode%==estimation $INCLUDE "include_files\estimate_parameters.gms"
 
 
-display p_catchElasticity ;
+*display p_catchElasticity ;
 
 
 *###############################################################################
@@ -353,6 +357,8 @@ p_fiskresultat(f,"allSpecies","v_effortAnnual","UP")    = v_effortAnnual.UP(f);
 p_fiskresultat(f,"allSpecies","v_effortAnnual","M")     = v_effortAnnual.M(f);
 p_fiskresultat(f,"allSpecies","v_varCostAve","sim")    = v_varCostAve.L(f);
 p_fiskResultat(quotaArea,catchQuotaName,"p_TACOri","sim") = p_TACOri(catchQuotaName,quotaArea);
+p_fiskResultat(quotaArea,catchQuotaName,"p_TACchange","sim") = p_TACchange(catchQuotaName,quotaArea);
+p_fiskResultat(quotaArea,catchQuotaName,"p_TACnetto","sim") = p_TACnetto(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","M") = e_catchQuota.M(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(catchQuotaName,quotaArea);
 

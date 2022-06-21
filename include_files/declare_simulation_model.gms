@@ -9,7 +9,7 @@ EQUATIONS
     e_effRestrSeg(segment)          "Restriction on fishing effort per segment"
     e_effRestrFishery(fishery)      "Restriction on fishing effort per fishery"
     e_catchQuota(catchQuotaName,quotaArea) "Catch quotas per species and quota area"
-    e_effortRegulation(effortGroup,area) "THE effort regulation (i Västerhavet)"
+    e_effortRegulation(effortGroup,area) "THE effort regulation (i Vï¿½sterhavet)"
     e_effortPerEffortGroup(effortGroup,area) "Computation of effort per effort group for use in THE effort regulation"
 
     e_reportVarCostAve(fishery) "Computation of average variable cost, for reporting independent of functional form for MC"
@@ -106,9 +106,9 @@ e_effRestrSeg(seg) ..
 
 e_effRestrFishery(f) ..
 
-*   Begränsning på hur många fiskedagar varje fishery kan göra i varje period
-*   Begränsningen beräknas utifrån säsong (månadsbasis) och antal fartyg och
-*   fiskedagar hos flottan som gör detta fishery
+*   Begrï¿½nsning pï¿½ hur mï¿½nga fiskedagar varje fishery kan gï¿½ra i varje period
+*   Begrï¿½nsningen berï¿½knas utifrï¿½n sï¿½song (mï¿½nadsbasis) och antal fartyg och
+*   fiskedagar hos flottan som gï¿½r detta fishery
 
     v_effortAnnual(f) =L= SUM(seg $ segment_fishery(seg,f), v_vessels(seg))*pv_maxEffFishery(f);
 
@@ -126,9 +126,9 @@ e_effortRegulation(effortGroup,area) $ p_maxEffortPerEffortGroup(effortGroup,are
         p_maxEffortPerEffortGroup(effortGroup,area);
 
 
-*   Om fiske ska förbjudas helt, sätt kvoten till ngt litet positivt tal
-*   Om ingen begränsning ska finnas, sätt kvoten till "0" (ingen kvot).
-e_catchQuota(catchQuotaName,quotaArea) $ (p_TACOri(catchQuotaName,quotaArea) GT 0) ..
+*   Om fiske ska fï¿½rbjudas helt, sï¿½tt kvoten till ngt litet positivt tal
+*   Om ingen begrï¿½nsning ska finnas, sï¿½tt kvoten till "0" (ingen kvot).
+e_catchQuota(catchQuotaName,quotaArea) $ (p_TACNetto(catchQuotaName,quotaArea) GT 0) ..
 
 
 *   Sum of catch for fishery active in the present area,
@@ -137,11 +137,11 @@ e_catchQuota(catchQuotaName,quotaArea) $ (p_TACOri(catchQuotaName,quotaArea) GT 
             v_landings(f,s))
     =L=
 *   Quota for this quota species in this quota area
-    p_TACOri(catchQuotaName,quotaArea)*pv_TACAdjustment(catchQuotaName,quotaArea);
+    p_TACNetto(catchQuotaName,quotaArea)*pv_TACAdjustment(catchQuotaName,quotaArea);
 
-*   Denna funktion är behändig att ha för att rapportering ska fungera oberoende av hur vi definierar variabla kostnader
-*   Rapporteringen behöver bara lita på att vi har skrivit rätt värde på varCostAve.
-*   VarCostAve ingår inte i optimalitetsvillkor eller begränsningar - det är bara en rapportfunktion
+*   Denna funktion ï¿½r behï¿½ndig att ha fï¿½r att rapportering ska fungera oberoende av hur vi definierar variabla kostnader
+*   Rapporteringen behï¿½ver bara lita pï¿½ att vi har skrivit rï¿½tt vï¿½rde pï¿½ varCostAve.
+*   VarCostAve ingï¿½r inte i optimalitetsvillkor eller begrï¿½nsningar - det ï¿½r bara en rapportfunktion
 e_reportVarCostAve(f)..
     v_varCostAve(f) =E= pv_varCostConst(f) + 1/2*pv_varCostSlope(f)*v_effortAnnual(f);
 

@@ -15,6 +15,8 @@ PARAMETERS
     p_maxEffSeg(seg)            "Maximum possible number of fishing days per segment and year (days per vessel)"
     p_season(fishery,period)    "Fishery season (fishery possible)"
     p_TACOri(catchQuotaName,quotaArea) "Total Allowable Catch per species, quota type (e.g. Coastal Quota) and area"
+    p_TACchange(catchQuotaName,quotaArea) "Change in Total Allowable Catch per species, quota type (e.g. Coastal Quota) and area e.g. trade with DK"
+    p_TACnetto(catchQuotaName,quotaArea) "Net Total Allowable Catch per species, quota type (e.g. Coastal Quota) and area after TACchange"
     p_catchOri(fishery,species)     "Catch of different species per unit of effort of each fishery (tons/day)"
     p_landingsOri(fishery,species)  "Landings of different species per unit of effort of each fishery (tons/year)"
     p_discardsOri(fishery,species)  "Discards of different species per unit of effort of each fishery (tons/year)"
@@ -26,7 +28,7 @@ PARAMETERS
     p_landingObligation(fishery,species) "Indication if (1) sort B needs to be landed or if (0) discard is allowed"
     p_maxEffortPerEffortGroup(effortGroup,area) "Maximum kWh-days per effortGroup and area"
     p_kwhOri(segment) "Average kwh per vessel per segment"
-    p_fiskResultat(fisheryDomain,*,resLabel,statItem) "Rapport från fiskmodellen för GUI"
+    p_fiskResultat(fisheryDomain,*,resLabel,statItem) "Rapport frï¿½n fiskmodellen fï¿½r GUI"
 
     p_ShareDASseal(fishery) "Share of days at sea when seal damage is observed"
     p_subsidyPerDAS(fishery)"Subsidy per fishery (tkr/DAS)"
@@ -60,8 +62,8 @@ SCALARS
 
 PARAMETER p_profitFishery(fisheryDomain,resLabel) "Total profit and profit per day of effort, disaggregated into revenues and costs";
 PARAMETER p_VCshareLab(f) "share of VC that is paid and unpaid labour, used for correct GVA calculation" ;
-PARAMETER p_reportDualsFisheryQuota(fisheryDomain,quotaArea,catchQuotaName,*) "Förklaring av marginell kvotränta per fiske";
+PARAMETER p_reportDualsFisheryQuota(fisheryDomain,quotaArea,catchQuotaName,*) "Fï¿½rklaring av marginell kvotrï¿½nta per fiske";
 PARAMETER p_marginalCatch(f,s);
-PARAMETER p_reportDualsFishery(fisheryDomain,resLabel) "Resultat för den marginella lönsamheten i varje fiske, inklusive skuggpriser";
+PARAMETER p_reportDualsFishery(fisheryDomain,resLabel) "Resultat fï¿½r den marginella lï¿½nsamheten i varje fiske, inklusive skuggpriser";
 PARAMETER p_kwhPerEffortGroupOri(effortGroup,area,*);
 PARAMETER p_kwhPerFisheryInEffortGroup(fishery,effortGroup,area,*);
