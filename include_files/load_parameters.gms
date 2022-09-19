@@ -2,7 +2,7 @@ $ONTEXT
 
     @purpose: Loadbehavioural and economic parameters of the fishery model.
 
-    @author: Torbjörn Jansson, Staffan Waldo
+    @author: Torbjï¿½rn Jansson, Staffan Waldo
 
     @calledby: prototyp.gms
 

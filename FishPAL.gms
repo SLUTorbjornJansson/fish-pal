@@ -32,6 +32,7 @@ $SETGLOBAL projectDirectory fuel_tax
 
 *   Ange specifikt vilken scenariofil i ovan nämnda katalog vi vill använda
 $SETGLOBAL scenario energy_tax
+*$SETGLOBAL scenario reference
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja
@@ -74,10 +75,11 @@ $IFI %GGIG%==ON $INCLUDE "%scen%.gms"
 *           CONVERT EXCEL DATA FILE TO GAMS GDX FORMAT
 *#############################################################
 
-$CALL gdxxrw %datDir%\data_gams_2019.xlsx o=%datDir%\inData.gdx index=index!A1
+$CALL gdxxrw %datDir%\data_gams_2019_fuel.xlsx o=%datDir%\inData.gdx index=index!A1
 
 * Ange att set ska l�sas fr�n indata-filen
 $set fileNameForSetDefnitions %datDir%\inData.gdx
+
 
 *##############################################################################
 * DECLARE SETS AND LOAD THEM FROM THE DATABASE
@@ -100,11 +102,13 @@ $LOAD p_landingsOri p_discardShareOri p_effortOri p_vesselsOri p_landingObligati
 $LOAD p_catchElasticityPerGearGroup
 $LOAD p_subsidyBudget
 $LOAD p_ShareDASseal
+$LOAD p_fuelOri
+$LOAD p_employmentOri
 
 * St�ng GDX-filen genom att anropa GDXIN utan argument
 $GDXIN
 
-
+execute_unload "temp.gdx";
 
 *** SW program som jag inte vet var jag ska göra av
 *** anger min-level för landings för arter som ska modelleras (ton/år)
@@ -127,7 +131,8 @@ p_catchOri(f,s) = p_landingsOri(f,s)+p_discardsOri(f,s);
 
 * --- Compute available catch quota as original quota plus change in quota
 
-p_TACnetto(catchQuotaName,quotaArea) = p_TACOri(catchQuotaName,quotaArea) + p_TACchange(catchQuotaName,quotaArea);
+p_TACnetto(catchQuotaName,quotaArea) = p_TACOri(catchQuotaName,quotaArea)
+                                     + p_TACchange(catchQuotaName,quotaArea);
 
 
 *##############################################################################
@@ -137,7 +142,32 @@ p_TACnetto(catchQuotaName,quotaArea) = p_TACOri(catchQuotaName,quotaArea) + p_TA
 $include "include_files\define_handy_sets.gms"
 
 
-*DISPLAY quotaFishery,area,quotaFishery_fishery;     // SW
+*##############################################################################
+*  Compute share of each variable cost in total variable cost 
+*##############################################################################
+
+alias(varCost,varCost1);
+p_varCostOriShare(f,varCost) = sum(seg $ segment_fishery(seg,f), p_costOri(seg,varCost)
+                                              / sum(varCost1, p_costOri(seg,varCost1)));
+
+
+*##############################################################################
+*  Compute how much fuel and staff is used per day at sea in each fishery
+*  This is kept constant in simulation and used for reporting indicators
+*##############################################################################
+
+loop(seg,
+    p_fuelPerEffort(f) $ segment_fishery(seg,f)
+        = p_fuelOri(seg)
+          / sum(fishery $ segment_fishery(seg,fishery), p_effortOri(fishery))
+    );
+
+loop(seg,
+    p_employmentPerEffort(f,employmentItem) $ segment_fishery(seg,f)
+        = p_employmentOri(seg,employmentItem)
+          / sum(fishery $ segment_fishery(seg,fishery), p_effortOri(fishery))
+    );
+
 
 
 *##############################################################################
@@ -171,10 +201,20 @@ else
     display "Successfully checked for fleet existence";
 );
 
+* --- Assert that cost shares add up to "1" within some tolerance
+problem_fishery(f) $ [abs(sum(varCost, p_varCostOriShare(f,varCost)) - 1) gt 0.00001] = yes;
+
+if(card(problem_fishery),
+    execute_unload "%ERROR_FILE%";
+    abort "For some fishery the sum of variable cost shares do not equal 1. All data unloaded to %ERROR_FILE%.", problem_fishery;
+else
+    display "Successfully checked for sum of cost shares equalling one.";
+);
+
 
 * --- Assert that each fishery that has effort also has some vessel
 problem_fishery(f) $ [p_effortOri(f)
-                      and (not sum(seg $ segment_fishery(seg,f), p_vesselsOri(seg)))] = yes; 
+                      and (not sum(seg $ segment_fishery(seg,f), p_vesselsOri(seg)))] = yes;
 
 if(card(problem_fishery),
     display "Some fishery has effort but no vessels. All data unloaded to %ERROR_FILE%.", problem_fishery;
@@ -332,6 +372,13 @@ p_fiskResultat(quotaArea,catchQuotaName,"p_TACchange","sim") = p_TACchange(catch
 p_fiskResultat(quotaArea,catchQuotaName,"p_TACnetto","sim") = p_TACnetto(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","M") = e_catchQuota.M(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(catchQuotaName,quotaArea);
+
+*   Report numer of employees
+p_fiskresultat(f,"allSpecies",resLabel,"sim")
+    = sum(employmentItem $ sameas(resLabel,employmentItem), v_effortAnnual.l(f)*p_employmentPerEffort(f,employmentItem));
+
+
+
 
 *   Aggregera fishery till segment, area osv.
 p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat) $ [(NOT fishery(fisheryDomain)) and (NOT p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat))]

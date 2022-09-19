@@ -450,11 +450,11 @@ else
 *   ... and variance ASSUMED to be such that 2 standard deviations cover 1/2 of the mean in each direction, sigma=Ori/4
     p_weightvarCostAve(f) $ p_varCostAveOri(f) = 1/(2*SQR(p_varCostAveOri(f)/4));
 
-* --- Definiera parametrar till kostnadsfunktionen. Hur det g�r till beror p� funktionsform.
-*     Nedan antar vi en kvadratisk totalkostnad, dvs linj�r marginalkostnad, och l�ter skattningen
-*     best�mma intercept men inte lutning.
-*     Antagande: interceptet �r ungef�r halva den observerade genomsnittskostnaden.
-*     om MC = a + b*E s� inneb�r det att b = AC/E
+* --- Definiera parametrar till kostnadsfunktionen. Hur det går till beror på funktionsform.
+*     Nedan antar vi en kvadratisk totalkostnad, dvs linjär marginalkostnad, och låter skattningen
+*     bestämma intercept men inte lutning.
+*     Antagande: interceptet är ungefär halva den observerade genomsnittskostnaden.
+*     om MC = a + b*E så innebär det att b = AC/E
 
 *   Then, we assume a slope corresponding to an a-priori (myopic) elasticity of 1.5
 *   beta = 1/elasticity * AverageCost / EffortOri

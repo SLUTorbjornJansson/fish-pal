@@ -34,6 +34,7 @@ SETS
     s_varCost   "Variable cost items"
     s_fixCost   "Fixed cost items"
 
+    employmentItem "Various indicators on employment"
     ;
 
 ALIAS(segment,seg);
@@ -47,7 +48,7 @@ ALIAS(fishery,f);
 * L�s in set fr�n GDX-filen
 $LOAD s_segment=segment s_gear=gear s_area=area s_species=species
 $LOAD s_fishery=fishery s_quotaArea=quotaArea s_varCost=varCost s_fixCost=fixCost period s_catchQuotaName=catchQuotaName
-$LOAD s_effortGroup=effortGroup gearGroup
+$LOAD s_effortGroup=effortGroup gearGroup employmentItem
 
 * Skapa ett set som inneh�ller "species UNION catchQuotaName", att ha som dom�n f�r vissa parametrar (f�r resultatfiler)
 * F�r att klara UNIONEN anv�nder vi tricket "$ONMULTI" f�r att l�gga till nya delvis �verlappande element
@@ -191,6 +192,9 @@ sets
         aveFixCosts      "Total fixed costs (per vessel) per DAS"
         aveProfit        "Revenues minus all costs per DAS"
         avePMP           "Income from PMP term per DAS"
+
+*       Items for employment
+        set.employmentItem
 
 *       Items for dual report
         set.s_dualResult

@@ -21,13 +21,9 @@ $offtext
 $include "scenarioFiles\noChange.gms"
 
 
-* --- Increase fuel tax by p_fuelTax kr/liter
 
-p_fuelTaxPerLitre(f) = 3;
+p_varCostPriceShift(f,"VC_fuel") = 0.25;
 
 
-* --- Re-compute pv_varCostConst(f) to reflect the new tax level
 
-p_fuelUsePerDay("1") = 14;
-pv_varCostConst.l(f) = pv_varCostConst.l(f) + p_fuelUsePerDay(f) * p_fuelTaxPerLitre(f)/1000;
 

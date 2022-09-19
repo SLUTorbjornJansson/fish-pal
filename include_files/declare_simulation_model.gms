@@ -65,7 +65,13 @@ e_objFunc ..
        +SUM(f, v_effortAnnual(f)*p_subsidyPerDAS(f))
 
 *       minus variable costs
-       -SUM(f, pv_varCostConst(f)*v_effortAnnual(f) + 1/2*pv_varCostSlope(f)*sqr(v_effortAnnual(f)))
+       -SUM(f, pv_varCostConst(f)*v_effortAnnual(f) + 1/2*pv_varCostSlope(f)*sqr(v_effortAnnual(f))
+*       ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
+*           In the baseline scenario, the shifters must be zero and the shares add up to 1
+               *SUM(varCost, p_varCostOriShare(f,varCost)
+                       *(1 + p_varCostPriceShift(f,varCost))
+                       *(1 + p_varCostQuantShift(f,varCost)))
+            )
 
 *       minus fixed costs
        -SUM(seg, p_fixCostSumOri(seg)*v_vessels(seg))
@@ -139,11 +145,19 @@ e_catchQuota(catchQuotaName,quotaArea) $ (p_TACNetto(catchQuotaName,quotaArea) G
 *   Quota for this quota species in this quota area
     p_TACNetto(catchQuotaName,quotaArea)*pv_TACAdjustment(catchQuotaName,quotaArea);
 
-*   Denna funktion �r beh�ndig att ha f�r att rapportering ska fungera oberoende av hur vi definierar variabla kostnader
+*   Denna funktion är behändig att ha för att rapportering ska fungera oberoende av hur vi definierar variabla kostnader
 *   Rapporteringen beh�ver bara lita p� att vi har skrivit r�tt v�rde p� varCostAve.
 *   VarCostAve ing�r inte i optimalitetsvillkor eller begr�nsningar - det �r bara en rapportfunktion
 e_reportVarCostAve(f)..
-    v_varCostAve(f) =E= pv_varCostConst(f) + 1/2*pv_varCostSlope(f)*v_effortAnnual(f);
+    v_varCostAve(f) =E= (pv_varCostConst(f) + 1/2*pv_varCostSlope(f)*v_effortAnnual(f))
+    
+*       ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
+*           In the baseline scenario, the shifters must be zero and the shares add up to 1
+               *SUM(varCost, p_varCostOriShare(f,varCost)
+                       *(1 + p_varCostPriceShift(f,varCost))
+                       *(1 + p_varCostQuantShift(f,varCost)))    
+
+    ;
 
 e_sealSubsidy..
          v_sealSubsidy =E=

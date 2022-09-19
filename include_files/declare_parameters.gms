@@ -6,6 +6,10 @@ PARAMETERS
     p_shareA(fishery,species)      "Share of catch that is of sort A"
     p_shareB(fishery,species)      "Share of catch that is of sort B"
     p_costOri(segment,cost)        "Cost structure per segment, in annual totals (tkr/year)"
+    p_fuelOri(segment)             "Fuel use in m3 per segment and year"
+    p_fuelPerEffort(fishery)       "Fuel use per day at sea for each fishery (for reporting)"
+    p_employmentOri(segment,employmentItem) "Employment per segment measured in various ways"
+    p_employmentPerEffort(fishery,employmentItem) "Staff use per day at sea for each fishery (for reporting)"
     p_varCostOri(fishery,varCost)  "Variable cost per fishery and cost category per effort (tkr/day)"
     p_varCostAveOri(fishery)       "Sum of variable cost categories per fishery per effort (tkr/day)"
     p_varCostAveDist(fishery,statItem) "Distributional statistics for sum of variable costs, e.g. variance, expected value"
@@ -28,7 +32,7 @@ PARAMETERS
     p_landingObligation(fishery,species) "Indication if (1) sort B needs to be landed or if (0) discard is allowed"
     p_maxEffortPerEffortGroup(effortGroup,area) "Maximum kWh-days per effortGroup and area"
     p_kwhOri(segment) "Average kwh per vessel per segment"
-    p_fiskResultat(fisheryDomain,*,resLabel,statItem) "Rapport fr�n fiskmodellen f�r GUI"
+    p_fiskResultat(fisheryDomain,*,resLabel,statItem) "Rapport från fiskmodellen för GUI"
 
 *   Seal scenario parameters
     p_ShareDASseal(fishery) "Share of days at sea when seal damage is observed"
@@ -36,8 +40,10 @@ PARAMETERS
     p_sealDamage(fishery)   "Total value of seal damage per fishery"
 
 *   Parameters relating to some exogenous shocks such as variable costs
-    p_fuelUsePerDay(fishery) "Fuel use per fishery in litres per day"
-    p_fuelTaxPerLitre(fishery) "Tax on fuel in SEK/litre"
+    p_varCostOriShare(fishery,varCost) "Share in total variable cost for each of the variable cost components"
+    p_varCostPriceShift(fishery,varCost) "Exogenous shift in the price of each variable cost (relative change, -0.2 means -20%)"
+    p_varCostQuantShift(fishery,varCost) "Exogenous shift in the use per day of each variable cost (relative change, -0.2 means -20%)"   
+
 
 *   Parameters for steering and monitoring convergence behaviour
     p_projectedEffort(fishery) "Projected effort for next iteration. Partial adjustment for subsidy computation"
@@ -78,5 +84,8 @@ PARAMETER p_kwhPerFisheryInEffortGroup(fishery,effortGroup,area,*);
 *   Initialize parameters that can in fact be zero but should be reported anyway
 *###############################################################################
 
-OPTION KILL=p_fuelUsePerDay;
-OPTION KILL=p_fuelTaxPerLitre;
+OPTION KILL=p_varCostPriceShift;
+OPTION KILL=p_varCostQuantShift;
+
+*OPTION KILL=p_fuelUsePerDay;
+*OPTION KILL=p_fuelTaxPerLitre;
