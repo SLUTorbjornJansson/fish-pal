@@ -108,7 +108,6 @@ $LOAD p_employmentOri
 * St�ng GDX-filen genom att anropa GDXIN utan argument
 $GDXIN
 
-execute_unload "temp.gdx";
 
 *** SW program som jag inte vet var jag ska göra av
 *** anger min-level för landings för arter som ska modelleras (ton/år)
@@ -224,6 +223,18 @@ else
     display "Successfully checked for fleet existence for each fishery";
 );
 
+
+* --- Assert that the available season length is at least the observed fishery effort
+problem_fishery(f) $ [p_effortOri(f)
+                      gt SUM((seg,p) $ segment_fishery(seg,f), p_vesselsOri(seg)*p_maxEffSegPeriod(seg,p)*p_season(f,p))]
+                      = yes;
+
+if(card(problem_fishery),
+    execute_unload "%ERROR_FILE%";
+    abort "Error: Some fishery has less season than observed effort. All data unloaded to %ERROR_FILE%.", problem_fishery;
+else
+    display "Successfully checked for season length covering observed effort per fishery";
+);
 
 
 *#############################################################
@@ -366,7 +377,7 @@ p_fiskresultat(f,"allSpecies","v_effortAnnual","sim")   = v_effortAnnual.L(f);
 p_fiskresultat(f,"allSpecies","v_effortAnnual","LO")    = v_effortAnnual.LO(f);
 p_fiskresultat(f,"allSpecies","v_effortAnnual","UP")    = v_effortAnnual.UP(f);
 p_fiskresultat(f,"allSpecies","v_effortAnnual","M")     = v_effortAnnual.M(f);
-p_fiskresultat(f,"allSpecies","v_varCostAve","sim")    = v_varCostAve.L(f);
+p_fiskresultat(f,"allSpecies","v_varCostAve","sim")     = v_varCostAve.L(f);
 p_fiskResultat(quotaArea,catchQuotaName,"p_TACOri","sim") = p_TACOri(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"p_TACchange","sim") = p_TACchange(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"p_TACnetto","sim") = p_TACnetto(catchQuotaName,quotaArea);
@@ -374,10 +385,19 @@ p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","M") = e_catchQuota.M(cat
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(catchQuotaName,quotaArea);
 
 *   Report numer of employees
-p_fiskresultat(f,"allSpecies",resLabel,"sim")
-    = sum(employmentItem $ sameas(resLabel,employmentItem), v_effortAnnual.l(f)*p_employmentPerEffort(f,employmentItem));
+*p_fiskresultat(f,"allSpecies",resLabel,"sim")
+*    = sum(employmentItem $ sameas(resLabel,employmentItem), v_effortAnnual.l(f)*p_employmentPerEffort(f,employmentItem));
 
-
+*   Report variable cost of each cost category using total varCost times the cost shares including shift factors
+loop((resLabel,varCost) $ sameas(resLabel,varCost),
+        p_fiskresultat(f,"allSpecies",resLabel,"sim")
+            =   (pv_varCostConst.l(f)*v_effortAnnual.l(f) + 1/2*pv_varCostSlope.l(f)*sqr(v_effortAnnual.l(f)))
+*                 ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
+*                     In the baseline scenario, the shifters must be zero and the shares add up to 1
+                * p_varCostOriShare(f,varCost)
+                * (1 + p_varCostPriceShift(f,varCost))
+                * (1 + p_varCostQuantShift(f,varCost));
+    );
 
 
 *   Aggregera fishery till segment, area osv.

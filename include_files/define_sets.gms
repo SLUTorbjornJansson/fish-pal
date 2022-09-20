@@ -195,6 +195,7 @@ sets
 
 *       Items for employment
         set.employmentItem
+        set.varCost
 
 *       Items for dual report
         set.s_dualResult

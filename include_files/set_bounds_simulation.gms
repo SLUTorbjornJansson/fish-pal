@@ -1,7 +1,7 @@
 $ONTEXT
-    Denna fil används för att fixera variablers värden så att de blir till
-    parametrar. Främst för att fixera resultatet av skattningarna så att de
-    kan användas i den primala modellen.
+    Denna fil anvï¿½nds fï¿½r att fixera variablers vï¿½rden sï¿½ att de blir till
+    parametrar. Frï¿½mst fï¿½r att fixera resultatet av skattningarna sï¿½ att de
+    kan anvï¿½ndas i den primala modellen.
 
 $OFFTEXT
 
@@ -44,10 +44,10 @@ pv_kwh.FX(seg) = pv_kwh.L(seg);
 
 * Expert knowledge *
 * Set effortAnnual for "pilk, S" to original data since too large otherwise
-* obs måste läggas in sist i set_bounds_simulation för annars skrivs det över i den filen
-v_effortAnnual.FX("131") = p_effortOri("131");
-v_effortAnnual.FX("142") = p_effortOri("142");
+* obs mï¿½ste lï¿½ggas in sist i set_bounds_simulation fï¿½r annars skrivs det ï¿½ver i den filen
+*v_effortAnnual.FX("131") = p_effortOri("131");
+*v_effortAnnual.FX("142") = p_effortOri("142");
 
 
-v_effortAnnual.fx("48") = p_effortOri("48") ;
-v_effortAnnual.fx("65") = p_effortOri("65") ;
+*v_effortAnnual.fx("48") = p_effortOri("48") ;
+*v_effortAnnual.fx("65") = p_effortOri("65") ;
