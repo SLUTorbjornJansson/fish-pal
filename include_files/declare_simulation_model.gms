@@ -134,7 +134,7 @@ e_effortRegulation(effortGroup,area) $ p_maxEffortPerEffortGroup(effortGroup,are
 
 *   Om fiske ska f�rbjudas helt, s�tt kvoten till ngt litet positivt tal
 *   Om ingen begr�nsning ska finnas, s�tt kvoten till "0" (ingen kvot).
-e_catchQuota(catchQuotaName,quotaArea) $ (p_TACNetto(catchQuotaName,quotaArea) GT 0) ..
+e_catchQuota(catchQuotaName,quotaArea) $ (p_TACOri(catchQuotaName,quotaArea) GT 0) ..
 
 
 *   Sum of catch for fishery active in the present area,
@@ -143,7 +143,7 @@ e_catchQuota(catchQuotaName,quotaArea) $ (p_TACNetto(catchQuotaName,quotaArea) G
             v_landings(f,s))
     =L=
 *   Quota for this quota species in this quota area
-    p_TACNetto(catchQuotaName,quotaArea)*pv_TACAdjustment(catchQuotaName,quotaArea);
+    p_TACOri(catchQuotaName,quotaArea)*pv_TACAdjustment(catchQuotaName,quotaArea);
 
 *   Denna funktion är behändig att ha för att rapportering ska fungera oberoende av hur vi definierar variabla kostnader
 *   Rapporteringen beh�ver bara lita p� att vi har skrivit r�tt v�rde p� varCostAve.

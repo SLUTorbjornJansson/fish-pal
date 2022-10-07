@@ -115,7 +115,7 @@ p_kwhPerEffortGroupOri(effortGroup,area,"sim") = v_effortPerEffortGroup.L(effort
 
 p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"shadowPriceQuota") $  quotaArea_fishery(quotaArea,f)
     = - SUM(s $ [catchQuotaName_quotaArea_fishery_species(catchQuotaName,quotaArea,f,s)
-                  AND (p_TACnetto(catchQuotaName,quotaArea) GT 0)], e_catchQuota.M(catchQuotaName,quotaArea));
+                  AND (p_TACori(catchQuotaName,quotaArea) GT 0)], e_catchQuota.M(catchQuotaName,quotaArea));
 
 
 p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingA") $ quotaArea_fishery(quotaArea,f)

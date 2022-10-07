@@ -6,10 +6,8 @@ PARAMETERS
     p_shareA(fishery,species)      "Share of catch that is of sort A"
     p_shareB(fishery,species)      "Share of catch that is of sort B"
     p_costOri(segment,cost)        "Cost structure per segment, in annual totals (tkr/year)"
-    p_fuelOri(segment)             "Fuel use in m3 per segment and year"
-    p_fuelPerEffort(fishery)       "Fuel use per day at sea for each fishery (for reporting)"
-    p_employmentOri(segment,employmentItem) "Employment per segment measured in various ways"
-    p_employmentPerEffort(fishery,employmentItem) "Staff use per day at sea for each fishery (for reporting)"
+    p_inputOri(segment,inputItem) "Input per segment measured in various ways"
+    p_inputPerEffort(fishery,inputItem) "Input use per day at sea for each fishery (for reporting)"
     p_varCostOri(fishery,varCost)  "Variable cost per fishery and cost category per effort (tkr/day)"
     p_varCostAveOri(fishery)       "Sum of variable cost categories per fishery per effort (tkr/day)"
     p_varCostAveDist(fishery,statItem) "Distributional statistics for sum of variable costs, e.g. variance, expected value"
@@ -19,8 +17,6 @@ PARAMETERS
     p_maxEffSeg(seg)            "Maximum possible number of fishing days per segment and year (days per vessel)"
     p_season(fishery,period)    "Fishery season (fishery possible)"
     p_TACOri(catchQuotaName,quotaArea) "Total Allowable Catch per species, quota type (e.g. Coastal Quota) and area"
-    p_TACchange(catchQuotaName,quotaArea) "Change in Total Allowable Catch per species, quota type (e.g. Coastal Quota) and area e.g. trade with DK"
-    p_TACnetto(catchQuotaName,quotaArea) "Net Total Allowable Catch per species, quota type (e.g. Coastal Quota) and area after TACchange"
     p_catchOri(fishery,species)     "Catch of different species per unit of effort of each fishery (tons/day)"
     p_landingsOri(fishery,species)  "Landings of different species per unit of effort of each fishery (tons/year)"
     p_discardsOri(fishery,species)  "Discards of different species per unit of effort of each fishery (tons/year)"
@@ -43,7 +39,7 @@ PARAMETERS
     p_varCostOriShare(fishery,varCost) "Share in total variable cost for each of the variable cost components"
     p_varCostPriceShift(fishery,varCost) "Exogenous shift in the price of each variable cost (relative change, -0.2 means -20%)"
     p_varCostQuantShift(fishery,varCost) "Exogenous shift in the use per day of each variable cost (relative change, -0.2 means -20%)"   
-
+    p_varCostPriceCal(fishery,varCost) "Price of the variable cost items in the calibration point"
 
 *   Parameters for steering and monitoring convergence behaviour
     p_projectedEffort(fishery) "Projected effort for next iteration. Partial adjustment for subsidy computation"
