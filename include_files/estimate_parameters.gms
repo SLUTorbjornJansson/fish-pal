@@ -272,13 +272,13 @@ m_estimateFish.OPTFILE = 1;  // Include steering info for conopt (conopt.opt), s
 p_effortOri(seg) = SUM(f $ segment_fishery(seg,f), p_effortOri(f));
 
 *   Each fishery assumed to have the same variable cost as the segment average
-p_varCostOri(f,varCost) = SUM(seg $ segment_fishery(seg,f), p_costOri(seg,varCost)/p_effortOri(seg));
-p_varCostAveOri(f) = SUM(varCost, p_varCostOri(f,varCost));
+p_varCostOri(f,VariableInput) = SUM(seg $ segment_fishery(seg,f), p_costOri(seg,VariableInput)/p_effortOri(seg));
+p_varCostAveOri(f) = SUM(VariableInput, p_varCostOri(f,VariableInput));
 
 
 *  Fix costs are in annual totals in the database, but we need per vessel cost
-p_fixCostOri(seg,fixCost) = p_costOri(seg,fixCost)/p_vesselsOri(seg);
-p_fixCostSumOri(seg) = SUM(fixCost, p_fixCostOri(seg,fixCost));
+p_fixCostOri(seg,FixInput) = p_costOri(seg,FixInput)/p_vesselsOri(seg);
+p_fixCostSumOri(seg) = SUM(FixInput, p_fixCostOri(seg,FixInput));
 
 
 *  Compute maximum possible number of fishing days per vessel and year in each fishery using
@@ -676,13 +676,19 @@ p_subsidyBudget = sum(f, p_subsidyPerDAS(f)*v_effortAnnual.L(f));
 
 *$SETGLOBAL scenario %scenario%
 
+* compute Input use per fishery by assuming that the input use per day is as segment average
+
+loop (seg, 
+    p_InputQuant(fishery,VariableInput)$segment_fishery(seg,fishery) =  p_InputQuantOri(seg,VariableInput)/sum(f $ segment_fishery(seg,f), v_effortAnnual.L(f))
+    *v_effortAnnual.L(fishery) ;
+
+) ;
+
 * --- Compute the implied price of the variable cost items in the calibration point
 *     To use in reporting in sims where varCosts change (and we assume no change in price)
-p_varCostPriceCal(f,varCost)
+p_InputPrice(f,VariableInput)
     = (pv_varCostConst.l(f)*v_effortAnnual.l(f) + 1/2*pv_varCostSlope.l(f)*sqr(v_effortAnnual.l(f)))
-    * p_varCostOriShare(f,varCost)
-*   / divided by some quantity from the excel sheet...    
-    ;
+    * p_varCostOriShare(f,VariableInput) / p_InputQuant(f, VariableInput)   ;
 
 *-------------------------------------------------------------------------------
 *   Spara parametrarna i en datafil, att anv�nda i simulation
@@ -695,7 +701,6 @@ EXECUTE_UNLOAD "%resdir%\estimation\par_%parFileName%.gdx"
                                                 p_shareB
                                                 pv_varCostConst
                                                 pv_varCostSlope
-                                                p_varCostPriceCal
                                                 p_fixCostSumOri
                                                 pv_PMPconst
                                                 pv_PMPslope
@@ -708,7 +713,8 @@ EXECUTE_UNLOAD "%resdir%\estimation\par_%parFileName%.gdx"
                                                 pv_kwh
                                                 p_landingObligation
                                                 p_varCostOri
-                                                p_subsidyBudget;
+                                                p_subsidyBudget
+                                                p_InputPrice;
 
 
 *-------------------------------------------------------------------------------

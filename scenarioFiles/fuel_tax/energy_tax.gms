@@ -22,7 +22,7 @@ $include "scenarioFiles\noChange.gms"
 
 
 
-p_varCostPriceShift(f,"VC_fuel") = 0.25;
+p_varCostPriceShift(f,"Fuel_m3") = 0.25;
 
 
 

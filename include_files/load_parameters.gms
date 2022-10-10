@@ -28,5 +28,6 @@ EXECUTE_LOAD "%resdir%\estimation\par_%parFileName%.gdx"
                                               pv_TACAdjustment
                                               pv_kwh
                                               p_varCostOri
-                                              p_subsidyBudget;
+                                              p_subsidyBudget
+                                              p_InputPrice;
 * p_landingObligation ; "over-writes LO changed in scenario file if unloaded here

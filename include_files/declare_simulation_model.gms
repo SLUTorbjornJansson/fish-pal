@@ -68,9 +68,9 @@ e_objFunc ..
        -SUM(f, pv_varCostConst(f)*v_effortAnnual(f) + 1/2*pv_varCostSlope(f)*sqr(v_effortAnnual(f))
 *       ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
 *           In the baseline scenario, the shifters must be zero and the shares add up to 1
-               *SUM(varCost, p_varCostOriShare(f,varCost)
-                       *(1 + p_varCostPriceShift(f,varCost))
-                       *(1 + p_varCostQuantShift(f,varCost)))
+               *SUM(VariableInput, p_varCostOriShare(f,VariableInput)
+                       *(1 + p_varCostPriceShift(f,VariableInput))
+                       *(1 + p_varCostQuantShift(f,VariableInput)))
             )
 
 *       minus fixed costs
@@ -153,9 +153,9 @@ e_reportVarCostAve(f)..
     
 *       ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
 *           In the baseline scenario, the shifters must be zero and the shares add up to 1
-               *SUM(varCost, p_varCostOriShare(f,varCost)
-                       *(1 + p_varCostPriceShift(f,varCost))
-                       *(1 + p_varCostQuantShift(f,varCost)))    
+               *SUM(VariableInput, p_varCostOriShare(f,VariableInput)
+                       *(1 + p_varCostPriceShift(f,VariableInput))
+                       *(1 + p_varCostQuantShift(f,VariableInput)))    
 
     ;
 

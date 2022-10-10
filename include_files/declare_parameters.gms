@@ -5,13 +5,13 @@ PARAMETERS
     p_pricesB(species)             "Simulation price of sort B fish, for industrial use, same for all fisheries but possibly different per species"
     p_shareA(fishery,species)      "Share of catch that is of sort A"
     p_shareB(fishery,species)      "Share of catch that is of sort B"
-    p_costOri(segment,cost)        "Cost structure per segment, in annual totals (tkr/year)"
-    p_inputOri(segment,inputItem) "Input per segment measured in various ways"
-    p_inputPerEffort(fishery,inputItem) "Input use per day at sea for each fishery (for reporting)"
-    p_varCostOri(fishery,varCost)  "Variable cost per fishery and cost category per effort (tkr/day)"
+    p_costOri(segment,Input)        "Cost structure per segment, in annual totals (tkr/year)"
+    p_inputQuantOri(segment,Input) "Input per segment measured in various ways"
+    p_inputPerEffort(fishery,Input) "Input use per day at sea for each fishery (for reporting)"
+    p_varCostOri(fishery,VariableInput)  "Variable cost per fishery and cost category per effort (tkr/day)"
     p_varCostAveOri(fishery)       "Sum of variable cost categories per fishery per effort (tkr/day)"
     p_varCostAveDist(fishery,statItem) "Distributional statistics for sum of variable costs, e.g. variance, expected value"
-    p_fixCostOri(segment,fixCost)  "Fixed cost per vessel and cost category (tkr/vessel)"
+    p_fixCostOri(segment,FixInput)  "Fixed cost per vessel and cost category (tkr/vessel)"
     p_fixCostSumOri(segment)       "Sum of fixed cost categories per vessel (tkr/vessel)"
     p_maxEffSegPeriod(seg,p)    "Max effort per segment and period (days per vessel)"
     p_maxEffSeg(seg)            "Maximum possible number of fishing days per segment and year (days per vessel)"
@@ -36,10 +36,11 @@ PARAMETERS
     p_sealDamage(fishery)   "Total value of seal damage per fishery"
 
 *   Parameters relating to some exogenous shocks such as variable costs
-    p_varCostOriShare(fishery,varCost) "Share in total variable cost for each of the variable cost components"
-    p_varCostPriceShift(fishery,varCost) "Exogenous shift in the price of each variable cost (relative change, -0.2 means -20%)"
-    p_varCostQuantShift(fishery,varCost) "Exogenous shift in the use per day of each variable cost (relative change, -0.2 means -20%)"   
-    p_varCostPriceCal(fishery,varCost) "Price of the variable cost items in the calibration point"
+    p_varCostOriShare(fishery,VariableInput) "Share in total variable cost for each of the variable cost components"
+    p_varCostPriceShift(fishery,VariableInput) "Exogenous shift in the price of each variable cost (relative change, -0.2 means -20%)"
+    p_varCostQuantShift(fishery,VariableInput) "Exogenous shift in the use per day of each variable cost (relative change, -0.2 means -20%)"   
+    p_InputPrice(f,VariableInput) "Price of the variable cost items in the calibration point"
+    p_InputQuant(fishery,VariableInput) "Total input quantity in the calibration point"
 
 *   Parameters for steering and monitoring convergence behaviour
     p_projectedEffort(fishery) "Projected effort for next iteration. Partial adjustment for subsidy computation"
@@ -74,6 +75,8 @@ PARAMETER p_marginalCatch(f,s);
 PARAMETER p_reportDualsFishery(fisheryDomain,resLabel) "Resultat f�r den marginella l�nsamheten i varje fiske, inklusive skuggpriser";
 PARAMETER p_kwhPerEffortGroupOri(effortGroup,area,*);
 PARAMETER p_kwhPerFisheryInEffortGroup(fishery,effortGroup,area,*);
+
+PARAMETER p_InputOutputReport(fisheryDomain, speciesDomain, *) ;
 
 
 *###############################################################################

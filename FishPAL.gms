@@ -31,8 +31,8 @@ $SETGLOBAL programMode simulation
 $SETGLOBAL projectDirectory fuel_tax
 
 *   Ange specifikt vilken scenariofil i ovan nämnda katalog vi vill använda
-$SETGLOBAL scenario energy_tax
-*$SETGLOBAL scenario reference
+*$SETGLOBAL scenario energy_tax
+$SETGLOBAL scenario reference
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja
@@ -102,10 +102,12 @@ $LOAD p_landingsOri p_discardShareOri p_effortOri p_vesselsOri p_landingObligati
 $LOAD p_catchElasticityPerGearGroup
 $LOAD p_subsidyBudget
 $LOAD p_ShareDASseal
-$LOAD p_inputOri
+$LOAD p_inputQuantOri
 
 * St�ng GDX-filen genom att anropa GDXIN utan argument
 $GDXIN
+
+
 
 
 *** SW program som jag inte vet var jag ska göra av
@@ -139,21 +141,23 @@ $include "include_files\define_handy_sets.gms"
 *  Compute share of each variable cost in total variable cost 
 *##############################################################################
 
-alias(varCost,varCost1);
-p_varCostOriShare(f,varCost) = sum(seg $ segment_fishery(seg,f), p_costOri(seg,varCost)
-                                              / sum(varCost1, p_costOri(seg,varCost1)));
+alias(VariableInput,VariableInput1);
+p_varCostOriShare(f,VariableInput) = sum(seg $ segment_fishery(seg,f), p_costOri(seg,VariableInput)
+                                              / sum(VariableInput1, p_costOri(seg,VariableInput1)));
 
+*execute_unload "allt.gdx" ;
+*$stop
 
 *##############################################################################
 *  Compute how much fuel and staff is used per day at sea in each fishery
 *  This is kept constant in simulation and used for reporting indicators
 *##############################################################################
 
-loop(seg,
-    p_inputPerEffort(f,inputItem) $ segment_fishery(seg,f)
-        = p_inputOri(seg,inputItem)
-          / sum(fishery $ segment_fishery(seg,fishery), p_effortOri(fishery))
-    );
+*loop(seg,
+*    p_inputPerEffort(f,inputItem) $ segment_fishery(seg,f)
+*        = p_inputOri(seg,inputItem)
+*          / sum(fishery $ segment_fishery(seg,fishery), p_effortOri(fishery))
+*    );
 
 
 
@@ -190,7 +194,7 @@ else
 );
 
 * --- Assert that cost shares add up to "1" within some tolerance
-problem_fishery(f) $ [abs(sum(varCost, p_varCostOriShare(f,varCost)) - 1) gt 0.00001] = yes;
+problem_fishery(f) $ [abs(sum(VariableInput, p_varCostOriShare(f,VariableInput)) - 1) gt 0.00001] = yes;
 
 if(card(problem_fishery),
     execute_unload "%ERROR_FILE%";
@@ -264,6 +268,7 @@ OPTION NLP=CONOPT;
 * If this is an estimation run: include a module that estimates parameters.
 * This has to come after the scenario file, where the policy equations are defined
 $IF %programMode%==estimation $INCLUDE "include_files\estimate_parameters.gms"
+
 
 
 
@@ -373,14 +378,14 @@ p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(c
 
 
 *   Report variable cost of each cost category using total varCost times the cost shares including shift factors
-loop((resLabel,varCost) $ sameas(resLabel,varCost),
+loop((resLabel,VariableInput) $ sameas(resLabel,VariableInput),
         p_fiskresultat(f,"allSpecies",resLabel,"sim")
             =   (pv_varCostConst.l(f)*v_effortAnnual.l(f) + 1/2*pv_varCostSlope.l(f)*sqr(v_effortAnnual.l(f)))
 *                 ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
 *                     In the baseline scenario, the shifters must be zero and the shares add up to 1
-                * p_varCostOriShare(f,varCost)
-                * (1 + p_varCostPriceShift(f,varCost))
-                * (1 + p_varCostQuantShift(f,varCost));
+                * p_varCostOriShare(f,VariableInput)
+                * (1 + p_varCostPriceShift(f,VariableInput))
+                * (1 + p_varCostQuantShift(f,VariableInput));
     );
 
 *   Report input use indirectly by dividing variable cost by the price found in calibration
@@ -420,6 +425,11 @@ p_fiskResultat(f,s,"totalSalesRevenues","sim")
 *   Rapportera dualv�rden (Lagrange-funktionens partialderivator m.a.p. effortannual)
 p_fiskResultat(fisheryDomain,"allSpecies",dualResult,"sim") $ p_reportDualsFishery(fisheryDomain,dualResult)
     = p_reportDualsFishery(fisheryDomain,dualResult);
+    
+* report input and output prices and quantities
+p_fiskResultat(fisheryDomain,speciesDomain,resLabel,"sim")$p_InputOutputReport(fisheryDomain, speciesDomain,resLabel)
+   = p_InputOutputReport(fisheryDomain, speciesDomain,resLabel) ;
+
 
 *   L�gg till l�nsamhetsresultaten per fiske
 *p_fiskresultat(f,"total","days")
@@ -435,7 +445,8 @@ EXECUTE_UNLOAD "%resDir%\simulation\%runtype%_%scenario_path_underscores%%ResId%
                                                       p_reportDualsFisheryQuota
                                                       fisheryDomain
                                                       speciesDomain
-                                                      p_solutionStats;
+                                                      p_solutionStats
+                                                      p_InputOutputReport;
 
 
 * Skriv ut alla resultat f�r att kolla hur det blev

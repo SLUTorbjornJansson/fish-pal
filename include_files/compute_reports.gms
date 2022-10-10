@@ -22,7 +22,7 @@ p_profitFishery(f,"totalContrMarg") = p_profitFishery(f,"totalSalesRevenues")
 
 *   F�r�dlingsv�rde (value added)
 
-p_VCshareLab(f) = [p_varCostOri(f,"VC_LABOUR")+ p_varCostOri(f,"VC_UNPAIDLABOUR")] / SUM(varCost, p_varCostOri(f,varCost)) ;
+p_VCshareLab(f) = [p_varCostOri(f,"PaidLabour")+ p_varCostOri(f,"UnpaidLabour")] / SUM(VariableInput, p_varCostOri(f,VariableInput)) ;
 
 p_profitFishery(f,"totalGrossVA") = p_profitFishery(f,"totalSalesRevenues")
                                     + p_profitFishery(f,"totalVariableCosts")*(1-p_VCshareLab(f));
@@ -197,4 +197,22 @@ p_reportDualsFishery(fisheryDomain,dualResult)
     / SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), v_effortAnnual.L(fishery));
 *p_reportDualsFishery(fisheryDomain,dualResult) $ [not fishery(fisheryDomain)]
 *         = weightedMean(fisheryDomain_fishery(fisheryDomain,f),p_reportDualsFishery(f,dualResult),v_effortAnnual.L(f));
+
+
+* Report that reports input and output quantities, prices and revenue/cost (i.e. p*q)
+
+p_InputOutputReport(f, VariableInput, "PQ") =  (pv_varCostConst.L(f)*v_effortAnnual.L(f) + 1/2*pv_varCostSlope.L(f)*sqr(v_effortAnnual.L(f)))
+*       ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
+*           In the baseline scenario, the shifters must be zero and the shares add up to 1
+               * p_varCostOriShare(f,VariableInput)
+                       *(1 + p_varCostPriceShift(f,VariableInput))
+                       *(1 + p_varCostQuantShift(f,VariableInput)) ;
+                       
+p_InputOutputReport(f, VariableInput, "P")  = (p_InputPrice(f, VariableInput) *(1 + p_varCostPriceShift(f,VariableInput))) ;
+p_InputOutputReport(f, VariableInput, "Q")  = p_InputOutputReport(f, VariableInput, "PQ") / (p_InputPrice(f, VariableInput) *(1 + p_varCostPriceShift(f,VariableInput))) ;
+
+p_InputOutputReport(fisheryDomain, VariableInput, "Q")$(NOT fishery(fisheryDomain)) = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_InputOutputReport(fishery,VariableInput, "Q")) ;
+p_InputOutputReport(fisheryDomain, VariableInput, "PQ")$(NOT fishery(fisheryDomain)) = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_InputOutputReport(fishery,VariableInput, "PQ")) ;
+p_InputOutputReport(fisheryDomain, VariableInput, "P")$(sum(f $ fisheryDomain_fishery(fisheryDomain,f), 1) ge 1) = p_InputOutputReport(fisheryDomain,VariableInput, "PQ") / p_InputOutputReport(fisheryDomain,VariableInput, "Q");
+
 

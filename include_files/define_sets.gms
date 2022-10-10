@@ -30,11 +30,11 @@ SETS
     s_effortGroup "List of elements for EffortGroup"
     gearGroup   "Groups of gear, for instance fixed gear"
 
-*   Cost items
-    s_varCost   "Variable cost items"
-    s_fixCost   "Fixed cost items"
+*   Input items (items to use for quantities and costs)
+    s_VariableInput   "Variable cost items"
+    s_FixInput   "Fixed cost items. Do not have p and q for this so keep as cost"
 
-    inputItem "Various indicators on employment and fuel use"
+    
     ;
 
 ALIAS(segment,seg);
@@ -47,8 +47,8 @@ ALIAS(fishery,f);
 
 * L�s in set fr�n GDX-filen
 $LOAD s_segment=segment s_gear=gear s_area=area s_species=species
-$LOAD s_fishery=fishery s_quotaArea=quotaArea s_varCost=varCost s_fixCost=fixCost period s_catchQuotaName=catchQuotaName
-$LOAD s_effortGroup=effortGroup gearGroup inputItem
+$LOAD s_fishery=fishery s_quotaArea=quotaArea s_VariableInput=VariableInput s_FixInput=FixInput period s_catchQuotaName=catchQuotaName
+$LOAD s_effortGroup=effortGroup gearGroup 
 
 * Skapa ett set som inneh�ller "species UNION catchQuotaName", att ha som dom�n f�r vissa parametrar (f�r resultatfiler)
 * F�r att klara UNIONEN anv�nder vi tricket "$ONMULTI" f�r att l�gga till nya delvis �verlappande element
@@ -59,7 +59,7 @@ $ONMULTI
 * Skapa en dom�n, dvs ett set som kan anv�ndas i deklarationer i GAMS, f�r species, catchQuotaName
 * Det kr�vs tv� rader eftersom vissa element i species upprepas i catchQuotaName.
 SETS
-    speciesDomain(*) "L�gg till species" /allSpecies "Alla arter",SET.s_species /
+    speciesDomain(*) "L�gg till species" /allSpecies "Alla arter",SET.s_species, set.s_FixInput, set.s_VariableInput /
     speciesDomain(*) "L�gg till catchQuotaName" /SET.s_catchQuotaName,SET.s_area /
 
     fisheryDomain(*) "L�gg till fishery, segment mm" /total "Alla fisketyper", na "Not applicable or not used", SET.s_fishery,SET.s_segment,SET.s_gear,SET.s_area/
@@ -78,9 +78,9 @@ SETS
     effortGroup(fisheryDomain) "Groups of fisheries that are fall under the same effort regulation" /SET.s_effortGroup/
 
 * ... Variabla kostnader plus total variabel kostnad
-    cost(*)    "Kostnader: fasta, r�rliga, summor" /SET.s_fixCost, SET.s_varCost/
-    fixCost(cost) "Fasta kostnader" /SET.s_fixCost/
-    varCost(cost) "Variabla kostnader plus total variabel kostnad " /SET.s_varCost/
+    Input(speciesDomain)    "Kostnader: fasta, r�rliga, summor" /SET.s_FixInput, SET.s_VariableInput/
+    FixInput(Input) "Fasta kostnader" /SET.s_FixInput/
+    VariableInput(Input) "Variabla kostnader plus total variabel kostnad " /SET.s_VariableInput/
     ;
 $OFFMULTI
 
@@ -170,6 +170,9 @@ sets
         p_pricesA "Price of Sort A, used in simulation"
         p_pricesB "Price of Sort B, used in simulation"
         p_subsidyPerDAS "Subsidy per DAS (compensation for seal damage)"
+        P "price for input or output"
+        Q "quantity for input or output"
+        PQ "Cost/Revenue for input or output"
 
         totalSalesRevenues "Total revenues from fish sales"
         totalVariableCosts "Total variable costs"
@@ -192,8 +195,8 @@ sets
         avePMP           "Income from PMP term per DAS"
 
 *       Items for input use(employment and fuel)
-        set.inputItem
-        set.varCost
+
+        set.VariableInput
 
 *       Items for dual report
         set.s_dualResult
