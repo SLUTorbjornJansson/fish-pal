@@ -88,6 +88,11 @@ $set fileNameForSetDefnitions %datDir%\inData.gdx
 $include "include_files\define_sets.gms"
 
 
+* --- Include the following line to generate a new xml file for the GUI
+*     containing explanations and codes for the various items
+*$include "include_files\generate_dimdefs.gms"
+
+
 *##############################################################################
 * GET THE BASELINE DATA FROM THE DATABASE
 *##############################################################################
