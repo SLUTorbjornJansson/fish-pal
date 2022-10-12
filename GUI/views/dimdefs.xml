@@ -356,7 +356,7 @@
    <product><key>Berggylta</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Bergtunga</key><sel>species,all</sel></product>
    <product><key>Blackfisk</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>BlavitlingKolmule</key><sel>species,quotaSpecies,all</sel></product>
+   <product><key>BlavitlingKolmule</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
    <product><key>Braxen</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Fjarsing</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Gadda</key><sel>species,quotaSpecies,all</sel></product>
@@ -371,57 +371,57 @@
    <product><key>Knaggrocka</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Kolja</key><sel>species,all</sel></product>
    <product><key>Krabbtaska</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Kummel</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Langa</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Lax</key><sel>species,quotaSpecies,all</sel></product>
+   <product><key>Kummel</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
+   <product><key>Langa</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
+   <product><key>Lax</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
    <product><key>Lerskadda</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Lubb</key><sel>species,quotaSpecies,all</sel></product>
+   <product><key>Lubb</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
    <product><key>Lyrtorsk</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Makrill</key><sel>species,all</sel></product>
-   <product><key>Marulk</key><sel>species,quotaSpecies,all</sel></product>
+   <product><key>Marulk</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
    <product><key>Mort</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Nordhavsraka</key><sel>species,quotaSpecies,all</sel></product>
+   <product><key>Nordhavsraka</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
    <product><key>Pigghaj</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Piggvar</key><sel>species,quotaSpecies,all</sel></product>
+   <product><key>Piggvar</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
    <product><key>Rodspotta</key><sel>species,all</sel></product>
    <product><key>Rodtunga</key><sel>species,all</sel></product>
    <product><key>Sandskadda</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>SikFiskar</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Sikloja</key><sel>species,quotaSpecies,all</sel></product>
+   <product><key>Sikloja</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
    <product><key>Sill</key><sel>species,all</sel></product>
    <product><key>Sjurygg</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Skarpsill</key><sel>species,all</sel></product>
    <product><key>Skrubskadda</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Slatvar</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Spiggar</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Taggmakrill</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Tobisar</key><sel>species,quotaSpecies,all</sel></product>
+   <product><key>Taggmakrill</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
+   <product><key>Tobisar</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
    <product><key>Torsk</key><sel>species,all</sel></product>
    <product><key>Trollkrabba</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Valthornssnacka</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Vitling</key><sel>species,all</sel></product>
    <product><key>Vitlinglyra</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Tunga</key><sel>species,quotaSpecies,all</sel></product>
+   <product><key>Tunga</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
    <product><key>Oring</key><sel>species,quotaSpecies,all</sel></product>
-   <product><key>Bergtunga_Rodtunga</key><sel>quotaSpecies,all</sel></product>
-   <product><key>GrasejKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>GrasejEjKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>HavskraftaKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>HavskraftaEjKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>KoljaKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>KoljaEjKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>MakrillKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>MakrillEjKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>RodspottaKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>RodspottaEjKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>SillKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>SillEjKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>SkarpsillKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>SkarpsillEjKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>TorskKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>TorskEjKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>VitlingKust</key><sel>quotaSpecies,all</sel></product>
-   <product><key>VitlingEjKust</key><sel>quotaSpecies,all</sel></product>
+   <product><key>Bergtunga_Rodtunga</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>GrasejKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>GrasejEjKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>HavskraftaKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>HavskraftaEjKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>KoljaKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>KoljaEjKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>MakrillKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>MakrillEjKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>RodspottaKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>RodspottaEjKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>SillKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>SillEjKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>SkarpsillKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>SkarpsillEjKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>TorskKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>TorskEjKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>VitlingKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
+   <product><key>VitlingEjKust</key><sel>quotaSpecies,hasQuota,all</sel></product>
 
    <!-- Inputs -->
    <product><key>PaidLabour</key><sel>variableInput,input,all</sel></product>
@@ -465,6 +465,7 @@
    <activity><key>pv_delta</key><sel>[all]</sel><itemName></itemName></activity>
    <activity><key>v_varCostAve</key><sel>[all]</sel><itemName></itemName></activity>
    <activity><key>p_TACOri</key><sel>[all]</sel><itemName></itemName></activity>
+   <activity><key>TACadj</key><sel>[all]</sel><itemName></itemName></activity>
    <activity><key>p_landingObligation</key><sel>[all]</sel><itemName></itemName></activity>
    <activity><key>pv_maxEffFishery</key><sel>[all]</sel><itemName></itemName></activity>
    <activity><key>pv_kwh</key><sel>[all]</sel><itemName></itemName></activity>

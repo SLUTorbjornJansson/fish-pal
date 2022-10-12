@@ -86,6 +86,8 @@ loop(speciesDomain $ [species(speciesDomain) or catchQuotaName(speciesDomain)],
     put "%s%<product><key>",speciesDomain.tl:0,"</key><sel>";
     if(species(speciesDomain), put "species,");
     if(catchQuotaName(speciesDomain), put "quotaSpecies,");
+*   --- Add a selection label indicating if this species actually has a quota in some quotaArea
+    if(sum((catchQuotaName,quotaArea) $ sameas(speciesDomain,catchQuotaName), p_TACOri(catchQuotaName,quotaArea)), put "hasQuota,");
     put "all</sel></product>"/;
 );
 put /;

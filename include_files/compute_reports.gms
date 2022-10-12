@@ -80,6 +80,26 @@ p_profitFishery(fisheryDomain,"avePMP")           $ p_fiskresultat(fisheryDomain
 
 
 *###############################################################################
+*   Rapportera fyllgrad och skuggpris på kvoter, hopplockat från p_fiskresultat
+*###############################################################################
+
+set quotaReport_from_fiskResultat(resLabel,resLabel,statItem) "Mapping from fiskresultat to p_quotaReport"/
+    p_TACOri.(p_TACOri.sim)     "Quota in regulation"
+    TACadj.(TACadj.sim)         "Quota after calibration"
+    dualTAC.(e_catchQuota.M)    "Shadow price of the catch quota"
+    v_landings.(v_landings.sim) "Landings"
+    v_catch.(v_catch.sim)       "Catch"
+    /;
+
+*   Copy results from the results parameter as per the mapping above, but only if there is a quota
+p_quotaReport(quotaArea,catchQuotaName,resLabel) $ p_TACori(catchQuotaName,quotaArea)
+    = sum((resLabel1,statItem) $ quotaReport_from_fiskResultat(resLabel,resLabel1,statItem),
+            p_fiskResultat(quotaArea,catchQuotaName,resLabel1,statItem));
+
+
+
+
+*###############################################################################
 *   Rapportera effortrestriktioner
 *###############################################################################
 

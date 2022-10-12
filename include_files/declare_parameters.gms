@@ -76,7 +76,8 @@ PARAMETER p_reportDualsFishery(fisheryDomain,resLabel) "Resultat f�r den margi
 PARAMETER p_kwhPerEffortGroupOri(effortGroup,area,*);
 PARAMETER p_kwhPerFisheryInEffortGroup(fishery,effortGroup,area,*);
 
-PARAMETER p_InputOutputReport(fisheryDomain, speciesDomain, *) ;
+PARAMETER p_InputOutputReport(fisheryDomain, speciesDomain, *) "Inputs and outputs with prices and quantities";
+PARAMETER p_quotaReport(fisheryDomain,speciesDomain,resLabel) "Collecting results on quota fill rates";
 
 
 *###############################################################################

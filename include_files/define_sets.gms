@@ -163,6 +163,7 @@ sets
         v_varCostAve
 
         p_TACOri        "Original (regulation) catch quota per species and region"
+        TACadj          "Effective TAC adjusted in calibration (p_TACori*pv_TACadjustment)"
         p_landingObligation "Landing obligation per fishery and species"
         pv_maxEffFishery
         pv_kwh
@@ -206,6 +207,7 @@ sets
     dualResult(resLabel) "Items for dual report" /set.s_dualResult/
     ;
 
+alias(resLabel,resLabel1);
 
 *   Skapa set som underl�ttar aggregeringen
 SET addVars(resLabel) "Variabler som kan adderas utan att bli meningsl�sa (kvantiteter)" /v_effortAnnual,v_catch,v_varCostAve/;

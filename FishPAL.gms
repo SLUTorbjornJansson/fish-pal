@@ -88,10 +88,6 @@ $set fileNameForSetDefnitions %datDir%\inData.gdx
 $include "include_files\define_sets.gms"
 
 
-* --- Include the following line to generate a new xml file for the GUI
-*     containing explanations and codes for the various items
-*$include "include_files\generate_dimdefs.gms"
-
 
 *##############################################################################
 * GET THE BASELINE DATA FROM THE DATABASE
@@ -142,6 +138,11 @@ p_catchOri(f,s) = p_landingsOri(f,s)+p_discardsOri(f,s);
 $include "include_files\define_handy_sets.gms"
 
 
+* --- Include the following line to generate a new xml file for the GUI
+*     containing explanations and codes for the various items
+$include "include_files\generate_dimdefs.gms"
+
+
 *##############################################################################
 *  Compute share of each variable cost in total variable cost 
 *##############################################################################
@@ -152,18 +153,6 @@ p_varCostOriShare(f,VariableInput) = sum(seg $ segment_fishery(seg,f), p_costOri
 
 *execute_unload "allt.gdx" ;
 *$stop
-
-*##############################################################################
-*  Compute how much fuel and staff is used per day at sea in each fishery
-*  This is kept constant in simulation and used for reporting indicators
-*##############################################################################
-
-*loop(seg,
-*    p_inputPerEffort(f,inputItem) $ segment_fishery(seg,f)
-*        = p_inputOri(seg,inputItem)
-*          / sum(fishery $ segment_fishery(seg,fishery), p_effortOri(fishery))
-*    );
-
 
 
 
@@ -378,6 +367,7 @@ p_fiskresultat(f,"allSpecies","v_effortAnnual","UP")    = v_effortAnnual.UP(f);
 p_fiskresultat(f,"allSpecies","v_effortAnnual","M")     = v_effortAnnual.M(f);
 p_fiskresultat(f,"allSpecies","v_varCostAve","sim")     = v_varCostAve.L(f);
 p_fiskResultat(quotaArea,catchQuotaName,"p_TACOri","sim") = p_TACOri(catchQuotaName,quotaArea);
+p_fiskResultat(quotaArea,catchQuotaName,"TACadj","sim") = p_TACOri(catchQuotaName,quotaArea)*pv_TACAdjustment.l(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","M") = e_catchQuota.M(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(catchQuotaName,quotaArea);
 
@@ -451,7 +441,8 @@ EXECUTE_UNLOAD "%resDir%\simulation\%runtype%_%scenario_path_underscores%%ResId%
                                                       fisheryDomain
                                                       speciesDomain
                                                       p_solutionStats
-                                                      p_InputOutputReport;
+                                                      p_InputOutputReport
+                                                      p_quotaReport;
 
 
 * Skriv ut alla resultat f�r att kolla hur det blev

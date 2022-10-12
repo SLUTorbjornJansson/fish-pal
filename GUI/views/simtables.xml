@@ -116,36 +116,47 @@
       <name>Quotas</name>
       <defpivot>0PRA</defpivot>
       <regionSel>quotaArea</regionSel>
-      <productSel>quotaSpecies</productSel>
+      <productSel>hasQuota</productSel>
       <productText>Quota name</productText>
       <dim5Text>Statistic</dim5Text>
       <itemDim>activity</itemDim>
       <item>
-        <itemName>Quota</itemName>
-        <key>e_catchQuota</key>
-        <unit>Tons per year</unit>
-      </item>
-      <item>
-        <itemName>Baseline quota</itemName>
-        <key>p_TACori</key>
+        <itemName>Quota after calibration</itemName>
+        <key>TACadj</key>
         <unit>Tons per year</unit>
       </item>
 
-      <item>
-        <itemName>Catch</itemName>
-        <key>v_catch</key>
-        <unit>Tons per year</unit>
-      </item>
       <item>
         <itemName>Landings</itemName>
         <key>v_landings</key>
         <unit>Tons per year</unit>
       </item>
+	  
+      <item>
+        <itemName>Shadow price of quota</itemName>
+        <key>dualTAC</key>
+        <unit>SEK/kg</unit>
+      </item>	 	  
+	  
+      <item>
+        <itemName>Catch</itemName>
+        <key>v_catch</key>
+        <unit>Tons per year</unit>
+      </item>
+	  
+      <item>
+        <itemName>Quota in data file</itemName>
+        <key>p_TACori</key>
+        <unit>Tons per year</unit>
+      </item>	  
+
       <item>
         <itemName>Discards</itemName>
         <key>v_discards</key>
         <unit>Tons per year</unit>
       </item>
+	  
+ 
     </table>
 
 
