@@ -112,7 +112,7 @@ put /;
 
 put "%s%<!-- ResLabel -->"/;
 loop(resLabel,
-    put "%s%<activity><key>",resLabel.tl:0,"</key><sel>[all]</sel><itemName></itemName></activity>" /;
+    put "%s%<activity><key>",resLabel.tl:0,"</key><sel>[all]</sel><itemName>",resLabel.te(resLabel):0,"</itemName></activity>" /;
 );
 put /;
 

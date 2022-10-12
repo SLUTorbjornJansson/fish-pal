@@ -231,8 +231,28 @@ p_InputOutputReport(f, VariableInput, "PQ") =  (pv_varCostConst.L(f)*v_effortAnn
 p_InputOutputReport(f, VariableInput, "P")  = (p_InputPrice(f, VariableInput) *(1 + p_varCostPriceShift(f,VariableInput))) ;
 p_InputOutputReport(f, VariableInput, "Q")  = p_InputOutputReport(f, VariableInput, "PQ") / (p_InputPrice(f, VariableInput) *(1 + p_varCostPriceShift(f,VariableInput))) ;
 
-p_InputOutputReport(fisheryDomain, VariableInput, "Q")$(NOT fishery(fisheryDomain)) = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_InputOutputReport(fishery,VariableInput, "Q")) ;
-p_InputOutputReport(fisheryDomain, VariableInput, "PQ")$(NOT fishery(fisheryDomain)) = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_InputOutputReport(fishery,VariableInput, "PQ")) ;
-p_InputOutputReport(fisheryDomain, VariableInput, "P")$(sum(f $ fisheryDomain_fishery(fisheryDomain,f), 1) ge 1) = p_InputOutputReport(fisheryDomain,VariableInput, "PQ") / p_InputOutputReport(fisheryDomain,VariableInput, "Q");
+p_InputOutputReport(f,s,"Q") = v_landings.l(f,s);
+p_InputOutputReport(f,s,"PQ") = v_sortA.l(f,s)*p_pricesA(f,s) + v_sortB.l(f,s)*p_pricesB(s);
+p_InputOutputReport(f,s,"P") $ p_InputOutputReport(f,s,"Q") = p_InputOutputReport(f,s,"PQ")/p_InputOutputReport(f,s,"Q");
+
+* Aggregate from io to aggregates of it
+p_InputOutputReport(f,ioAggregate,"PQ")
+    = sum(speciesDomain $ ioAggregate_speciesDomain(ioAggregate,speciesDomain), p_inputOutputReport(f,speciesDomain,"PQ"));
+    
+p_InputOutputReport(f,ioAggregate,"Q")
+    = sum(speciesDomain $ ioAggregate_speciesDomain(ioAggregate,speciesDomain), p_inputOutputReport(f,speciesDomain,"Q"));
+
+p_InputOutputReport(f,ioAggregate,"P") $ p_InputOutputReport(f,ioAggregate,"PQ")
+    = p_InputOutputReport(f,ioAggregate,"PQ") / p_InputOutputReport(f,ioAggregate,"Q");
+
+* Aggregate, to do for outputs! And where are the fixInputs?
+p_InputOutputReport(fisheryDomain, speciesDomain, "Q")$(NOT fishery(fisheryDomain))
+    = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_InputOutputReport(fishery,speciesDomain, "Q")) ;
+    
+p_InputOutputReport(fisheryDomain, speciesDomain, "PQ")$(NOT fishery(fisheryDomain))
+    = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_InputOutputReport(fishery,speciesDomain, "PQ")) ;
+
+p_InputOutputReport(fisheryDomain, speciesDomain, "P") $ [(sum(f $ fisheryDomain_fishery(fisheryDomain,f), 1) ge 1) and p_InputOutputReport(fisheryDomain, speciesDomain, "PQ")]
+    = p_InputOutputReport(fisheryDomain,speciesDomain, "PQ") / p_InputOutputReport(fisheryDomain,speciesDomain, "Q");
 
 

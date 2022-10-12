@@ -59,11 +59,12 @@ $ONMULTI
 * Skapa en dom�n, dvs ett set som kan anv�ndas i deklarationer i GAMS, f�r species, catchQuotaName
 * Det kr�vs tv� rader eftersom vissa element i species upprepas i catchQuotaName.
 SETS
-    speciesDomain(*) "L�gg till species" /allSpecies "Alla arter",SET.s_species, set.s_FixInput, set.s_VariableInput /
-    speciesDomain(*) "L�gg till catchQuotaName" /SET.s_catchQuotaName,SET.s_area /
+    s_ioAggregate(*) "Aggregates of inputs and outputs" /allSpecies "Alla arter", none "Nothing", variableInputs "Variable inputs", fixInputs "Fix inputs", inputs "All inputs", TB1 "Revenues minus variable costs", TB2 "TB1 minus fix costs"/
+    speciesDomain(*) "Lägg till species" /set.s_ioAggregate,SET.s_species, set.s_FixInput, set.s_VariableInput /
+    speciesDomain(*) "Lägg till catchQuotaName" /SET.s_catchQuotaName,SET.s_area /
 
-    fisheryDomain(*) "L�gg till fishery, segment mm" /total "Alla fisketyper", na "Not applicable or not used", SET.s_fishery,SET.s_segment,SET.s_gear,SET.s_area/
-    fisheryDomain(*) "L�gg till quotaArea" /SET.s_quotaArea, SET.s_effortGroup/
+    fisheryDomain(*) "Lägg till fishery, segment mm" /total "Alla fisketyper", na "Not applicable or not used", SET.s_fishery,SET.s_segment,SET.s_gear,SET.s_area/
+    fisheryDomain(*) "Lägg till quotaArea" /SET.s_quotaArea, SET.s_effortGroup/
 
 * Nu kan vi g�ra species och catchQuotaName som delm�ngder av speciesDomain
     species(speciesDomain) "L�gg till element i species" /SET.s_species /
@@ -81,6 +82,7 @@ SETS
     Input(speciesDomain)    "Kostnader: fasta, r�rliga, summor" /SET.s_FixInput, SET.s_VariableInput/
     FixInput(Input) "Fasta kostnader" /SET.s_FixInput/
     VariableInput(Input) "Variabla kostnader plus total variabel kostnad " /SET.s_VariableInput/
+    ioAggregate(speciesDomain) "Aggregates of individual inputs and outputs" /set.s_ioAggregate/;
     ;
 $OFFMULTI
 
@@ -90,7 +92,7 @@ $OFFMULTI
 *   f�r att kunna anv�nda dessa som dom�n �t kors-setten.
 
 SETS
-    f_seg_g_a(fishery,segment,gear,area)  "Fiskart och anv�ndning"
+    f_seg_g_a(fishery,segment,gear,area)  "Fiske kopplat till segment, redskap och fiskeområde"
     quotaArea_area(quotaArea,area)          "Composition of quota regions in terms of geographical regions"
     catchQuotaName_species(catchQuotaName,s)    "Composition of quota regions in terms of geographical regions"
     segment_fishery(segment,fishery)        "Segment to which each fishery belongs"
@@ -107,6 +109,13 @@ SETS
 
 *   Definitioner av olika aggregat som �r smidiga att anv�nda vid rapportering
     fisheryDomain_fishery(fisheryDomain,fishery) "Mapping of fishery to aggregate"
+    
+    ioAggregate_speciesDomain(ioAggregate,speciesDomain) "Mapping items from speciesDomain to aggregate" /
+    allSpecies.(#species)
+    variableInputs.(#VariableInput)
+    fixInputs.(#FixInput)
+    inputs.(#Input)
+    /;
 ;
 
 * L�s in tuples fr�n GDX-filen
@@ -145,15 +154,15 @@ sets
         /
 
     resLabel(*)    "Result label, such as name of parameter, variable, equation or other model item" /
-        v_effortAnnual
-        v_catch
+        v_effortAnnual  "Days at sea"
+        v_catch         "Catch"
         v_landings
         v_discards
-        v_sortA
-        v_sortB
+        v_sortA         "High quality product (standard price)"
+        v_sortB         "Fish for industrial processing into fish meal (low price)"
         v_estimationMetric
 
-        e_CatchQuota
+        e_CatchQuota    "Quota equation"
         e_effRestrSeg
         e_effRestrFishery
 

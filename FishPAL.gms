@@ -373,15 +373,15 @@ p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(c
 
 
 *   Report variable cost of each cost category using total varCost times the cost shares including shift factors
-loop((resLabel,VariableInput) $ sameas(resLabel,VariableInput),
-        p_fiskresultat(f,"allSpecies",resLabel,"sim")
-            =   (pv_varCostConst.l(f)*v_effortAnnual.l(f) + 1/2*pv_varCostSlope.l(f)*sqr(v_effortAnnual.l(f)))
-*                 ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
-*                     In the baseline scenario, the shifters must be zero and the shares add up to 1
-                * p_varCostOriShare(f,VariableInput)
-                * (1 + p_varCostPriceShift(f,VariableInput))
-                * (1 + p_varCostQuantShift(f,VariableInput));
-    );
+*loop((resLabel,VariableInput) $ sameas(resLabel,VariableInput),
+*        p_fiskresultat(f,"allSpecies",resLabel,"sim")
+*            =   (pv_varCostConst.l(f)*v_effortAnnual.l(f) + 1/2*pv_varCostSlope.l(f)*sqr(v_effortAnnual.l(f)))
+**                 ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
+**                     In the baseline scenario, the shifters must be zero and the shares add up to 1
+*                * p_varCostOriShare(f,VariableInput)
+*                * (1 + p_varCostPriceShift(f,VariableInput))
+*                * (1 + p_varCostQuantShift(f,VariableInput));
+*    );
 
 *   Report input use indirectly by dividing variable cost by the price found in calibration
 
@@ -424,6 +424,7 @@ p_fiskResultat(fisheryDomain,"allSpecies",dualResult,"sim") $ p_reportDualsFishe
 * report input and output prices and quantities
 p_fiskResultat(fisheryDomain,speciesDomain,resLabel,"sim")$p_InputOutputReport(fisheryDomain, speciesDomain,resLabel)
    = p_InputOutputReport(fisheryDomain, speciesDomain,resLabel) ;
+
 
 
 *   L�gg till l�nsamhetsresultaten per fiske
