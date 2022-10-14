@@ -70,7 +70,7 @@ SCALARS
 
 PARAMETER p_profitFishery(fisheryDomain,resLabel) "Total profit and profit per day of effort, disaggregated into revenues and costs";
 PARAMETER p_VCshareLab(f) "share of VC that is paid and unpaid labour, used for correct GVA calculation" ;
-PARAMETER p_reportDualsFisheryQuota(fisheryDomain,quotaArea,catchQuotaName,*) "F�rklaring av marginell kvotr�nta per fiske";
+PARAMETER p_reportDualsFisheryQuota(fisheryDomain,quotaArea,catchQuotaName,resLabel) "F�rklaring av marginell kvotr�nta per fiske";
 PARAMETER p_marginalCatch(f,s);
 PARAMETER p_reportDualsFishery(fisheryDomain,resLabel) "Resultat f�r den marginella l�nsamheten i varje fiske, inklusive skuggpriser";
 PARAMETER p_kwhPerEffortGroupOri(effortGroup,area,*);

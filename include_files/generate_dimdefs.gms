@@ -76,7 +76,17 @@ put /;
 
 
 * --- Special key "allSpecies"
-put "%s%<product><key>allSpecies</key><itemName>All species</itemName><sel>[allSpecies,all]</sel></product>"/;
+*put "%s%<product><key>allSpecies</key><itemName>All species</itemName><sel>[allSpecies,all]</sel></product>"/;
+*put /;
+
+* --- Write out aggregates of inputs or outputs
+put "%s%<!-- ioAggregates -->"/;
+loop(ioAggregate,
+    put "%s%<product><key>",ioAggregate.tl:0,"</key><sel>";
+    if(sameas(ioAggregate,"allSpecies"), put "allSpecies,");
+    
+    put "ioAggregate,all</sel></product>"/;
+);
 put /;
   
 
@@ -105,6 +115,8 @@ put /;
 
 
 
+
+
 * -------------------------------------------------------------------------------------------------
 put "%s%<!-- Third dimension of results parameter: variables, equations etc. -->"/;
 put /;
@@ -112,7 +124,9 @@ put /;
 
 put "%s%<!-- ResLabel -->"/;
 loop(resLabel,
-    put "%s%<activity><key>",resLabel.tl:0,"</key><sel>[all]</sel><itemName>",resLabel.te(resLabel):0,"</itemName></activity>" /;
+    put "%s%<activity><key>",resLabel.tl:0,"</key><sel>";
+    if(dualResult(resLabel), put "dualResult,");
+    put "all</sel><itemName>",resLabel.te(resLabel):0,"</itemName></activity>" /;
 );
 put /;
 

@@ -151,6 +151,11 @@ sets
         dualBoundEffortAnnual "Dual value of bound on effortAnnual"
         dualEffortRegulation "Dual value of Effort Regulation"
         sumOfDuals "Sum of the partials of the Lagrangean function"
+        
+*       Items for disaggregating dualTAC
+        marginalLandingA
+        marginalLandingB
+        shadowPriceQuota
         /
 
     resLabel(*)    "Result label, such as name of parameter, variable, equation or other model item" /
@@ -205,8 +210,7 @@ sets
         avePMP           "Income from PMP term per DAS"
 
 *       Items for input use(employment and fuel)
-
-        set.VariableInput
+*        set.input
 
 *       Items for dual report
         set.s_dualResult

@@ -219,7 +219,12 @@ p_reportDualsFishery(fisheryDomain,dualResult)
 *         = weightedMean(fisheryDomain_fishery(fisheryDomain,f),p_reportDualsFishery(f,dualResult),v_effortAnnual.L(f));
 
 
-* Report that reports input and output quantities, prices and revenue/cost (i.e. p*q)
+*###############################################################################
+* Report input and output quantities, prices and revenue/cost (i.e. p*q)
+*###############################################################################
+
+
+* --- Variabla kostnader
 
 p_InputOutputReport(f, VariableInput, "PQ") =  (pv_varCostConst.L(f)*v_effortAnnual.L(f) + 1/2*pv_varCostSlope.L(f)*sqr(v_effortAnnual.L(f)))
 *       ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
@@ -231,21 +236,16 @@ p_InputOutputReport(f, VariableInput, "PQ") =  (pv_varCostConst.L(f)*v_effortAnn
 p_InputOutputReport(f, VariableInput, "P")  = (p_InputPrice(f, VariableInput) *(1 + p_varCostPriceShift(f,VariableInput))) ;
 p_InputOutputReport(f, VariableInput, "Q")  = p_InputOutputReport(f, VariableInput, "PQ") / (p_InputPrice(f, VariableInput) *(1 + p_varCostPriceShift(f,VariableInput))) ;
 
+
+* --- Catch
+
 p_InputOutputReport(f,s,"Q") = v_landings.l(f,s);
 p_InputOutputReport(f,s,"PQ") = v_sortA.l(f,s)*p_pricesA(f,s) + v_sortB.l(f,s)*p_pricesB(s);
 p_InputOutputReport(f,s,"P") $ p_InputOutputReport(f,s,"Q") = p_InputOutputReport(f,s,"PQ")/p_InputOutputReport(f,s,"Q");
 
-* Aggregate from io to aggregates of it
-p_InputOutputReport(f,ioAggregate,"PQ")
-    = sum(speciesDomain $ ioAggregate_speciesDomain(ioAggregate,speciesDomain), p_inputOutputReport(f,speciesDomain,"PQ"));
-    
-p_InputOutputReport(f,ioAggregate,"Q")
-    = sum(speciesDomain $ ioAggregate_speciesDomain(ioAggregate,speciesDomain), p_inputOutputReport(f,speciesDomain,"Q"));
 
-p_InputOutputReport(f,ioAggregate,"P") $ p_InputOutputReport(f,ioAggregate,"PQ")
-    = p_InputOutputReport(f,ioAggregate,"PQ") / p_InputOutputReport(f,ioAggregate,"Q");
+* --- Aggregate from fisheries to aggregates of fisheries
 
-* Aggregate, to do for outputs! And where are the fixInputs?
 p_InputOutputReport(fisheryDomain, speciesDomain, "Q")$(NOT fishery(fisheryDomain))
     = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_InputOutputReport(fishery,speciesDomain, "Q")) ;
     
@@ -256,3 +256,31 @@ p_InputOutputReport(fisheryDomain, speciesDomain, "P") $ [(sum(f $ fisheryDomain
     = p_InputOutputReport(fisheryDomain,speciesDomain, "PQ") / p_InputOutputReport(fisheryDomain,speciesDomain, "Q");
 
 
+* --- Fixed costs are by definition only available for segments - add them to the report here
+
+p_InputOutputReport(seg, fixInput, "PQ") = p_costOri(seg,fixInput);
+p_InputOutputReport(seg, fixInput, "Q") = p_vesselsOri(seg);
+p_InputOutputReport(seg, fixInput, "P") $ p_InputOutputReport(seg, fixInput, "PQ")
+    = p_InputOutputReport(seg, fixInput, "PQ")/p_InputOutputReport(seg, fixInput, "Q");
+    
+
+* --- Aggregate fix costs manually, only to "total", since the aggregations above here start from fishery (no fix costs there)
+
+p_InputOutputReport("total", fixInput, "PQ") = sum(seg, p_InputOutputReport(seg, fixInput, "PQ"));
+p_InputOutputReport("total", fixInput, "Q") = sum(seg, p_InputOutputReport(seg, fixInput, "Q"));
+p_InputOutputReport("total", fixInput, "P") $ p_InputOutputReport("total", fixInput, "PQ")
+    = p_InputOutputReport("total", fixInput, "PQ")/p_InputOutputReport("total", fixInput, "Q");
+
+
+* --- Aggregate from io to aggregates of it
+
+p_InputOutputReport(fisheryDomain,ioAggregate,"PQ") = sum(speciesDomain $ ioAggregate_speciesDomain(ioAggregate,speciesDomain), p_inputOutputReport(fisheryDomain,speciesDomain,"PQ"));
+p_InputOutputReport(fisheryDomain,ioAggregate,"Q") = sum(speciesDomain $ ioAggregate_speciesDomain(ioAggregate,speciesDomain), p_inputOutputReport(fisheryDomain,speciesDomain,"Q"));
+p_InputOutputReport(fisheryDomain,ioAggregate,"P") $ p_InputOutputReport(fisheryDomain,ioAggregate,"PQ")
+    = p_InputOutputReport(fisheryDomain,ioAggregate,"PQ")/p_InputOutputReport(fisheryDomain,ioAggregate,"Q");
+
+
+* --- Profitability
+
+p_InputOutputReport(fisheryDomain,"TB1","PQ") = p_InputOutputReport(fisheryDomain,"allSpecies","PQ") - p_InputOutputReport(fisheryDomain,"variableInputs","PQ");
+p_InputOutputReport(fisheryDomain,"TB2","PQ") = p_InputOutputReport(fisheryDomain,"TB1","PQ") - p_InputOutputReport(fisheryDomain,"fixInputs","PQ");

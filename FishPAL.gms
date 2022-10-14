@@ -417,9 +417,14 @@ p_fiskResultat(fisheryDomain,"allSpecies",resLabel,"sim") $ p_profitFishery(fish
 p_fiskResultat(f,s,"totalSalesRevenues","sim")
     = v_sortA.L(f,s)*p_pricesAOri(f,s) + v_sortB.L(f,s)*p_pricesBOri(s)*p_landingObligation(f,s);
 
-*   Rapportera dualv�rden (Lagrange-funktionens partialderivator m.a.p. effortannual)
+*   Rapportera dualvärden (Lagrange-funktionens partialderivator m.a.p. effortannual)
 p_fiskResultat(fisheryDomain,"allSpecies",dualResult,"sim") $ p_reportDualsFishery(fisheryDomain,dualResult)
     = p_reportDualsFishery(fisheryDomain,dualResult);
+    
+*   Rapportera dualvärden per kvotområde
+p_fiskResultat(f,catchQuotaName,dualResult,"sim")
+    $ sum(quotaArea $ quotaArea_fishery(quotaArea,f), p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,dualResult))
+    = sum(quotaArea $ quotaArea_fishery(quotaArea,f), p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,dualResult));
     
 * report input and output prices and quantities
 p_fiskResultat(fisheryDomain,speciesDomain,resLabel,"sim")$p_InputOutputReport(fisheryDomain, speciesDomain,resLabel)

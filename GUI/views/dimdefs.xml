@@ -348,7 +348,14 @@
 
    <!-- Second dimension of results parameter: Species and aggregates of species (speciesDomain). -->
 
-   <product><key>allSpecies</key><itemName>All species</itemName><sel>[allSpecies,all]</sel></product>
+   <!-- ioAggregates -->
+   <product><key>allSpecies</key><sel>allSpecies,ioAggregate,all</sel></product>
+   <product><key>none</key><sel>ioAggregate,all</sel></product>
+   <product><key>variableInputs</key><sel>ioAggregate,all</sel></product>
+   <product><key>fixInputs</key><sel>ioAggregate,all</sel></product>
+   <product><key>inputs</key><sel>ioAggregate,all</sel></product>
+   <product><key>TB1</key><sel>ioAggregate,all</sel></product>
+   <product><key>TB2</key><sel>ioAggregate,all</sel></product>
 
    <!-- Species and catch quotas -->
    <product><key>Abborre</key><sel>species,quotaSpecies,all</sel></product>
@@ -435,65 +442,63 @@
    <!-- Third dimension of results parameter: variables, equations etc. -->
 
    <!-- ResLabel -->
-   <activity><key>PaidLabour</key><sel>[all]</sel><itemName>Labour cost</itemName></activity>
-   <activity><key>UnpaidLabour</key><sel>[all]</sel><itemName>Unpaid labour costs</itemName></activity>
-   <activity><key>Repair</key><sel>[all]</sel><itemName>Repair cost</itemName></activity>
-   <activity><key>Fuel_m3</key><sel>[all]</sel><itemName>Fuel cost</itemName></activity>
-   <activity><key>OtherInput</key><sel>[all]</sel><itemName>Other variable costs</itemName></activity>
-   <activity><key>dualMR</key><sel>[all]</sel><itemName>Marginal revenues</itemName></activity>
-   <activity><key>dualSubsidy</key><sel>[all]</sel><itemName>Marginal subsidy</itemName></activity>
-   <activity><key>dualVarCost</key><sel>[all]</sel><itemName>Variable costs</itemName></activity>
-   <activity><key>dualPMP</key><sel>[all]</sel><itemName>Marginal effect of PMP</itemName></activity>
-   <activity><key>dualTAC</key><sel>[all]</sel><itemName>Marginal quota rent</itemName></activity>
-   <activity><key>dualEffRestrSeg</key><sel>[all]</sel><itemName>Marginal cost of segment effort restriction</itemName></activity>
-   <activity><key>dualEffRestrFishery</key><sel>[all]</sel><itemName>Marginal cost of effort restriction per fishery, or season</itemName></activity>
-   <activity><key>dualBoundEffortAnnual</key><sel>[all]</sel><itemName>Dual value of bound on effortAnnual</itemName></activity>
-   <activity><key>dualEffortRegulation</key><sel>[all]</sel><itemName>Dual value of Effort Regulation</itemName></activity>
-   <activity><key>sumOfDuals</key><sel>[all]</sel><itemName>Sum of the partials of the Lagrangean function</itemName></activity>
-   <activity><key>v_effortAnnual</key><sel>[all]</sel><itemName>Days at sea</itemName></activity>
-   <activity><key>v_catch</key><sel>[all]</sel><itemName>Catch</itemName></activity>
-   <activity><key>v_landings</key><sel>[all]</sel><itemName>v_landings</itemName></activity>
-   <activity><key>v_discards</key><sel>[all]</sel><itemName>v_discards</itemName></activity>
-   <activity><key>v_sortA</key><sel>[all]</sel><itemName>High quality product (standard price)</itemName></activity>
-   <activity><key>v_sortB</key><sel>[all]</sel><itemName>Fish for industrial processing into fish meal (low price)</itemName></activity>
-   <activity><key>v_estimationMetric</key><sel>[all]</sel><itemName>v_estimationMetric</itemName></activity>
-   <activity><key>e_CatchQuota</key><sel>[all]</sel><itemName>Quota equation</itemName></activity>
-   <activity><key>e_effRestrSeg</key><sel>[all]</sel><itemName>e_effRestrSeg</itemName></activity>
-   <activity><key>e_effRestrFishery</key><sel>[all]</sel><itemName>e_effRestrFishery</itemName></activity>
-   <activity><key>pv_PMPconst</key><sel>[all]</sel><itemName>pv_PMPconst</itemName></activity>
-   <activity><key>pv_PMPslope</key><sel>[all]</sel><itemName>pv_PMPslope</itemName></activity>
-   <activity><key>pv_delta</key><sel>[all]</sel><itemName>pv_delta</itemName></activity>
-   <activity><key>v_varCostAve</key><sel>[all]</sel><itemName>v_varCostAve</itemName></activity>
-   <activity><key>p_TACOri</key><sel>[all]</sel><itemName>Original (regulation) catch quota per species and region</itemName></activity>
-   <activity><key>TACadj</key><sel>[all]</sel><itemName>Effective TAC adjusted in calibration (p_TACori*pv_TACadjustment)</itemName></activity>
-   <activity><key>p_landingObligation</key><sel>[all]</sel><itemName>Landing obligation per fishery and species</itemName></activity>
-   <activity><key>pv_maxEffFishery</key><sel>[all]</sel><itemName>pv_maxEffFishery</itemName></activity>
-   <activity><key>pv_kwh</key><sel>[all]</sel><itemName>pv_kwh</itemName></activity>
-   <activity><key>v_effortPerEffortGroup</key><sel>[all]</sel><itemName>v_effortPerEffortGroup</itemName></activity>
-   <activity><key>p_pricesA</key><sel>[all]</sel><itemName>Price of Sort A, used in simulation</itemName></activity>
-   <activity><key>p_pricesB</key><sel>[all]</sel><itemName>Price of Sort B, used in simulation</itemName></activity>
-   <activity><key>p_subsidyPerDAS</key><sel>[all]</sel><itemName>Subsidy per DAS (compensation for seal damage)</itemName></activity>
-   <activity><key>P</key><sel>[all]</sel><itemName>price for input or output</itemName></activity>
-   <activity><key>Q</key><sel>[all]</sel><itemName>quantity for input or output</itemName></activity>
-   <activity><key>PQ</key><sel>[all]</sel><itemName>Cost/Revenue for input or output</itemName></activity>
-   <activity><key>totalSalesRevenues</key><sel>[all]</sel><itemName>Total revenues from fish sales</itemName></activity>
-   <activity><key>totalVariableCosts</key><sel>[all]</sel><itemName>Total variable costs</itemName></activity>
-   <activity><key>totalContrMarg</key><sel>[all]</sel><itemName>Contribution Margin = revenues minus variable costs</itemName></activity>
-   <activity><key>totalGrossVA</key><sel>[all]</sel><itemName>Gross Value Added = revenues minus variable costs that are not labour</itemName></activity>
-   <activity><key>totalSubsidy</key><sel>[all]</sel><itemName>Total subsidy received</itemName></activity>
-   <activity><key>totalModifiedGrossVA</key><sel>[all]</sel><itemName>Modified Gross Value Added = Gross Value Added plus Subsidies</itemName></activity>
-   <activity><key>totalFixCosts</key><sel>[all]</sel><itemName>Total fixed costs (per vessel)</itemName></activity>
-   <activity><key>totalProfit</key><sel>[all]</sel><itemName>Revenues minus all costs</itemName></activity>
-   <activity><key>totalPMP</key><sel>[all]</sel><itemName>Income from PMP term</itemName></activity>
-   <activity><key>aveRevenues</key><sel>[all]</sel><itemName>Average revenues per DAS</itemName></activity>
-   <activity><key>aveVariableCosts</key><sel>[all]</sel><itemName>Total variable costs per DAS</itemName></activity>
-   <activity><key>aveContrMarg</key><sel>[all]</sel><itemName>Contribution Margin = revenues minus variable costs per DAS</itemName></activity>
-   <activity><key>aveGrossVA</key><sel>[all]</sel><itemName>Gross Value Added = revenues minus variable costs that are not labour per DAS</itemName></activity>
-   <activity><key>aveSubsidy</key><sel>[all]</sel><itemName>Total subsidy received</itemName></activity>
-   <activity><key>aveModifiedGrossVA</key><sel>[all]</sel><itemName>Modified Gross Value Added = Gross Value Added plus Subsidies</itemName></activity>
-   <activity><key>aveFixCosts</key><sel>[all]</sel><itemName>Total fixed costs (per vessel) per DAS</itemName></activity>
-   <activity><key>aveProfit</key><sel>[all]</sel><itemName>Revenues minus all costs per DAS</itemName></activity>
-   <activity><key>avePMP</key><sel>[all]</sel><itemName>Income from PMP term per DAS</itemName></activity>
+   <activity><key>dualMR</key><sel>dualResult,all</sel><itemName>Marginal revenues</itemName></activity>
+   <activity><key>dualSubsidy</key><sel>dualResult,all</sel><itemName>Marginal subsidy</itemName></activity>
+   <activity><key>dualVarCost</key><sel>dualResult,all</sel><itemName>Variable costs</itemName></activity>
+   <activity><key>dualPMP</key><sel>dualResult,all</sel><itemName>Marginal effect of PMP</itemName></activity>
+   <activity><key>dualTAC</key><sel>dualResult,all</sel><itemName>Marginal quota rent</itemName></activity>
+   <activity><key>dualEffRestrSeg</key><sel>dualResult,all</sel><itemName>Marginal cost of segment effort restriction</itemName></activity>
+   <activity><key>dualEffRestrFishery</key><sel>dualResult,all</sel><itemName>Marginal cost of effort restriction per fishery, or season</itemName></activity>
+   <activity><key>dualBoundEffortAnnual</key><sel>dualResult,all</sel><itemName>Dual value of bound on effortAnnual</itemName></activity>
+   <activity><key>dualEffortRegulation</key><sel>dualResult,all</sel><itemName>Dual value of Effort Regulation</itemName></activity>
+   <activity><key>sumOfDuals</key><sel>dualResult,all</sel><itemName>Sum of the partials of the Lagrangean function</itemName></activity>
+   <activity><key>marginalLandingA</key><sel>dualResult,all</sel><itemName>marginalLandingA</itemName></activity>
+   <activity><key>marginalLandingB</key><sel>dualResult,all</sel><itemName>marginalLandingB</itemName></activity>
+   <activity><key>shadowPriceQuota</key><sel>dualResult,all</sel><itemName>shadowPriceQuota</itemName></activity>
+   <activity><key>v_effortAnnual</key><sel>all</sel><itemName>Days at sea</itemName></activity>
+   <activity><key>v_catch</key><sel>all</sel><itemName>Catch</itemName></activity>
+   <activity><key>v_landings</key><sel>all</sel><itemName>v_landings</itemName></activity>
+   <activity><key>v_discards</key><sel>all</sel><itemName>v_discards</itemName></activity>
+   <activity><key>v_sortA</key><sel>all</sel><itemName>High quality product (standard price)</itemName></activity>
+   <activity><key>v_sortB</key><sel>all</sel><itemName>Fish for industrial processing into fish meal (low price)</itemName></activity>
+   <activity><key>v_estimationMetric</key><sel>all</sel><itemName>v_estimationMetric</itemName></activity>
+   <activity><key>e_CatchQuota</key><sel>all</sel><itemName>Quota equation</itemName></activity>
+   <activity><key>e_effRestrSeg</key><sel>all</sel><itemName>e_effRestrSeg</itemName></activity>
+   <activity><key>e_effRestrFishery</key><sel>all</sel><itemName>e_effRestrFishery</itemName></activity>
+   <activity><key>pv_PMPconst</key><sel>all</sel><itemName>pv_PMPconst</itemName></activity>
+   <activity><key>pv_PMPslope</key><sel>all</sel><itemName>pv_PMPslope</itemName></activity>
+   <activity><key>pv_delta</key><sel>all</sel><itemName>pv_delta</itemName></activity>
+   <activity><key>v_varCostAve</key><sel>all</sel><itemName>v_varCostAve</itemName></activity>
+   <activity><key>p_TACOri</key><sel>all</sel><itemName>Original (regulation) catch quota per species and region</itemName></activity>
+   <activity><key>TACadj</key><sel>all</sel><itemName>Effective TAC adjusted in calibration (p_TACori*pv_TACadjustment)</itemName></activity>
+   <activity><key>p_landingObligation</key><sel>all</sel><itemName>Landing obligation per fishery and species</itemName></activity>
+   <activity><key>pv_maxEffFishery</key><sel>all</sel><itemName>pv_maxEffFishery</itemName></activity>
+   <activity><key>pv_kwh</key><sel>all</sel><itemName>pv_kwh</itemName></activity>
+   <activity><key>v_effortPerEffortGroup</key><sel>all</sel><itemName>v_effortPerEffortGroup</itemName></activity>
+   <activity><key>p_pricesA</key><sel>all</sel><itemName>Price of Sort A, used in simulation</itemName></activity>
+   <activity><key>p_pricesB</key><sel>all</sel><itemName>Price of Sort B, used in simulation</itemName></activity>
+   <activity><key>p_subsidyPerDAS</key><sel>all</sel><itemName>Subsidy per DAS (compensation for seal damage)</itemName></activity>
+   <activity><key>P</key><sel>all</sel><itemName>price for input or output</itemName></activity>
+   <activity><key>Q</key><sel>all</sel><itemName>quantity for input or output</itemName></activity>
+   <activity><key>PQ</key><sel>all</sel><itemName>Cost/Revenue for input or output</itemName></activity>
+   <activity><key>totalSalesRevenues</key><sel>all</sel><itemName>Total revenues from fish sales</itemName></activity>
+   <activity><key>totalVariableCosts</key><sel>all</sel><itemName>Total variable costs</itemName></activity>
+   <activity><key>totalContrMarg</key><sel>all</sel><itemName>Contribution Margin = revenues minus variable costs</itemName></activity>
+   <activity><key>totalGrossVA</key><sel>all</sel><itemName>Gross Value Added = revenues minus variable costs that are not labour</itemName></activity>
+   <activity><key>totalSubsidy</key><sel>all</sel><itemName>Total subsidy received</itemName></activity>
+   <activity><key>totalModifiedGrossVA</key><sel>all</sel><itemName>Modified Gross Value Added = Gross Value Added plus Subsidies</itemName></activity>
+   <activity><key>totalFixCosts</key><sel>all</sel><itemName>Total fixed costs (per vessel)</itemName></activity>
+   <activity><key>totalProfit</key><sel>all</sel><itemName>Revenues minus all costs</itemName></activity>
+   <activity><key>totalPMP</key><sel>all</sel><itemName>Income from PMP term</itemName></activity>
+   <activity><key>aveRevenues</key><sel>all</sel><itemName>Average revenues per DAS</itemName></activity>
+   <activity><key>aveVariableCosts</key><sel>all</sel><itemName>Total variable costs per DAS</itemName></activity>
+   <activity><key>aveContrMarg</key><sel>all</sel><itemName>Contribution Margin = revenues minus variable costs per DAS</itemName></activity>
+   <activity><key>aveGrossVA</key><sel>all</sel><itemName>Gross Value Added = revenues minus variable costs that are not labour per DAS</itemName></activity>
+   <activity><key>aveSubsidy</key><sel>all</sel><itemName>Total subsidy received</itemName></activity>
+   <activity><key>aveModifiedGrossVA</key><sel>all</sel><itemName>Modified Gross Value Added = Gross Value Added plus Subsidies</itemName></activity>
+   <activity><key>aveFixCosts</key><sel>all</sel><itemName>Total fixed costs (per vessel) per DAS</itemName></activity>
+   <activity><key>aveProfit</key><sel>all</sel><itemName>Revenues minus all costs per DAS</itemName></activity>
+   <activity><key>avePMP</key><sel>all</sel><itemName>Income from PMP term per DAS</itemName></activity>
 
    <!-- Fourth dimension (sim, est, and suffixes for equations) -->
    <dim5><key>mean</key><sel>[all]</sel><itemName></itemName></dim5>

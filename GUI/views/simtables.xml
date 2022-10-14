@@ -155,28 +155,39 @@
         <key>v_discards</key>
         <unit>Tons per year</unit>
       </item>
-	  
- 
+	   
     </table>
 
-
-
-    <!--// Create a table with results of the dual analysis
-
-    <table>
-      <theme>Dual analysis</theme>
-      <name>Partials of Lagrangian w.r.t. effortAnnual</name>
-      <regionSel>fishery</regionSel>
-      <regionText>Fishery</regionText>
-      <productSel>allSpecies</productSel>
-      <productText>hide</productText>
-      <dim5Text>Type of value</dim5Text>
+<!-- Profits per fishery and aggregates thereof -->
+   <table>
+      <theme>Economy</theme>
+      <name>Output-input</name>
+      <defpivot>0P0A</defpivot>
+      <productText>Output or input</productText>
+      <dim5Text>Statistic</dim5Text>
       <itemDim>activity</itemDim>
       <item>
-        <itemName>Marginal revenue</itemName>
-        <key>dualMR</key>
+        <itemName>Total quantity</itemName>
+        <key>Q</key>
+        <unit>Tons per year</unit>
       </item>
-    </table> //-->
+
+      <item>
+        <itemName>Average price per unit</itemName>
+        <key>P</key>
+        <unit>SEK/kg</unit>
+      </item>
+	  
+      <item>
+        <itemName>Value</itemName>
+        <key>PQ</key>
+        <unit>1000 SEK</unit>
+      </item>	 	  
+	  	   
+    </table> 
+
+
+    <!-- Create a table with results of the dual analysis -->
 
     <table>
         <theme>Dual analysis</theme>
@@ -190,7 +201,6 @@
         <productSel>allSpecies</productSel>
         <productText>hide</productText>
 
-        <!-- <activitySel>all</activitySel> -->
         <activitySel>dualResult</activitySel>
         <activityText>Partial</activityText>
 
@@ -202,6 +212,48 @@
             <itemName>Simulated</itemName>
             <key>allSpecies</key>
         </item>
+    </table> 
+
+   <table>
+      <theme>Dual analysis</theme>
+      <name>Explain dual value of quota per fishery</name>
+      <defpivot>0R0A</defpivot>
+      <scenText>Scenario</scenText>
+      
+	  <regionSel>fishery</regionSel>
+      <regionText>Fishery</regionText>
+      
+	  <productSel>hasQuota</productSel>
+      <productText>Name of quota</productText>
+      
+	  <activitySel>dualResult</activitySel>
+      <activityText>Component</activityText>	  
+	  
+      <dim5Sel>sim</dim5Sel>
+      <dim5Text>Type of value</dim5Text>	  
+      
+	  <itemDim>activity</itemDim>
+      <item>
+        <itemName>Shadow price quota</itemName>
+        <key>shadowPriceQuota</key>
+		<unit>SEK/kg</unit>
+      </item>	  
+      <item>
+        <itemName>Marginal landing A</itemName>
+        <key>marginalLandingA</key>
+		<unit>kg/day</unit>
+      </item>	  
+      <item>
+        <itemName>Marginal landing B</itemName>
+        <key>marginalLandingB</key>
+		<unit>kg/day</unit>
+      </item>	  	  
+      <item>
+        <itemName>Marginal rent</itemName>
+        <key>dualTac</key>
+		<unit>SEK/day</unit>
+      </item>
     </table>
+
 
 </generated>
