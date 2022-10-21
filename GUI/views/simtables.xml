@@ -1,60 +1,88 @@
 <generated>
     <table>
       <theme>Fishing effort</theme>
-      <name>Effort per fishery</name>
+      <name>Effort and total catch per fishery</name>
       <regionSel>fishery</regionSel>
       <regionText>Fishery</regionText>
       <productSel>allSpecies</productSel>
-      <productText>hide</productText>
-      <dim5sel>sim</dim5sel>
+      <productText>Species</productText>
+      <!--<dim5sel>sim</dim5sel>-->
       <dim5Text>Type of value</dim5Text>
+	  <defpivot>0RSA</defpivot>
       <itemDim>activity</itemDim>
       <item>
         <itemName>Days at sea</itemName>
         <key>v_effortAnnual</key>
+		<unit>Days</unit>
+      </item>
+	  <item>
+        <itemName>Total catch</itemName>
+        <key>v_catch</key>
+		<unit>Tons</unit>
       </item>
     </table>
 
     <table>
       <theme>Fishing effort</theme>
-      <name>Effort per segment</name>
+      <name>Effort and total catch  per segment</name>
       <regionSel>segment</regionSel>
       <productSel>allSpecies</productSel>
-      <productText>hide</productText>
+      <productText>Species</productText>
       <dim5Text>Type of value</dim5Text>
+	  <defpivot>0RSA</defpivot>
       <itemDim>activity</itemDim>
       <item>
         <itemName>Days at sea</itemName>
         <key>v_effortAnnual</key>
+		<unit>Days</unit>
+      </item>
+	  <item>
+        <itemName>Total catch</itemName>
+        <key>v_catch</key>
+		<unit>Tons</unit>
       </item>
     </table>
 
     <table>
       <theme>Fishing effort</theme>
-      <name>Effort per gear</name>
+      <name>Effort and total catch  per gear</name>
       <regionSel>gear</regionSel>
       <productSel>allSpecies</productSel>
-      <productText>hide</productText>
+      <productText>Species</productText>
       <dim5Text>Type of value</dim5Text>
+	  <defpivot>0RSA</defpivot>
       <itemDim>activity</itemDim>
       <item>
         <itemName>Days at sea</itemName>
         <key>v_effortAnnual</key>
+		<unit>Days</unit>
+      </item>
+	  <item>
+        <itemName>Total catch</itemName>
+        <key>v_catch</key>
+		<unit>Tons</unit>
       </item>
     </table>
 
     <table>
       <theme>Fishing effort</theme>
-      <name>Effort per area</name>
+      <name>Effort and total catch  per area</name>
       <regionSel>area</regionSel>
       <regionText>Fishing area</regionText>
       <productSel>allSpecies</productSel>
       <productText>hide</productText>
       <dim5Text>Type of value</dim5Text>
+	  <defpivot>0RSA</defpivot>
       <itemDim>activity</itemDim>
       <item>
         <itemName>Days at sea</itemName>
         <key>v_effortAnnual</key>
+		<unit>Days</unit>
+      </item>
+	  <item>
+        <itemName>Total catch</itemName>
+        <key>v_catch</key>
+		<unit>Tons</unit>
       </item>
     </table>
 

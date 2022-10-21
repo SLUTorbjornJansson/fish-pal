@@ -175,7 +175,10 @@ p_reportDualsFishery(f,"dualSubsidy")
     = p_subsidyPerDAS(f);
 
 *   Variabla kostnader
-p_reportDualsFishery(f,"dualVarCost") = - (pv_varCostConst.L(f) + pv_varCostSlope.L(f)*v_effortAnnual.L(f));
+p_reportDualsFishery(f,"dualVarCost") = - (pv_varCostConst.L(f) + pv_varCostSlope.L(f)*v_effortAnnual.L(f))
+                                      *SUM(VariableInput, p_varCostOriShare(f,VariableInput)
+                                                        *(1 + p_varCostPriceShift(f,VariableInput))
+                                                        *(1 + p_varCostQuantShift(f,VariableInput)));
 
 *   Kalibreringstermen
 p_reportDualsFishery(f,"dualPMP") = - (pv_PMPconst.L(f) + pv_PMPslope.L(f)*v_effortAnnual.L(f));

@@ -502,13 +502,13 @@
    <activity><key>avePMP</key><sel>all</sel><itemName>Income from PMP term per DAS</itemName></activity>
 
    <!-- Fourth dimension (sim, est, and suffixes for equations) -->
-   <dim5><key>mean</key><sel>[all]</sel><itemName></itemName></dim5>
-   <dim5><key>var</key><sel>[all]</sel><itemName></itemName></dim5>
-   <dim5><key>ori</key><sel>[all]</sel><itemName></itemName></dim5>
-   <dim5><key>est</key><sel>[all]</sel><itemName></itemName></dim5>
-   <dim5><key>sim</key><sel>[all]</sel><itemName></itemName></dim5>
-   <dim5><key>M</key><sel>[all]</sel><itemName></itemName></dim5>
-   <dim5><key>UP</key><sel>[all]</sel><itemName></itemName></dim5>
-   <dim5><key>LO</key><sel>[all]</sel><itemName></itemName></dim5>
+   <dim5><key>mean</key><sel>mean        ,all</sel><itemName></itemName></dim5>
+   <dim5><key>var</key><sel>var         ,all</sel><itemName></itemName></dim5>
+   <dim5><key>ori</key><sel>ori         ,all</sel><itemName></itemName></dim5>
+   <dim5><key>est</key><sel>est         ,all</sel><itemName></itemName></dim5>
+   <dim5><key>sim</key><sel>sim         ,all</sel><itemName></itemName></dim5>
+   <dim5><key>M</key><sel>M           ,all</sel><itemName></itemName></dim5>
+   <dim5><key>UP</key><sel>UP          ,all</sel><itemName></itemName></dim5>
+   <dim5><key>LO</key><sel>LO          ,all</sel><itemName></itemName></dim5>
 
 </generated>

@@ -65,7 +65,7 @@ e_objFunc ..
        +SUM(f, v_effortAnnual(f)*p_subsidyPerDAS(f))
 
 *       minus variable costs
-       -SUM(f, pv_varCostConst(f)*v_effortAnnual(f) + 1/2*pv_varCostSlope(f)*sqr(v_effortAnnual(f))
+       -SUM(f, (pv_varCostConst(f)*v_effortAnnual(f) + 1/2*pv_varCostSlope(f)*sqr(v_effortAnnual(f)))
 *       ... shifted by an exogenous change in price or quantity of each cost item, weighted with its share in VC
 *           In the baseline scenario, the shifters must be zero and the shares add up to 1
                *SUM(VariableInput, p_varCostOriShare(f,VariableInput)

@@ -134,7 +134,8 @@ put /;
 
 put "%s%<!-- Fourth dimension (sim, est, and suffixes for equations) -->"/;
 loop(statItem,
-    put "%s%<dim5><key>",statItem.tl:0,"</key><sel>[all]</sel><itemName></itemName></dim5>" /;
+    put "%s%<dim5><key>",statItem.tl:0,"</key><sel>"statItem.tl;
+    put ",all</sel><itemName></itemName></dim5>" /;
 );
 put /;
 
