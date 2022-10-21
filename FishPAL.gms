@@ -32,7 +32,8 @@ $SETGLOBAL projectDirectory fuel_tax
 
 *   Ange specifikt vilken scenariofil i ovan nämnda katalog vi vill använda
 *$SETGLOBAL scenario energy_tax
-$SETGLOBAL scenario reference
+*$SETGLOBAL scenario reference
+$SETGLOBAL scenario s1_lp_tax
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja

@@ -349,13 +349,14 @@
    <!-- Second dimension of results parameter: Species and aggregates of species (speciesDomain). -->
 
    <!-- ioAggregates -->
-   <product><key>allSpecies</key><sel>allSpecies,ioAggregate,all</sel></product>
-   <product><key>none</key><sel>ioAggregate,all</sel></product>
-   <product><key>variableInputs</key><sel>ioAggregate,all</sel></product>
-   <product><key>fixInputs</key><sel>ioAggregate,all</sel></product>
-   <product><key>inputs</key><sel>ioAggregate,all</sel></product>
-   <product><key>TB1</key><sel>ioAggregate,all</sel></product>
-   <product><key>TB2</key><sel>ioAggregate,all</sel></product>
+   <product><key>allSpecies</key><sel>allSpecies,ioAggregate,all</sel><itemName>All species caught</itemName></product>
+   <product><key>none</key><sel>ioAggregate,all</sel><itemName>Nothing</itemName></product>
+   <product><key>variableInputs</key><sel>ioAggregate,all</sel><itemName>Variable inputs</itemName></product>
+   <product><key>fixInputs</key><sel>ioAggregate,all</sel><itemName>Fix inputs</itemName></product>
+   <product><key>inputs</key><sel>ioAggregate,all</sel><itemName>All inputs</itemName></product>
+   <product><key>valueAdded</key><sel>ioAggregate,all</sel><itemName>Value Added</itemName></product>
+   <product><key>contributionMargin</key><sel>ioAggregate,all</sel><itemName>Contribution margin</itemName></product>
+   <product><key>profit</key><sel>ioAggregate,all</sel><itemName>Profit</itemName></product>
 
    <!-- Species and catch quotas -->
    <product><key>Abborre</key><sel>species,quotaSpecies,all</sel></product>

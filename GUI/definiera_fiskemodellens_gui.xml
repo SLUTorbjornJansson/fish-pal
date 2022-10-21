@@ -37,7 +37,7 @@
             <regionDim>0,Fishery</regionDim>
             <productDim>1,Species</productDim>
             <activityDim>2,ResultLabel</activityDim>
-            <!--<dim5Dim>3</dim5Dim>-->
+            <dim5Dim>3,OriEst</dim5Dim>
             <scenDim>4</scenDim>
          </task>
 
@@ -51,7 +51,7 @@
             <regionDim>0,Fishery</regionDim>
             <productDim>1,Species</productDim>
             <activityDim>2,ResultLabel</activityDim>
-            <!--<dim5Dim>3</dim5Dim>-->
+            <dim5Dim>3,OriEstSim</dim5Dim>
             <scenDim>4</scenDim>
          </task>
 
