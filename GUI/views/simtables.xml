@@ -134,7 +134,7 @@
 	  
       <item>
         <itemName>Shadow price of quota</itemName>
-        <key>dualTAC</key>
+        <key>shadowPriceQuota</key>
         <unit>SEK/kg</unit>
       </item>	 	  
 	  
@@ -241,17 +241,17 @@
       <item>
         <itemName>Marginal landing A</itemName>
         <key>marginalLandingA</key>
-		<unit>kg/day</unit>
+		<unit>ton/day</unit>
       </item>	  
       <item>
         <itemName>Marginal landing B</itemName>
         <key>marginalLandingB</key>
-		<unit>kg/day</unit>
+		<unit>ton/day</unit>
       </item>	  	  
       <item>
         <itemName>Marginal rent</itemName>
         <key>dualTac</key>
-		<unit>SEK/day</unit>
+		<unit>1000 SEK/day</unit>
       </item>
     </table>
 

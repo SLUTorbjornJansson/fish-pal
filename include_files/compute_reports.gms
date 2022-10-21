@@ -133,19 +133,19 @@ p_kwhPerEffortGroupOri(effortGroup,area,"sim") = v_effortPerEffortGroup.L(effort
 * --- Rapportera kvotr�ntor per fishery, uppdelat p� kvotomr�de och art,
 *     men omr�knat som marginalkostnad per fiskedag
 
-p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"shadowPriceQuota") $  quotaArea_fishery(quotaArea,f)
+p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"shadowPriceQuota") $  [quotaArea_fishery(quotaArea,f) and (p_TACori(catchQuotaName,quotaArea) GT 0)]
     = - SUM(s $ [catchQuotaName_quotaArea_fishery_species(catchQuotaName,quotaArea,f,s)
                   AND (p_TACori(catchQuotaName,quotaArea) GT 0)], e_catchQuota.M(catchQuotaName,quotaArea));
 
 
-p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingA") $ quotaArea_fishery(quotaArea,f)
+p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingA") $  [quotaArea_fishery(quotaArea,f) and (p_TACori(catchQuotaName,quotaArea) GT 0)]
     = SUM(s $ [catchQuotaName_quotaArea_fishery_species(catchQuotaName,quotaArea,f,s)],
             p_shareA(f,s) * pv_delta.L(f,s)*[p_catchElasticity(f)*v_effortAnnual.L(f)**(p_catchElasticity(f)-1)]);
 
 
 p_marginalCatch(f,s) = [p_catchElasticity(f)*v_effortAnnual.L(f)**(p_catchElasticity(f)-1)];
 
-p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingB") $ quotaArea_fishery(quotaArea,f)
+p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingB") $ [quotaArea_fishery(quotaArea,f) and (p_TACori(catchQuotaName,quotaArea) GT 0)]
     = SUM(s $ catchQuotaName_quotaArea_fishery_species(catchQuotaName,quotaArea,f,s),
             p_landingObligation(f,s) * p_shareB(f,s) * pv_delta.L(f,s)*[p_catchElasticity(f)*v_effortAnnual.L(f)**(p_catchElasticity(f)-1)]);
 
@@ -157,7 +157,7 @@ p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingB") $ quota
 
 *   Compute how much the quota rent costs each fishery on the margin, i.e. the marginal catch times the quota rent of each species landed
 
-p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"dualTAC") $ quotaArea_fishery(quotaArea,f)
+p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"dualTAC") $ [quotaArea_fishery(quotaArea,f) and (p_TACori(catchQuotaName,quotaArea) GT 0)]
     = p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"shadowPriceQuota")
     * (p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingA")
       +p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,"marginalLandingB"));
@@ -280,7 +280,11 @@ p_InputOutputReport(fisheryDomain,ioAggregate,"P") $ p_InputOutputReport(fishery
     = p_InputOutputReport(fisheryDomain,ioAggregate,"PQ")/p_InputOutputReport(fisheryDomain,ioAggregate,"Q");
 
 
-* --- Profitability
+* --- Profitability measures
 
-p_InputOutputReport(fisheryDomain,"TB1","PQ") = p_InputOutputReport(fisheryDomain,"allSpecies","PQ") - p_InputOutputReport(fisheryDomain,"variableInputs","PQ");
-p_InputOutputReport(fisheryDomain,"TB2","PQ") = p_InputOutputReport(fisheryDomain,"TB1","PQ") - p_InputOutputReport(fisheryDomain,"fixInputs","PQ");
+p_InputOutputReport(fisheryDomain,"valueAdded","PQ") = p_InputOutputReport(fisheryDomain,"allSpecies","PQ")
+                                                    - p_InputOutputReport(fisheryDomain,"Repair","PQ")
+                                                    - p_InputOutputReport(fisheryDomain,"Fuel_m3","PQ")
+                                                    - p_InputOutputReport(fisheryDomain,"OtherInput","PQ");
+p_InputOutputReport(fisheryDomain,"contributionMargin","PQ") = p_InputOutputReport(fisheryDomain,"allSpecies","PQ") - p_InputOutputReport(fisheryDomain,"variableInputs","PQ");
+p_InputOutputReport(fisheryDomain,"profit","PQ") = p_InputOutputReport(fisheryDomain,"contributionMargin","PQ") - p_InputOutputReport(fisheryDomain,"fixInputs","PQ");

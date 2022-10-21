@@ -59,7 +59,15 @@ $ONMULTI
 * Skapa en dom�n, dvs ett set som kan anv�ndas i deklarationer i GAMS, f�r species, catchQuotaName
 * Det kr�vs tv� rader eftersom vissa element i species upprepas i catchQuotaName.
 SETS
-    s_ioAggregate(*) "Aggregates of inputs and outputs" /allSpecies "Alla arter", none "Nothing", variableInputs "Variable inputs", fixInputs "Fix inputs", inputs "All inputs", TB1 "Revenues minus variable costs", TB2 "TB1 minus fix costs"/
+    s_ioAggregate(*) "Aggregates of inputs and outputs" /
+        allSpecies "All species caught"
+        none "Nothing"
+        variableInputs "Variable inputs"
+        fixInputs "Fix inputs"
+        inputs "All inputs"
+        valueAdded "Value Added"
+        contributionMargin "Contribution margin"
+        profit "Profit"/
     speciesDomain(*) "Lägg till species" /set.s_ioAggregate,SET.s_species, set.s_FixInput, set.s_VariableInput /
     speciesDomain(*) "Lägg till catchQuotaName" /SET.s_catchQuotaName,SET.s_area /
 

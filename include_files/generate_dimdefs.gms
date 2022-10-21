@@ -85,7 +85,8 @@ loop(ioAggregate,
     put "%s%<product><key>",ioAggregate.tl:0,"</key><sel>";
     if(sameas(ioAggregate,"allSpecies"), put "allSpecies,");
     
-    put "ioAggregate,all</sel></product>"/;
+    put "ioAggregate,all</sel><itemName>",ioAggregate.te(ioAggregate);
+    put "</itemName></product>"/;
 );
 put /;
   

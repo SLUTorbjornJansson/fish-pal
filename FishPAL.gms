@@ -369,6 +369,7 @@ p_fiskresultat(f,"allSpecies","v_varCostAve","sim")     = v_varCostAve.L(f);
 p_fiskResultat(quotaArea,catchQuotaName,"p_TACOri","sim") = p_TACOri(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"TACadj","sim") = p_TACOri(catchQuotaName,quotaArea)*pv_TACAdjustment.l(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","M") = e_catchQuota.M(catchQuotaName,quotaArea);
+p_fiskResultat(quotaArea,catchQuotaName,"shadowPriceQuota","sim") = e_catchQuota.M(catchQuotaName,quotaArea);
 p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(catchQuotaName,quotaArea);
 
 
@@ -448,7 +449,8 @@ EXECUTE_UNLOAD "%resDir%\simulation\%runtype%_%scenario_path_underscores%%ResId%
                                                       speciesDomain
                                                       p_solutionStats
                                                       p_InputOutputReport
-                                                      p_quotaReport;
+                                                      p_quotaReport
+                                                      quotaArea_fishery;
 
 
 * Skriv ut alla resultat f�r att kolla hur det blev
