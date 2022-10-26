@@ -388,24 +388,58 @@ p_fiskResultat(quotaArea,catchQuotaName,"e_catchQuota","sim") = e_catchQuota.L(c
 *   Report input use indirectly by dividing variable cost by the price found in calibration
 
 * to do
+*   Aggregate species to all species, in tons
+set aggResLabel(resLabel) "Result labels that can be just added" /v_catch,v_landings,v_discards,v_sortA,v_sortB,v_effortAnnual,totalSalesRevenues/;
+alias(resLabel,resLabel1);
+set resLabel_aggWeight(resLabel,resLabel) "Result labels that need to be weighted with another reslabel" /
+    p_pricesA.v_sortA
+    p_pricesB.v_sortB
+/;
 
-
-
+*   Revenues per species
+p_fiskResultat(f,s,"totalSalesRevenues","sim")
+    = v_sortA.L(f,s)*p_fiskresultat(f,s,"p_pricesA","sim") + v_sortB.L(f,s)*p_fiskresultat("total",s,"p_pricesB","sim")*p_landingObligation(f,s);
 
 *   Aggregera fishery till segment, area osv.
-p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat) $ [(NOT fishery(fisheryDomain)) and (NOT p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat))]
-    = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel,addStat));
+*   - for non-weighted results
+p_fiskresultat(fisheryDomain,speciesDomain,aggResLabel,addStat) $ [(NOT fishery(fisheryDomain)) and (NOT p_fiskresultat(fisheryDomain,speciesDomain,aggResLabel,addStat))]
+    = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,aggResLabel,addStat));
 
-*   Aggregera fr�n fiske och art till kvotomr�de och kvotnamn (art).
-p_fiskresultat(f,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(f,catchQuotaName,resLabel,addStat))]
-    = SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel,addStat));
+*   Aggregera från fiske och art till kvotområde och kvotnamn (art).
+p_fiskresultat(f,catchQuotaName,aggResLabel,addStat) $ [(NOT p_fiskresultat(f,catchQuotaName,aggResLabel,addStat))]
+    = SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,aggResLabel,addStat));
 
-p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat)) AND p_TACOri(catchQuotaName,quotaArea)]
-    = SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskresultat(f,s,resLabel,addStat));
+p_fiskresultat(quotaArea,catchQuotaName,aggResLabel,addStat) $ [(NOT p_fiskresultat(quotaArea,catchQuotaName,aggResLabel,addStat)) AND p_TACOri(catchQuotaName,quotaArea)]
+    = SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskresultat(f,s,aggResLabel,addStat));
 
-*   Aggregate species to all species, in tons
-set aggResLabel(resLabel) /v_catch,v_landings,v_discards,v_sortA,v_sortB/;
 p_fiskresultat(fisheryDomain,"allSpecies",aggResLabel,addStat) = sum(s, p_fiskresultat(fisheryDomain,s,aggResLabel,addStat));
+
+
+*   Aggregate as above for items that need a weighted average as aggregate (e.g. prices are weighted with catch)
+loop((resLabel,resLabel1) $ resLabel_aggWeight(resLabel,resLabel1),
+    p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat) $ [(NOT fishery(fisheryDomain))
+                                                                    and (NOT p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat))
+                                                                    and SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel1,addStat))]
+                                                                    
+        = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel,addStat) * p_fiskresultat(fishery,speciesDomain,resLabel1,addStat))
+        / SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel1,addStat));
+        
+    p_fiskresultat(f,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(f,catchQuotaName,resLabel,addStat))
+                                                         and SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel1,addStat))]
+        = SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel,addStat)*p_fiskResultat(f,s,resLabel1,addStat))
+        / SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel1,addStat));
+        
+    p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat)) AND p_TACOri(catchQuotaName,quotaArea)
+                                and SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskResultat(f,s,resLabel1,addStat))]
+        = SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskresultat(f,s,resLabel,addStat)*p_fiskResultat(f,s,resLabel1,addStat))
+        / SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskResultat(f,s,resLabel1,addStat));
+
+
+    p_fiskresultat(fisheryDomain,"allSpecies",resLabel,addStat)
+        $ sum(s, p_fiskResultat(fisheryDomain,s,resLabel1,addStat))
+        = sum(s, p_fiskresultat(fisheryDomain,s,resLabel,addStat) * p_fiskResultat(fisheryDomain,s,resLabel1,addStat))
+        / sum(s, p_fiskResultat(fisheryDomain,s,resLabel1,addStat));
+);    
 
 
 *   --- Include the computations of all report items (using the data loaded above)
@@ -415,9 +449,6 @@ $include "include_files\compute_reports.gms"
 p_fiskResultat(fisheryDomain,"allSpecies",resLabel,"sim") $ p_profitFishery(fisheryDomain,resLabel)
     = p_profitFishery(fisheryDomain,resLabel);
 
-*   Int�kter per fiskart
-p_fiskResultat(f,s,"totalSalesRevenues","sim")
-    = v_sortA.L(f,s)*p_pricesAOri(f,s) + v_sortB.L(f,s)*p_pricesBOri(s)*p_landingObligation(f,s);
 
 *   Rapportera dualvärden (Lagrange-funktionens partialderivator m.a.p. effortannual)
 p_fiskResultat(fisheryDomain,"allSpecies",dualResult,"sim") $ p_reportDualsFishery(fisheryDomain,dualResult)

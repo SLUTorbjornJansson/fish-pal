@@ -62,7 +62,7 @@ put "%s%<!-- Fishery -->"/;
 loop(fishery,
     put "%s%<region><key>",fishery.tl:0,"</key><sel>[fishery,all]</sel><itemName>";
     loop(f_seg_g_a(fishery,seg,gear,area),
-        put "Segment ",seg.tl:0," using gear ",gear.tl:0," in area ",area.tl:0;
+        put fishery.tl:0, ": Segment ",seg.tl:0," using gear ",gear.tl:0," in area ",area.tl:0;
     );
     put "</itemName></region>" /;
 );

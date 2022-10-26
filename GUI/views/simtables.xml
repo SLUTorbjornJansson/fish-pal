@@ -136,6 +136,7 @@
         <itemName>Revenue</itemName>
         <key>totalSalesRevenues</key>
         <unit>1000 SEK</unit>
+		<link>Output-input</link>
       </item>
     </table>
 
@@ -198,6 +199,7 @@
         <itemName>Total quantity</itemName>
         <key>Q</key>
         <unit>Tons per year</unit>
+		<link>Catch per fishery, gear, segment and area</link>
       </item>
 
       <item>
@@ -220,7 +222,7 @@
     <table>
         <theme>Dual analysis</theme>
         <name>Partials of Lagrangian w.r.t. effortAnnual</name>
-        <defpivot>0R0A</defpivot>
+        <defpivot>0RAS</defpivot>
         <scenText>Scenario</scenText>
 
         <regionSel>fishery</regionSel>
@@ -245,7 +247,7 @@
    <table>
       <theme>Dual analysis</theme>
       <name>Explain dual value of quota per fishery</name>
-      <defpivot>0R0A</defpivot>
+      <defpivot>0RPA</defpivot>
       <scenText>Scenario</scenText>
       
 	  <regionSel>fishery</regionSel>
