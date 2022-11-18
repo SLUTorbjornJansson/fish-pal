@@ -462,7 +462,7 @@ else
 *   With the current version, slope is FIXED (set_bounds_estimation.gms)
 *   to the value assigned here, so that this is really a kind of
 *   "very certain prior information"
-    scalar p_elas "Assumed a-priori effort-elasticity for fisheries to marginal costs" /1.5/;
+    scalar p_elas "Assumed a-priori effort-elasticity for fisheries to marginal costs" /2/;
 
     pv_varCostSlope.l(f) $ p_effortOri(f) = 1/(p_elas - 1/2) * p_varCostAveOri(f)/p_effortOri(f);
 

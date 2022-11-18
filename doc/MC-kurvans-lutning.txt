@@ -1,0 +1,37 @@
+Vad är elasticiteten för en linjär utbudsfunktion
+Där vi känner mittpunkten (AVC,Q/2)?
+Detta används i estimate_parameters.gms för att bestämma lutningen på MC-kurvan.
+
+    pv_varCostSlope.l(f) $ p_effortOri(f) = 1/(p_elas - 1/2) * p_varCostAveOri(f)/p_effortOri(f);
+
+HÄRLEDNING:
+-----------
+låt Q vara ungefär lika med effortannual och P ungefär lika med MC
+
+ela = (dq/Q) / (dp/P) = dq/dp * P/Q
+
+mc = a + b*x 
+
+p = a + b*q
+
+q = (p-a)/b
+
+dq/dp = 1/b
+
+ela = 1/b * P/Q 
+
+b = 1/ela * P/Q
+
+P = AVC + (Q/2)*b
+
+ela = 1/b * (AVC + (Q/2)*b)/Q
+
+ela = AVC/(b*Q) + (1/b)*(Q/2)*b/Q
+
+ela = AVC/(b*Q) + 1/2
+
+ela - 1/2 = AVC/(b*Q)
+
+b(ela-1/2) = AVC/Q
+
+b = AVC/Q * 1/(ela-1/2)
