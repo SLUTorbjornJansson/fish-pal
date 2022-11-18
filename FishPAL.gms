@@ -412,7 +412,10 @@ p_fiskresultat(f,catchQuotaName,aggResLabel,addStat) $ [(NOT p_fiskresultat(f,ca
 p_fiskresultat(quotaArea,catchQuotaName,aggResLabel,addStat) $ [(NOT p_fiskresultat(quotaArea,catchQuotaName,aggResLabel,addStat)) AND p_TACOri(catchQuotaName,quotaArea)]
     = SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskresultat(f,s,aggResLabel,addStat));
 
-p_fiskresultat(fisheryDomain,"allSpecies",aggResLabel,addStat) = sum(s, p_fiskresultat(fisheryDomain,s,aggResLabel,addStat));
+*   Aggregera till "allSpecies", men bara om det inte redan finns, så att inte saker som BARA finns där
+*   skrivs över.
+p_fiskresultat(fisheryDomain,"allSpecies",aggResLabel,addStat) $ [NOT p_fiskresultat(fisheryDomain,"allSpecies",aggResLabel,addStat)]
+    = sum(s, p_fiskresultat(fisheryDomain,s,aggResLabel,addStat));
 
 
 *   Aggregate as above for items that need a weighted average as aggregate (e.g. prices are weighted with catch)
@@ -440,6 +443,7 @@ loop((resLabel,resLabel1) $ resLabel_aggWeight(resLabel,resLabel1),
         = sum(s, p_fiskresultat(fisheryDomain,s,resLabel,addStat) * p_fiskResultat(fisheryDomain,s,resLabel1,addStat))
         / sum(s, p_fiskResultat(fisheryDomain,s,resLabel1,addStat));
 );    
+
 
 
 *   --- Include the computations of all report items (using the data loaded above)
