@@ -291,3 +291,31 @@ p_InputOutputReport(fisheryDomain,"valueAdded","PQ") = p_InputOutputReport(fishe
                                                     - p_InputOutputReport(fisheryDomain,"OtherInput","PQ");
 p_InputOutputReport(fisheryDomain,"contributionMargin","PQ") = p_InputOutputReport(fisheryDomain,"allSpecies","PQ") - p_InputOutputReport(fisheryDomain,"variableInputs","PQ");
 p_InputOutputReport(fisheryDomain,"profit","PQ") = p_InputOutputReport(fisheryDomain,"contributionMargin","PQ") - p_InputOutputReport(fisheryDomain,"fixInputs","PQ");
+
+
+* --- Productivity measures
+
+p_InputOutputReport(fisheryDomain,speciesDomain,"QPerDAS")
+    $ p_fiskResultat(fisheryDomain,"allSpecies","v_effortAnnual","sim")
+    = p_InputOutputReport(fisheryDomain,speciesDomain,"Q")
+    / p_fiskResultat(fisheryDomain,"allSpecies","v_effortAnnual","sim");
+
+p_InputOutputReport(fisheryDomain,speciesDomain,"PQPerDAS")
+    $ p_fiskResultat(fisheryDomain,"allSpecies","v_effortAnnual","sim")
+    = p_InputOutputReport(fisheryDomain,speciesDomain,"PQ")
+    / p_fiskResultat(fisheryDomain,"allSpecies","v_effortAnnual","sim");
+
+p_InputOutputReport(fisheryDomain,speciesDomain,"QPerCatchQ")
+    $ p_InputOutputReport(fisheryDomain,"allSpecies","Q")
+    = p_InputOutputReport(fisheryDomain,speciesDomain,"Q")
+    / p_InputOutputReport(fisheryDomain,"allSpecies","Q");
+
+p_InputOutputReport(fisheryDomain,speciesDomain,"PQPerCatchPQ")
+    $ p_InputOutputReport(fisheryDomain,"allSpecies","PQ")
+    = p_InputOutputReport(fisheryDomain,speciesDomain,"PQ")
+    / p_InputOutputReport(fisheryDomain,"allSpecies","PQ");
+
+p_InputOutputReport(fisheryDomain,variableInput,"varCostShare")
+    $ sum(variableInput1, p_InputOutputReport(fisheryDomain,variableInput1,"PQ"))
+    = p_InputOutputReport(fisheryDomain,variableInput,"PQ")
+    / sum(variableInput1, p_InputOutputReport(fisheryDomain,variableInput1,"PQ"));

@@ -18,11 +18,11 @@ $offtext
 *-------------------------------------------------------------------------------
 
 * --- Set base scenario to start with
-$include "scenarioFiles\noChange.gms"
+$include "scenarioFiles\fuel_tax\reference.gms"
 
 
 
-p_varCostPriceShift(f,"Fuel_m3") = 0.25;
+p_varCostPriceShift(f,"Fuel_m3") = 0.50;
 
 
 

@@ -3,7 +3,7 @@ $ONTEXT
     @about Fisheries Policy AnaLysis tool, for Swedish fisheries.
            This file is used for simulation and also calibration/estimation of parameters
 
-    @author Staffan Waldo, Torbj�rn Jansson
+    @author Staffan Waldo, Torbjorn Jansson
 
 $OFFTEXT
 $EOLCOM //
@@ -33,7 +33,7 @@ $SETGLOBAL projectDirectory fuel_tax
 *   Ange specifikt vilken scenariofil i ovan nämnda katalog vi vill använda
 *$SETGLOBAL scenario energy_tax
 *$SETGLOBAL scenario reference
-$SETGLOBAL scenario s1_lp_tax
+$SETGLOBAL scenario s4_hp
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja
@@ -99,7 +99,7 @@ $include "include_files\declare_parameters.gms"
 * L�s in parametrar fr�n Excel (via gdx-filen som tillverkats tidigare)
 $GDXIN "%fileNameForSetDefnitions%"
 
-$LOAD p_pricesAOri p_pricesBOri p_costOri p_maxEffSegPeriod p_season p_TACOri
+$LOAD p_pricesAOri p_pricesBOri p_costOri p_maxEffSegPeriod p_season p_TACOri p_indexedPriceOri
 $LOAD p_landingsOri p_discardShareOri p_effortOri p_vesselsOri p_landingObligation p_maxEffortPerEffortGroup p_kwhOri
 $LOAD p_catchElasticityPerGearGroup
 $LOAD p_subsidyBudget
@@ -173,6 +173,7 @@ p_varCostOriShare(f,VariableInput) = sum(seg $ segment_fishery(seg,f), p_costOri
 
 set problem_segment(seg) "Some problem with this segment";
 set problem_fishery(fishery) "Some problem with this fishery";
+set problem_species(species) "Some problem with this species";
 
 * --- Assert that there are vessels if we have fishing effort
 LOOP(segment,
@@ -467,7 +468,7 @@ p_fiskResultat(f,catchQuotaName,dualResult,"sim")
 p_fiskResultat(fisheryDomain,speciesDomain,resLabel,"sim")$p_InputOutputReport(fisheryDomain, speciesDomain,resLabel)
    = p_InputOutputReport(fisheryDomain, speciesDomain,resLabel) ;
 
-
+$ifi %programMode%==estimation $include "include_files/check_if_the_model_calibrated_well.gms"
 
 *   L�gg till l�nsamhetsresultaten per fiske
 *p_fiskresultat(f,"total","days")

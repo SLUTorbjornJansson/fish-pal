@@ -92,6 +92,8 @@ SETS
     VariableInput(Input) "Variabla kostnader plus total variabel kostnad " /SET.s_VariableInput/
     ioAggregate(speciesDomain) "Aggregates of individual inputs and outputs" /set.s_ioAggregate/;
     ;
+    
+    alias(VariableInput,variableInput1);
 $OFFMULTI
 
 *   H�r f�ljer definitioner av alla "kors-set" a.k.a. "tuples, mappings".
@@ -144,6 +146,8 @@ sets
          ori    "Original data"
          est    "Estimated value (or fitted value for observable variables)"
          sim    "Simulation outcome or value of parameter in simulation"
+         diffE  "Difference between simulation and Estimation"
+         diffO  "Difference between simulation and Original data"
          M      "Dual value of bound on variable or equation"
          UP     "Upper bound of variable or equation"
          LO     "Lower bound of variable or equation"/
@@ -216,6 +220,14 @@ sets
         aveFixCosts      "Total fixed costs (per vessel) per DAS"
         aveProfit        "Revenues minus all costs per DAS"
         avePMP           "Income from PMP term per DAS"
+
+*       Various productivity measures
+        QPerDAS          "Input or output quantity per DAS (units per day)"
+        PQPerDAS         "Input or output value per DAS (1000 SEK per day)"
+        QPerCatchQ       "Input or output per ton of catch (units per ton)"
+        PQPerCatchPQ     "Input or output per value of catch (ratio)"
+        varCostShare     "Share of variable cost in total variable costs"
+        
 
 *       Items for input use(employment and fuel)
 *        set.input

@@ -28,6 +28,7 @@ PARAMETERS
     p_landingObligation(fishery,species) "Indication if (1) sort B needs to be landed or if (0) discard is allowed"
     p_maxEffortPerEffortGroup(effortGroup,area) "Maximum kWh-days per effortGroup and area"
     p_kwhOri(segment) "Average kwh per vessel per segment"
+    p_indexedPriceOri(variableInput) "Price index for some inputs that we want the calibration to reproduce exactly"
     p_fiskResultat(fisheryDomain,*,resLabel,statItem) "Rapport från fiskmodellen för GUI"
 
 *   Seal scenario parameters
