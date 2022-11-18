@@ -450,14 +450,43 @@ else
 *   ... and variance ASSUMED to be such that 2 standard deviations cover 1/2 of the mean in each direction, sigma=Ori/4
     p_weightvarCostAve(f) $ p_varCostAveOri(f) = 1/(2*SQR(p_varCostAveOri(f)/4));
 
-* --- Definiera parametrar till kostnadsfunktionen. Hur det går till beror på funktionsform.
-*     Nedan antar vi en kvadratisk totalkostnad, dvs linjär marginalkostnad, och låter skattningen
-*     bestämma intercept men inte lutning.
-*     Antagande: interceptet är ungefär halva den observerade genomsnittskostnaden.
-*     om MC = a + b*E så innebär det att b = AC/E
+$onText
+Vad är elasticiteten för en linjär utbudsfunktion där vi känner mittpunkten (AVC,Q/2)?
+Detta används i för att bestämma lutningen på MC-kurvan genom en antagen elasticitet, p_elas.
 
-*   Then, we assume a slope corresponding to an a-priori (myopic) elasticity of 1.5
-*   beta = 1/elasticity * AverageCost / EffortOri
+HÄRLEDNING:
+-----------
+låt Q vara ungefär lika med effortannual och P ungefär lika med MC
+
+ela = (dq/Q) / (dp/P) = dq/dp * P/Q
+
+mc = a + b*x 
+
+p = a + b*q
+
+q = (p-a)/b
+
+dq/dp = 1/b
+
+ela = 1/b * P/Q 
+
+b = 1/ela * P/Q
+
+P = AVC + (Q/2)*b
+
+ela = 1/b * (AVC + (Q/2)*b)/Q
+
+ela = AVC/(b*Q) + (1/b)*(Q/2)*b/Q
+
+ela = AVC/(b*Q) + 1/2
+
+ela - 1/2 = AVC/(b*Q)
+
+b(ela-1/2) = AVC/Q
+
+b = AVC/Q * 1/(ela-1/2)
+
+$offtext
 
 *   With the current version, slope is FIXED (set_bounds_estimation.gms)
 *   to the value assigned here, so that this is really a kind of
