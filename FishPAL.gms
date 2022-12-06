@@ -31,9 +31,14 @@ $SETGLOBAL programMode simulation
 $SETGLOBAL projectDirectory fuel_tax
 
 *   Ange specifikt vilken scenariofil i ovan nämnda katalog vi vill använda
-*$SETGLOBAL scenario energy_tax
 *$SETGLOBAL scenario reference
+*$SETGLOBAL scenario s1_lp_tax
+*$SETGLOBAL scenario s2_lp_tax_ets2019
+*$SETGLOBAL scenario s3_lp_tax_ets2022
 $SETGLOBAL scenario s4_hp
+*$SETGLOBAL scenario s5_hp_tax
+*$SETGLOBAL scenario s6_hp_tax_ets2019
+*$SETGLOBAL scenario s7_hp_tax_ets2022
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja
