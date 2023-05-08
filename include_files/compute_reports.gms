@@ -126,8 +126,8 @@ p_VCshareLab(f) = [p_varCostOri(f,"PaidLabour")+ p_varCostOri(f,"UnpaidLabour")]
 p_profitFishery(f,"totalGrossVA") = p_profitFishery(f,"totalSalesRevenues")
                                     + p_profitFishery(f,"totalVariableCosts")
                                     
-                                    - p_InputOutputReport(f,"UnpaidLabour","PQ")
-                                    - p_InputOutputReport(f,"PaidLabour","PQ");
+                                    + p_InputOutputReport(f,"UnpaidLabour","PQ")
+                                    + p_InputOutputReport(f,"PaidLabour","PQ");
 *(1-p_VCshareLab(f));
 
 p_profitFishery(f,"totalSubsidy") = p_subsidyPerDAS(f)*v_effortAnnual.L(f);

@@ -22,11 +22,11 @@ $include "scenarioFiles\fuel_tax\reference.gms"
 
 
 
-p_varCostPriceShift(f,"Fuel_m3") = 1.02;
+p_varCostPriceShift(f,"Fuel_m3") = 1.19;
 
 
 * --- Increase output prices too
 
-p_pricesA(f,s) = p_pricesA(f,s) * 1.08;
-p_pricesB(s)   = p_pricesB(s) * 1.08;
+*p_pricesA(f,s) = p_pricesA(f,s) * 1.08;
+*p_pricesB(s)   = p_pricesB(s) * 1.08;
 

@@ -35,10 +35,10 @@ $SETGLOBAL projectDirectory fuel_tax
 *$SETGLOBAL scenario s1_lp_tax
 *$SETGLOBAL scenario s2_lp_tax_ets2019
 *$SETGLOBAL scenario s3_lp_tax_ets2022
-$SETGLOBAL scenario s4_hp
+*$SETGLOBAL scenario s4_hp
 *$SETGLOBAL scenario s5_hp_tax
 *$SETGLOBAL scenario s6_hp_tax_ets2019
-*$SETGLOBAL scenario s7_hp_tax_ets2022
+$SETGLOBAL scenario s7_hp_tax_ets2022
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja
@@ -150,7 +150,7 @@ $include "include_files\generate_dimdefs.gms"
 
 
 *##############################################################################
-*  Compute share of each variable cost in total variable cost 
+*  Compute share of each variable cost in total variable cost
 *##############################################################################
 
 alias(VariableInput,VariableInput1);
@@ -429,15 +429,15 @@ loop((resLabel,resLabel1) $ resLabel_aggWeight(resLabel,resLabel1),
     p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat) $ [(NOT fishery(fisheryDomain))
                                                                     and (NOT p_fiskresultat(fisheryDomain,speciesDomain,resLabel,addStat))
                                                                     and SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel1,addStat))]
-                                                                    
+
         = SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel,addStat) * p_fiskresultat(fishery,speciesDomain,resLabel1,addStat))
         / SUM(fishery $ fisheryDomain_fishery(fisheryDomain,fishery), p_fiskresultat(fishery,speciesDomain,resLabel1,addStat));
-        
+
     p_fiskresultat(f,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(f,catchQuotaName,resLabel,addStat))
                                                          and SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel1,addStat))]
         = SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel,addStat)*p_fiskResultat(f,s,resLabel1,addStat))
         / SUM(s $ [catchQuotaName_fishery_species(catchQuotaName,f,s)], p_fiskresultat(f,s,resLabel1,addStat));
-        
+
     p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat) $ [(NOT p_fiskresultat(quotaArea,catchQuotaName,resLabel,addStat)) AND p_TACOri(catchQuotaName,quotaArea)
                                 and SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskResultat(f,s,resLabel1,addStat))]
         = SUM((f,s) $ [catchQuotaName_fishery_species(catchQuotaName,f,s) AND quotaArea_fishery(quotaArea,f)], p_fiskresultat(f,s,resLabel,addStat)*p_fiskResultat(f,s,resLabel1,addStat))
@@ -448,7 +448,7 @@ loop((resLabel,resLabel1) $ resLabel_aggWeight(resLabel,resLabel1),
         $ sum(s, p_fiskResultat(fisheryDomain,s,resLabel1,addStat))
         = sum(s, p_fiskresultat(fisheryDomain,s,resLabel,addStat) * p_fiskResultat(fisheryDomain,s,resLabel1,addStat))
         / sum(s, p_fiskResultat(fisheryDomain,s,resLabel1,addStat));
-);    
+);
 
 
 
@@ -463,12 +463,12 @@ p_fiskResultat(fisheryDomain,"allSpecies",resLabel,"sim") $ p_profitFishery(fish
 *   Rapportera dualvärden (Lagrange-funktionens partialderivator m.a.p. effortannual)
 p_fiskResultat(fisheryDomain,"allSpecies",dualResult,"sim") $ p_reportDualsFishery(fisheryDomain,dualResult)
     = p_reportDualsFishery(fisheryDomain,dualResult);
-    
+
 *   Rapportera dualvärden per kvotområde
 p_fiskResultat(f,catchQuotaName,dualResult,"sim")
     $ sum(quotaArea $ quotaArea_fishery(quotaArea,f), p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,dualResult))
     = sum(quotaArea $ quotaArea_fishery(quotaArea,f), p_reportDualsFisheryQuota(f,quotaArea,catchQuotaName,dualResult));
-    
+
 * report input and output prices and quantities
 p_fiskResultat(fisheryDomain,speciesDomain,resLabel,"sim")$p_InputOutputReport(fisheryDomain, speciesDomain,resLabel)
    = p_InputOutputReport(fisheryDomain, speciesDomain,resLabel) ;
