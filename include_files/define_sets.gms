@@ -34,7 +34,10 @@ SETS
     s_VariableInput   "Variable cost items"
     s_FixInput   "Fixed cost items. Do not have p and q for this so keep as cost"
 
-    
+*   Sets used for aggregating results
+    s_speciesAggregate "Domainless set used to create Aggregates of species"
+    speciesAggregate "Aggregates of species"
+    s_agg_species "Mapping aggregate of species to species"
     ;
 
 ALIAS(segment,seg);
@@ -48,7 +51,8 @@ ALIAS(fishery,f);
 * L�s in set fr�n GDX-filen
 $LOAD s_segment=segment s_gear=gear s_area=area s_species=species
 $LOAD s_fishery=fishery s_quotaArea=quotaArea s_VariableInput=VariableInput s_FixInput=FixInput period s_catchQuotaName=catchQuotaName
-$LOAD s_effortGroup=effortGroup gearGroup 
+$LOAD s_effortGroup=effortGroup gearGroup
+$LOAD s_speciesAggregate=speciesAggregate, s_agg_species=agg_species
 
 * Skapa ett set som inneh�ller "species UNION catchQuotaName", att ha som dom�n f�r vissa parametrar (f�r resultatfiler)
 * F�r att klara UNIONEN anv�nder vi tricket "$ONMULTI" f�r att l�gga till nya delvis �verlappande element
@@ -60,7 +64,7 @@ $ONMULTI
 * Det kr�vs tv� rader eftersom vissa element i species upprepas i catchQuotaName.
 SETS
     s_ioAggregate(*) "Aggregates of inputs and outputs" /
-        allSpecies "All species caught"
+        set.s_speciesAggregate
         none "Nothing"
         variableInputs "Variable inputs"
         fixInputs "Fix inputs"
@@ -68,7 +72,7 @@ SETS
         valueAdded "Value Added"
         contributionMargin "Contribution margin"
         profit "Profit"/
-    speciesDomain(*) "Lägg till species" /set.s_ioAggregate,SET.s_species, set.s_FixInput, set.s_VariableInput /
+    speciesDomain(*) "Lägg till species" /set.s_ioAggregate, SET.s_species, set.s_FixInput, set.s_VariableInput /
     speciesDomain(*) "Lägg till catchQuotaName" /SET.s_catchQuotaName,SET.s_area /
 
     fisheryDomain(*) "Lägg till fishery, segment mm" /total "Alla fisketyper", na "Not applicable or not used", SET.s_fishery,SET.s_segment,SET.s_gear,SET.s_area/
@@ -90,7 +94,8 @@ SETS
     Input(speciesDomain)    "Kostnader: fasta, r�rliga, summor" /SET.s_FixInput, SET.s_VariableInput/
     FixInput(Input) "Fasta kostnader" /SET.s_FixInput/
     VariableInput(Input) "Variabla kostnader plus total variabel kostnad " /SET.s_VariableInput/
-    ioAggregate(speciesDomain) "Aggregates of individual inputs and outputs" /set.s_ioAggregate/;
+    ioAggregate(speciesDomain) "Aggregates of individual inputs and outputs" /set.s_ioAggregate/
+    speciesAggregate(ioAggregate) "Aggregates of species" /SET.s_speciesAggregate/
     ;
     
     alias(VariableInput,variableInput1);
@@ -121,7 +126,8 @@ SETS
     fisheryDomain_fishery(fisheryDomain,fishery) "Mapping of fishery to aggregate"
     
     ioAggregate_speciesDomain(ioAggregate,speciesDomain) "Mapping items from speciesDomain to aggregate" /
-    allSpecies.(#species)
+*    allSpecies.(#species)
+    SET.s_agg_species
     variableInputs.(#VariableInput)
     fixInputs.(#FixInput)
     inputs.(#Input)

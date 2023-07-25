@@ -93,7 +93,7 @@
       <theme>Catch</theme>
       <name>Catch per fishery, gear, segment and area</name>
       <regionSel>all</regionSel>
-      <productSel>species</productSel>
+      <productSel>species,speciesAggregate</productSel>
       <productText>Species</productText>
       <dim5Text>Statistic</dim5Text>
       <itemDim>activity</itemDim>

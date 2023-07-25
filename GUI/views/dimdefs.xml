@@ -6,15 +6,15 @@
    <region><key>total</key><sel>[fishery,gear,area,segment,all]</sel><itemName>All fisheries</itemName></region>
 
    <!-- Area and quotaArea -->
-   <region><key>'2224'</key><sel>[quotaArea,area,all]</sel><itemName>'2224',</itemName></region>
-   <region><key>'2529+32'</key><sel>[quotaArea,area,all]</sel><itemName>'2529+32',</itemName></region>
-   <region><key>'3031'</key><sel>[quotaArea,area,all]</sel><itemName>'3031',</itemName></region>
-   <region><key>'K'</key><sel>[quotaArea,area,all]</sel><itemName>'K',</itemName></region>
-   <region><key>'S'</key><sel>[quotaArea,area,all]</sel><itemName>'S',</itemName></region>
-   <region><key>'N'</key><sel>[quotaArea,area,all]</sel><itemName>'N',</itemName></region>
-   <region><key>'KS'</key><sel>[quotaArea,all]</sel><itemName>'KS',</itemName></region>
-   <region><key>'KSN'</key><sel>[quotaArea,all]</sel><itemName>'KSN',</itemName></region>
-   <region><key>'BALTIC'</key><sel>[quotaArea,all]</sel><itemName>'BALTIC',</itemName></region>
+   <region><key>'2224'</key><sel>[quotaArea,area,all]</sel><itemName>"Västra Östersjön"</itemName></region>
+   <region><key>'2529+32'</key><sel>[quotaArea,area,all]</sel><itemName>"Östra Östersjön"</itemName></region>
+   <region><key>'3031'</key><sel>[quotaArea,area,all]</sel><itemName>"Norra Östersjön"</itemName></region>
+   <region><key>'K'</key><sel>[quotaArea,area,all]</sel><itemName>"Kattegatt"</itemName></region>
+   <region><key>'S'</key><sel>[quotaArea,area,all]</sel><itemName>"Skagerack"</itemName></region>
+   <region><key>'N'</key><sel>[quotaArea,area,all]</sel><itemName>"Nordsjön"</itemName></region>
+   <region><key>'KS'</key><sel>[quotaArea,all]</sel><itemName>Quota area 'KS'</itemName></region>
+   <region><key>'KSN'</key><sel>[quotaArea,all]</sel><itemName>Quota area 'KSN'</itemName></region>
+   <region><key>'BALTIC'</key><sel>[quotaArea,all]</sel><itemName>Quota area 'BALTIC'</itemName></region>
 
    <!-- Segments -->
    <region><key>DTS_VL0012_KRaFTA</key><sel>[segment,all]</sel><itemName></itemName></region>
@@ -349,7 +349,10 @@
    <!-- Second dimension of results parameter: Species and aggregates of species (speciesDomain). -->
 
    <!-- ioAggregates -->
-   <product><key>allSpecies</key><sel>allSpecies,ioAggregate,all</sel><itemName>All species caught</itemName></product>
+   <product><key>Pelagisk</key><sel>speciesAggregate,ioAggregate,all</sel><itemName>"Pelagiska arter"</itemName></product>
+   <product><key>Skaldjur</key><sel>speciesAggregate,ioAggregate,all</sel><itemName>"Skaldjur"</itemName></product>
+   <product><key>Ovrigt</key><sel>speciesAggregate,ioAggregate,all</sel><itemName>"Övriga arter"</itemName></product>
+   <product><key>allSpecies</key><sel>allSpecies,speciesAggregate,ioAggregate,all</sel><itemName>"All species caught"</itemName></product>
    <product><key>none</key><sel>ioAggregate,all</sel><itemName>Nothing</itemName></product>
    <product><key>variableInputs</key><sel>ioAggregate,all</sel><itemName>Variable inputs</itemName></product>
    <product><key>fixInputs</key><sel>ioAggregate,all</sel><itemName>Fix inputs</itemName></product>

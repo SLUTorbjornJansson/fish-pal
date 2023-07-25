@@ -34,9 +34,9 @@ put /;
 put "%s%<!-- Area and quotaArea -->"/;
 loop(quotaArea,
     if(area(quotaArea),
-        put"%s%<region><key>",quotaArea.tl:0,"</key><sel>[quotaArea,area,all]</sel><itemName>",quotaArea.te(quotaArea)",</itemName></region>"/;
+        put"%s%<region><key>",quotaArea.tl:0,"</key><sel>[quotaArea,area,all]</sel><itemName>",area.te(quotaArea),"</itemName></region>"/;
     else
-        put"%s%<region><key>",quotaArea.tl:0,"</key><sel>[quotaArea,all]</sel><itemName>",quotaArea.te(quotaArea)",</itemName></region>"/;
+        put"%s%<region><key>",quotaArea.tl:0,"</key><sel>[quotaArea,all]</sel><itemName>Quota area ",quotaArea.te(quotaArea),"</itemName></region>"/;
     );
 );
 put /;
@@ -84,6 +84,7 @@ put "%s%<!-- ioAggregates -->"/;
 loop(ioAggregate,
     put "%s%<product><key>",ioAggregate.tl:0,"</key><sel>";
     if(sameas(ioAggregate,"allSpecies"), put "allSpecies,");
+    if(speciesAggregate(ioAggregate), put "speciesAggregate,");
     
     put "ioAggregate,all</sel><itemName>",ioAggregate.te(ioAggregate);
     put "</itemName></product>"/;
