@@ -24,21 +24,21 @@ $SETGLOBAL resDir %SYSTEM.FP%output
 $SETGLOBAL parFileName default
 
 *   Ange vad programmet ska g�ra (estimation, simulation)
-*$SETGLOBAL programMode estimation
-$SETGLOBAL programMode simulation
+$SETGLOBAL programMode estimation
+*$SETGLOBAL programMode simulation
 
 *   Ange vad simulationen heter (var chocken kommer fr�n och vad resultaten ska kallas)
 $SETGLOBAL projectDirectory fuel_tax
 
 *   Ange specifikt vilken scenariofil i ovan nämnda katalog vi vill använda
-*$SETGLOBAL scenario reference
+$SETGLOBAL scenario reference
 *$SETGLOBAL scenario s1_lp_tax
 *$SETGLOBAL scenario s2_lp_tax_ets2019
 *$SETGLOBAL scenario s3_lp_tax_ets2022
 *$SETGLOBAL scenario s4_hp
 *$SETGLOBAL scenario s5_hp_tax
 *$SETGLOBAL scenario s6_hp_tax_ets2019
-$SETGLOBAL scenario s7_hp_tax_ets2022
+*$SETGLOBAL scenario s7_hp_tax_ets2022
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja
@@ -157,7 +157,7 @@ alias(VariableInput,VariableInput1);
 p_varCostOriShare(f,VariableInput) = sum(seg $ segment_fishery(seg,f), p_costOri(seg,VariableInput)
                                               / sum(VariableInput1, p_costOri(seg,VariableInput1)));
 
-*execute_unload "allt.gdx" ;
+execute_unload "allt.gdx" ;
 *$stop
 
 
@@ -279,6 +279,7 @@ $IF %programMode%==estimation $INCLUDE "include_files\estimate_parameters.gms"
 
 
 $INCLUDE "include_files\set_bounds_simulation.gms"
+
 
 * --- We need to iteratively adjust the subsidy per DAS to hit total budget
 *     Therefore, we loop over a set of iterations and compute the mean squared
