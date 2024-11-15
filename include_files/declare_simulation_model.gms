@@ -83,10 +83,11 @@ e_objFunc ..
 
 e_catch(f,s) $ fishery_species(f,s) ..
     v_catch(f,s) =E=
-
-*   times how catch changes (of all species) if effort changes
+*   scaling factor
     pv_delta(f,s)
-    *sum(a $ fishery_area(f,a), p_stock(a,s))**p_stockElasticity(f)
+*   times how catch changes if stock changes
+*    *sum(a $ fishery_area(f,a), p_stock(a,s))**p_stockElasticity(f)
+*   times how catch changes (of all species) if effort changes
     *v_effortAnnual(f)**p_catchElasticity(f);
 
 e_sortA(f,s) $ fishery_species(f,s) ..
