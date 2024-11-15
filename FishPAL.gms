@@ -31,8 +31,8 @@ $SETGLOBAL programMode simulation
 $SETGLOBAL projectDirectory HeatWaves
 
 *   Ange specifikt vilken scenariofil i ovan nämnda katalog vi vill använda
-$SETGLOBAL scenario reference
-*$SETGLOBAL scenario increase_herring_stock_10p
+*$SETGLOBAL scenario reference
+$SETGLOBAL scenario increase_herring_stock_10p
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja
@@ -75,7 +75,7 @@ $IFI %GGIG%==ON $INCLUDE "%scen%.gms"
 *           CONVERT EXCEL DATA FILE TO GAMS GDX FORMAT
 *#############################################################
 
-$CALL gdxxrw %datDir%\data_gams_2019_fuel.xlsx o=%datDir%\inData.gdx index=index!A1
+$CALL gdxxrw %datDir%\data_gams_2019_HeatWaves.xlsx o=%datDir%\inData.gdx index=index!A1
 
 * Ange att set ska l�sas fr�n indata-filen
 $set fileNameForSetDefnitions %datDir%\inData.gdx
@@ -98,9 +98,9 @@ $include "include_files\declare_parameters.gms"
 * L�s in parametrar fr�n Excel (via gdx-filen som tillverkats tidigare)
 $GDXIN "%fileNameForSetDefnitions%"
 
-$LOAD p_pricesAOri p_pricesBOri p_costOri p_maxEffSegPeriod p_season p_TACOri p_indexedPriceOri
+$LOAD p_pricesAOri p_pricesBOri p_costOri p_maxEffSegPeriod p_season p_TACOri p_indexedPriceOri p_stockOri
 $LOAD p_landingsOri p_discardShareOri p_effortOri p_vesselsOri p_landingObligation p_maxEffortPerEffortGroup p_kwhOri
-$LOAD p_catchElasticityPerGearGroup
+$LOAD p_catchElasticityPerGearGroup p_stockElasticityPerGearGroup
 $LOAD p_subsidyBudget
 $LOAD p_ShareDASseal
 $LOAD p_inputQuantOri
@@ -151,14 +151,8 @@ alias(VariableInput,VariableInput1);
 p_varCostOriShare(f,VariableInput) = sum(seg $ segment_fishery(seg,f), p_costOri(seg,VariableInput)
                                               / sum(VariableInput1, p_costOri(seg,VariableInput1)));
 
-* --- Temporary solution until data are entered in excel: invent stocks and elasticities
-p_stockOri(s,a) $ sum(fishery_area(f,a), p_catchOri(f,s)) = 1;
-p_stockElasticity(f) $ p_effortOri(f) = 0.9;
-
-
-p_stock(s,a) = p_stockOri(s,a);
-*execute_unload "allt.gdx" ;
-
+execute_unload "allt.gdx" ;
+*$stop
 
 
 *##############################################################################

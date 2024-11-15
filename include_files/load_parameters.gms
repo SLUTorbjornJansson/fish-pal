@@ -21,7 +21,9 @@ EXECUTE_LOAD "%resdir%\estimation\par_%parFileName%.gdx"
                                               pv_PMPconst
                                               pv_PMPslope
                                               pv_delta
+                                              p_stock
                                               p_catchElasticity
+                                              p_stockElasticity
                                               p_maxEffSeg
                                               pv_maxEffFishery
                                               p_TACOri

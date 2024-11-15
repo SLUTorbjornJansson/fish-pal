@@ -302,6 +302,17 @@ else
 );
 
 
+p_stock(s,a) = p_stockOri(s,a);
+
+*   Assign catch elasticities of each fishery depending on the type of gear used
+loop(gearGroup,
+    loop(gear $ gearGroup_gear(gearGroup,gear),
+        p_catchElasticity(f) $ fishery_gear(f,gear) = p_catchElasticityPerGearGroup(gearGroup);
+        p_stockElasticity(f) $ fishery_gear(f,gear) = p_stockElasticityPerGearGroup(gearGroup);
+    );
+);
+
+
 *###############################################################################
 *   Define priors
 *   We need to have parameters for the density functions of the parameters that
@@ -547,14 +558,6 @@ pv_varCostConst.l(f) $ p_effortOri(f) = p_varCostAveOri(f) - pv_varCostSlope.l(f
 v_varCostAve.l(f) = pv_varCostConst.l(f) + 1/2*p_effortOri(f)*pv_varCostSlope.l(f);
 
 
-*   Assign catch elasticities of each fishery depending on the type of gear used
-loop(gearGroup $ p_catchElasticityPerGearGroup(gearGroup),
-    loop(gear $ gearGroup_gear(gearGroup,gear),
-        p_catchElasticity(f) $ fishery_gear(f,gear) = p_catchElasticityPerGearGroup(gearGroup);
-    );
-);
-
-
 *   Starting point for catch function scale is average CPUE.
 pv_delta.L(f,s) = p_catchOri(f,s)*p_effortOri(f)**(-p_catchElasticity(f))
                 * SUM(a $ fishery_area(f,a), p_stock(s,a))**(-p_stockElasticity(f));
@@ -738,7 +741,9 @@ EXECUTE_UNLOAD "%resdir%\estimation\par_%parFileName%.gdx"
                                                 pv_PMPconst
                                                 pv_PMPslope
                                                 pv_delta
+                                                p_stock
                                                 p_catchElasticity
+                                                p_stockElasticity
                                                 p_maxEffSeg
                                                 pv_maxEffFishery
                                                 p_TACOri

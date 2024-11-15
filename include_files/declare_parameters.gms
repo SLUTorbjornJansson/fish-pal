@@ -23,6 +23,7 @@ PARAMETERS
     p_discardShareOri(fishery,species)  "Share of discards (share of total catch of all species)"
     p_catchElasticityPerGearGroup(gearGroup)  "Elasticity of catch w.r.t. effort, a.k.a. beta in the cobb-douglas function"
     p_catchElasticity(fishery)  "Elasticity of catch w.r.t. effort, a.k.a. beta in the cobb-douglas function"
+    p_stockElasticityPerGearGroup(gearGroup)  "Elasticity of catch w.r.t. stock, a.k.a. alpha in the cobb-douglas function"
     p_stockElasticity(fishery)  "Elasticity of catch w.r.t. size of fish stock"
     p_stockOri(species,area)    "Stock of each species in each area in the original data"
     p_stock(species,area)       "Stock of each species in each area"

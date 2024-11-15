@@ -399,7 +399,8 @@
    <product><key>Sandskadda</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>SikFiskar</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Sikloja</key><sel>species,quotaSpecies,hasQuota,all</sel></product>
-   <product><key>Sill</key><sel>species,all</sel></product>
+   <product><key>Sill_stor</key><sel>species,all</sel></product>
+   <product><key>Sill_liten</key><sel>species,all</sel></product>
    <product><key>Sjurygg</key><sel>species,quotaSpecies,all</sel></product>
    <product><key>Skarpsill</key><sel>species,all</sel></product>
    <product><key>Skrubskadda</key><sel>species,quotaSpecies,all</sel></product>
