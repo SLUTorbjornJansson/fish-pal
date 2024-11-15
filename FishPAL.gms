@@ -24,21 +24,15 @@ $SETGLOBAL resDir %SYSTEM.FP%output
 $SETGLOBAL parFileName default
 
 *   Ange vad programmet ska g�ra (estimation, simulation)
-$SETGLOBAL programMode estimation
-*$SETGLOBAL programMode simulation
+*$SETGLOBAL programMode estimation
+$SETGLOBAL programMode simulation
 
 *   Ange vad simulationen heter (var chocken kommer fr�n och vad resultaten ska kallas)
-$SETGLOBAL projectDirectory fuel_tax
+$SETGLOBAL projectDirectory HeatWaves
 
 *   Ange specifikt vilken scenariofil i ovan nämnda katalog vi vill använda
 $SETGLOBAL scenario reference
-*$SETGLOBAL scenario s1_lp_tax
-*$SETGLOBAL scenario s2_lp_tax_ets2019
-*$SETGLOBAL scenario s3_lp_tax_ets2022
-*$SETGLOBAL scenario s4_hp
-*$SETGLOBAL scenario s5_hp_tax
-*$SETGLOBAL scenario s6_hp_tax_ets2019
-*$SETGLOBAL scenario s7_hp_tax_ets2022
+*$SETGLOBAL scenario increase_herring_stock_10p
 
 
 *   Ange ett suffix till filnamnet f�r resultaten, f�r att t.ex. skilja
@@ -157,8 +151,13 @@ alias(VariableInput,VariableInput1);
 p_varCostOriShare(f,VariableInput) = sum(seg $ segment_fishery(seg,f), p_costOri(seg,VariableInput)
                                               / sum(VariableInput1, p_costOri(seg,VariableInput1)));
 
-execute_unload "allt.gdx" ;
-*$stop
+* --- Temporary solution until data are entered in excel: invent stocks and elasticities
+p_stockOri(s,a) $ sum(fishery_area(f,a), p_catchOri(f,s)) = 1;
+p_stockElasticity(f) $ p_effortOri(f) = 0.9;
+
+
+p_stock(s,a) = p_stockOri(s,a);
+*execute_unload "allt.gdx" ;
 
 
 

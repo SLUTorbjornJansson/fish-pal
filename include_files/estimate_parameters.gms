@@ -163,7 +163,10 @@ e_focEffortAnnual(f) $ [p_effortOri(f) GT 0] .. // Only build this equation if e
     + p_subsidyPerDAS(f)
     - (pv_varCostConst(f) + pv_varCostSlope(f)*v_effortAnnual(f))
     - (pv_PMPconst(f) + pv_PMPslope(f)*v_effortAnnual(f))
-    + SUM(s $ fishery_species(f,s), v_lambdaCatch(f,s)*pv_delta(f,s)*[p_catchElasticity(f)*v_effortAnnual(f)**(p_catchElasticity(f)-1)])
+    + SUM(s $ fishery_species(f,s), v_lambdaCatch(f,s) 
+         * pv_delta(f,s)* SUM(a $ fishery_area(f,a), p_stock(s,a))**p_stockElasticity(f)
+         *[p_catchElasticity(f)*v_effortAnnual(f)**(p_catchElasticity(f)-1)])
+
     - SUM(seg $ segment_fishery(seg,f), v_lambdaEffRestrSeg(seg))
     + v_lambdaEffNonNeg(f)
     - v_lambdaEffRestrFishery(f)
@@ -553,7 +556,8 @@ loop(gearGroup $ p_catchElasticityPerGearGroup(gearGroup),
 
 
 *   Starting point for catch function scale is average CPUE.
-pv_delta.L(f,s) = p_catchOri(f,s)*p_effortOri(f)**(-p_catchElasticity(f));
+pv_delta.L(f,s) = p_catchOri(f,s)*p_effortOri(f)**(-p_catchElasticity(f))
+                * SUM(a $ fishery_area(f,a), p_stock(s,a))**(-p_stockElasticity(f));
 
 
 *   Set calibration term intercept to zero for a start
@@ -770,7 +774,9 @@ p_fiskResultat(f,s,"v_discards","est") = (1-p_landingObligation(f,s))*v_sortB.L(
 
 
 *   Rapportera catchDist
-p_fiskResultat(f,s,"pv_delta","ori") = p_catchOri(f,s)*p_effortOri(f)**(-p_catchElasticity(f));
+p_fiskResultat(f,s,"pv_delta","ori") = p_catchOri(f,s)
+                                       * SUM(a $ fishery_area(f,a), p_stock(s,a))**(-p_stockElasticity(f))
+                                       * p_effortOri(f)**(-p_catchElasticity(f));
 p_fiskResultat(f,s,"pv_delta","est") = pv_delta.L(f,s);
 p_fiskResultat(f,s,"pv_delta","M") = pv_delta.M(f,s);
 
